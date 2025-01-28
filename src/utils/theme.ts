@@ -39,7 +39,7 @@ export interface Theme {
 
 type FormatAsCSSVar<Path extends string> = `var(--discord-${Path})`;
 
-type ToCSSVars<T, Path extends string = ""> = {
+type ToCSSVars<T, Path extends string = ''> = {
     [K in keyof T]: T[K] extends object
         ? ToCSSVars<T[K], `${Path}${K & string}-`> // オブジェクトの場合は再帰
         : FormatAsCSSVar<`${Path}${K & string}`>; // プリミティブ型はフォーマット
@@ -103,21 +103,37 @@ export const DefaultTheme: Theme = {
 };
 
 export const getCssVariables = (theme: Theme, appearance: Appearance): Record<string, string> => {
-    const variables: Record<string, string> = {};
+    const getVariables = (obj: Record<string, any>, path: string): Record<string, string> => {
+        let vars: Record<string, string> = {};
 
-    Object.entries(theme.palette).forEach(([groupKey, groupValues]) => {
-        Object.entries(groupValues).forEach(([key, value]: [string, string | Palette]) => {
-            variables[`--discord-palette-${groupKey}-${key}`] = typeof value === 'string' ? value : value[appearance.color];
-        });
-    });
+        for (const [key, value] of Object.entries(obj)) {
+            if (typeof value !== 'object') {
+                vars[`--discord-${path}-${key}`] = value;
+                continue;
+            }
 
-    Object.entries(theme.size).forEach(([key, value]: [string, string | Spacing]) => {
-        variables[`--discord-size-${key}`] = typeof value === 'string' ? value : value[appearance.display];
-    });
+            if ('dark' in value && 'light' in value) {
+                vars[`--discord-${path}-${key}`] = value[appearance.color];
+                continue;
+            }
 
-    Object.entries(theme.spacing).forEach(([key, value]: [string, string | Spacing]) => {
-        variables[`--discord-spacing-${key}`] = typeof value === 'string' ? value : value[appearance.display];
-    });
+            if ('cozy' in value && 'compact' in value) {
+                vars[`--discord-${path}-${key}`] = value[appearance.display];
+                continue;
+            }
 
-    return variables;
+            vars = {
+                ...vars,
+                ...getVariables(value, `${path}-${key}`)
+            };
+        }
+
+        return vars;
+    };
+
+    return {
+        ...getVariables(theme, 'palette'),
+        ...getVariables(theme, 'size'),
+        ...getVariables(theme, 'spacing')
+    };
 };
