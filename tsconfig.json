@@ -1,0 +1,42 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationMap": true,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "incremental": true,
+        "isolatedModules": true,
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "module": "esnext",
+        "moduleResolution": "node",
+        // "noEmit": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "outDir": "./dist",
+        "plugins": [],
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "es2023",
+        "typeRoots": [
+            "src/@types"
+        ]
+    },
+    "exclude": [
+        ".yarn/**/*",
+        "node_modules/**/*"
+    ],
+    "include": [
+        "next-env.d.ts",
+        "src/**/*"
+    ]
+}

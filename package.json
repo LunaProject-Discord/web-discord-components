@@ -1,0 +1,61 @@
+{
+    "name": "web-discord-components",
+    "version": "0.0.0",
+    "license": "LGPL-2.1",
+    "packageManager": "yarn@4.6.0",
+    "volta": {
+        "node": "20.11.0",
+        "yarn": "4.6.0"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LunaProject-Discord/web-discord-components.git"
+    },
+    "scripts": {
+        "build": "tsc && mkdir dist/@types && cp src/@types/* dist/@types/"
+    },
+    "dependencies": {
+        "@discordjs/rest": "^2.4.2",
+        "discord-api-types": "^0.37.114"
+    },
+    "devDependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@lunaproject/web-core": "^2.0.0-beta.16",
+        "@types/node": "~20.11.30",
+        "@types/react": "^19.0.8",
+        "@types/react-dom": "^19.0.3",
+        "eslint": "^8.57.1",
+        "eslint-config-next": "^15.1.6",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "typescript": "^5.7.3"
+    },
+    "peerDependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "next": "^15.1.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "peerDependenciesMeta": {
+        "@types/react": {
+            "optional": true
+        },
+        "@types/react-dom": {
+            "optional": true
+        }
+    },
+    "publishConfig": {
+        "access": "public",
+        "directory": "dist"
+    },
+    "files": [
+        "dist",
+        "static"
+    ]
+}
