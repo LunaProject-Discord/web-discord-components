@@ -441,6 +441,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lunaproject/web-discord-components@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@lunaproject/web-discord-components@workspace:."
+  dependencies:
+    "@discordjs/rest": "npm:^2.4.2"
+    "@emotion/react": "npm:^11.14.0"
+    "@emotion/styled": "npm:^11.14.0"
+    "@lunaproject/web-core": "npm:^2.0.0-beta.16"
+    "@types/luxon": "npm:^3"
+    "@types/node": "npm:~20.11.30"
+    "@types/react": "npm:^19.0.8"
+    "@types/react-dom": "npm:^19.0.3"
+    discord-api-types: "npm:^0.37.114"
+    eslint: "npm:^8.57.1"
+    eslint-config-next: "npm:^15.1.6"
+    luxon: "npm:^3.5.0"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    typescript: "npm:^5.7.3"
+  peerDependencies:
+    "@emotion/react": ^11.14.0
+    "@emotion/styled": ^11.14.0
+    "@types/react": ^19.0.0
+    "@types/react-dom": ^19.0.0
+    next: ^15.1.0
+    react: ^19.0.0
+    react-dom: ^19.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  languageName: unknown
+  linkType: soft
+
 "@next/eslint-plugin-next@npm:15.1.6":
   version: 15.1.6
   resolution: "@next/eslint-plugin-next@npm:15.1.6"
@@ -575,6 +610,13 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 10c0/6bf5337bc447b706bb5b4431d37686aa2ea6d07cfd6f79cc31de80170d6ff9b1c7384a9c0ccbc45b3f512bae9e9f75c2e12109806a15331dc94e8a8db6dbb4ac
+  languageName: node
+  linkType: hard
+
+"@types/luxon@npm:^3":
+  version: 3.4.2
+  resolution: "@types/luxon@npm:3.4.2"
+  checksum: 10c0/d835467de3daf7e17ba78b50bb5a14efd94272439ca067990d71332a54b311544459c69623eddd243b511b28d70194c9591a9ee8cf9c038962c965f991affd7e
   languageName: node
   linkType: hard
 
@@ -2629,6 +2671,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"luxon@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "luxon@npm:3.5.0"
+  checksum: 10c0/335789bba95077db831ef99894edadeb23023b3eb2137a1b56acd0d290082b691cf793143d69e30bc069ec95f0b49f36419f48e951c68014f19ffe12045e3494
+  languageName: node
+  linkType: hard
+
 "magic-bytes.js@npm:^1.10.0":
   version: 1.10.0
   resolution: "magic-bytes.js@npm:1.10.0"
@@ -3704,39 +3753,6 @@ __metadata:
   checksum: 10c0/aebab445129f3e104c271f1637fa38e55eb25f968593e3825bd2f7a12bd58dc3738bb70dc8ec85826621d80b4acfed5a29ebc9da17397c6125864d72301b937e
   languageName: node
   linkType: hard
-
-"web-discord-components@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "web-discord-components@workspace:."
-  dependencies:
-    "@discordjs/rest": "npm:^2.4.2"
-    "@emotion/react": "npm:^11.14.0"
-    "@emotion/styled": "npm:^11.14.0"
-    "@lunaproject/web-core": "npm:^2.0.0-beta.16"
-    "@types/node": "npm:~20.11.30"
-    "@types/react": "npm:^19.0.8"
-    "@types/react-dom": "npm:^19.0.3"
-    discord-api-types: "npm:^0.37.114"
-    eslint: "npm:^8.57.1"
-    eslint-config-next: "npm:^15.1.6"
-    react: "npm:^19.0.0"
-    react-dom: "npm:^19.0.0"
-    typescript: "npm:^5.7.3"
-  peerDependencies:
-    "@emotion/react": ^11.14.0
-    "@emotion/styled": ^11.14.0
-    "@types/react": ^19.0.0
-    "@types/react-dom": ^19.0.0
-    next: ^15.1.0
-    react: ^19.0.0
-    react-dom: ^19.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
-      optional: true
-  languageName: unknown
-  linkType: soft
 
 "which-boxed-primitive@npm:^1.0.2, which-boxed-primitive@npm:^1.1.0, which-boxed-primitive@npm:^1.1.1":
   version: 1.1.1

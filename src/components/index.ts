@@ -1,2 +1,10 @@
-// export * from './Message';
+export * from './Message';
+export * from './MessageContent';
+export * from './MessageEmbed';
+export * from './MessageEmbedAuthor';
+export * from './MessageEmbedField';
+export * from './MessageEmbedFooter';
+export * from './MessageEmbedThumbnail';
+export * from './MessageHeader';
+export * from './MessageReply';
 export * from './Messages';
