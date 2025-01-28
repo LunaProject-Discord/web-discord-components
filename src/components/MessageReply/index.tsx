@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
+import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
 import { generateDiscordComponentClasses } from '../../utils';
 
 export const messageReplyClasses = generateDiscordComponentClasses(
@@ -209,32 +209,38 @@ export const MessageReplyPreviewContent = styled(
     webkitLineClamp: 1
 });
 
-export interface MessageReplyProps {
-    type: MessageReplyType;
+export type MessageReplyProps = {
+    type?: MessageReplyType;
     profile: {
         name: ReactNode;
         avatarUrl?: string;
     };
+} & ({
+    type?: 'message';
     content: ReactNode;
-}
+} | {
+    type: 'command';
+    command: string;
+})
 
-export const MessageReply = (
-    {
-        type,
-        profile: {
-            name,
-            avatarUrl = 'https://cdn.discordapp.com/embed/avatars/0.png'
-        },
-        content
-    }: MessageReplyProps
-) => (
-    <MessageReplyRoot type={type}>
-        <MessageReplyUser>
-            <MessageReplyUserAvatar src={avatarUrl} />
-            <MessageReplyUserName>{name}</MessageReplyUserName>
-        </MessageReplyUser>
-        <MessageReplyPreview>
-            <MessageReplyPreviewContent>{content}</MessageReplyPreviewContent>
-        </MessageReplyPreview>
-    </MessageReplyRoot>
-);
+export const MessageReply = (props: MessageReplyProps) => {
+    const {
+        name,
+        avatarUrl = 'https://cdn.discordapp.com/embed/avatars/0.png'
+    } = props.profile;
+
+    return (
+        <MessageReplyRoot type={props.type}>
+            <MessageReplyUser>
+                <MessageReplyUserAvatar src={avatarUrl} />
+                <MessageReplyUserName>{name}</MessageReplyUserName>
+            </MessageReplyUser>
+            {props.type === 'command' ? <Fragment>
+                {' used '}
+                {props.command}
+            </Fragment> : <MessageReplyPreview>
+                <MessageReplyPreviewContent>{props.content}</MessageReplyPreviewContent>
+            </MessageReplyPreview>}
+        </MessageReplyRoot>
+    );
+};
