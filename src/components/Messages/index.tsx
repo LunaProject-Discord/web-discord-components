@@ -1,10 +1,11 @@
 'use client';
 
+import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { AppearanceColor, AppearanceDisplay, getCssVariables } from '../../utils';
+import { AppearanceColor, AppearanceDisplay, DefaultTheme, getCssVariables } from '../../utils';
 
 export const messagesClasses = generateComponentClasses(
     'Messages',
@@ -23,13 +24,13 @@ export interface MessagesRootProps {
     color?: AppearanceColor;
 }
 
-export const MessagesElement: ElementType = 'ul';
+export const MessagesRootElement: ElementType = 'ul';
 
-export type MessagesProps = Omit<ComponentPropsWithRef<typeof MessagesElement>, 'color'> & MessagesRootProps;
+export type MessagesProps = Omit<ComponentPropsWithRef<typeof MessagesRootElement>, 'color'> & MessagesRootProps;
 
-export const Messages = styled(
+export const MessagesRoot = styled(
     ({ variant, color, className, ...props }: MessagesProps) => (
-        <MessagesElement
+        <MessagesRootElement
             className={
                 clsx(
                     messagesClasses.root,
@@ -64,3 +65,11 @@ export const Messages = styled(
         gap: '.0625rem'
     }
 }));
+
+export const Messages = ({ variant, color, children }: MessagesProps) => (
+    <ThemeProvider theme={DefaultTheme}>
+        <Messages variant={variant} color={color}>
+            {children}
+        </Messages>
+    </ThemeProvider>
+);

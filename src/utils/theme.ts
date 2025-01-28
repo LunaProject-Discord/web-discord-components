@@ -37,17 +37,6 @@ export interface Theme {
     };
 }
 
-type FormatAsCSSVar<Path extends string> = `var(--discord-${Path})`;
-
-type ToCSSVars<T, Path extends string = ''> = {
-    [K in keyof T]: T[K] extends object
-        ? ToCSSVars<T[K], `${Path}${K & string}-`> // オブジェクトの場合は再帰
-        : FormatAsCSSVar<`${Path}${K & string}`>; // プリミティブ型はフォーマット
-};
-
-// 使用例
-type TransformedTheme = ToCSSVars<Theme>;
-
 export const DefaultTheme: Theme = {
     palette: {
         common: {
@@ -102,38 +91,37 @@ export const DefaultTheme: Theme = {
     }
 };
 
-export const getCssVariables = (theme: Theme, appearance: Appearance): Record<string, string> => {
-    const getVariables = (obj: Record<string, any>, path: string): Record<string, string> => {
-        let vars: Record<string, string> = {};
+export const getCssVariables = (theme: Theme, { color, display }: Appearance): Record<string, string> => {
+    const variables: Record<string, string> = {};
 
-        for (const [key, value] of Object.entries(obj)) {
+    const transform = (obj: Record<string, any>, path: string[] = []): void => {
+        console.log(obj, path);
+        for (const key in obj) {
+            const varKey = `--discord-${[...path, key].join('-')}`;
+            const value = obj[key];
+
+            console.log(varKey, key, value);
+
             if (typeof value !== 'object') {
-                vars[`--discord-${path}-${key}`] = value;
+                variables[varKey] = value;
                 continue;
             }
 
             if ('dark' in value && 'light' in value) {
-                vars[`--discord-${path}-${key}`] = value[appearance.color];
+                variables[varKey] = value[color];
                 continue;
             }
 
             if ('cozy' in value && 'compact' in value) {
-                vars[`--discord-${path}-${key}`] = value[appearance.display];
+                variables[varKey] = value[display];
                 continue;
             }
 
-            vars = {
-                ...vars,
-                ...getVariables(value, `${path}-${key}`)
-            };
+            transform(value, [...path, key]);
         }
-
-        return vars;
     };
 
-    return {
-        ...getVariables(theme, 'palette'),
-        ...getVariables(theme, 'size'),
-        ...getVariables(theme, 'spacing')
-    };
+    transform(theme);
+
+    return variables;
 };
