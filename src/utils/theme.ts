@@ -125,3 +125,10 @@ export const getCssVariables = (theme: Theme, { color, display }: Appearance): R
 
     return variables;
 };
+
+export const generateComponentClasses = <T extends string>(name: string, slots: T[]): Record<T, string> => {
+    const classes: Record<string, string> = {};
+    for (const slot of slots)
+        classes[slot] = `LPD${name}-${slot}`;
+    return classes;
+};

@@ -2,10 +2,9 @@
 
 import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
-import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { AppearanceColor, AppearanceDisplay, DefaultTheme, getCssVariables } from '../../utils';
+import { AppearanceColor, AppearanceDisplay, DefaultTheme, generateComponentClasses } from '../../utils';
 
 export const messagesClasses = generateComponentClasses(
     'Messages',
@@ -42,28 +41,32 @@ export const MessagesRoot = styled(
             {...props}
         />
     )
-)<MessagesProps>(({ theme, variant = 'cozy', color = 'dark' }) => ({
-    ...getCssVariables(theme, { color, display: variant }),
-    padding: '1.0625rem 0 1.5rem',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.vars.spacing.messagesGap,
-    listStyle: 'none',
-    color: 'var(--discord-text-primary)',
-    backgroundColor: 'var(--discord-background-primary)',
-    '& *, & *::before, & *::after': {
-        fontFamily: '"Roboto Symbol", "Noto Sans", "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", "Noto Color Emoji", sans-serif'
-    },
-    '& ::selection': {
-        backgroundColor: theme.vars.palette.background.selection
-    },
-    [`&.${messagesClasses.variantCozy}`]: {
-        gap: '1.0625rem'
-    },
-    [`&.${messagesClasses.variantCompact}`]: {
-        gap: '.0625rem'
-    }
-}));
+)<MessagesProps>(({ theme, variant = 'cozy', color = 'dark' }) => {
+    console.log(theme);
+
+    return {
+        // ...getCssVariables(theme, { color, display: variant }),
+        padding: '1.0625rem 0 1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.vars.spacing.messagesGap,
+        listStyle: 'none',
+        color: 'var(--discord-text-primary)',
+        backgroundColor: 'var(--discord-background-primary)',
+        '& *, & *::before, & *::after': {
+            fontFamily: '"Roboto Symbol", "Noto Sans", "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", "Noto Color Emoji", sans-serif'
+        },
+        '& ::selection': {
+            backgroundColor: theme.vars.palette.background.selection
+        },
+        [`&.${messagesClasses.variantCozy}`]: {
+            gap: '1.0625rem'
+        },
+        [`&.${messagesClasses.variantCompact}`]: {
+            gap: '.0625rem'
+        }
+    };
+});
 
 export const Messages = ({ variant, color, children }: MessagesProps) => (
     <ThemeProvider theme={DefaultTheme}>
