@@ -43,7 +43,6 @@ export const MessageReplyRoot = styled(
     )
 )<MessageReplyRootProps>(({ theme }) => ({
     width: 'max-content',
-    marginBottom: 4,
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -52,14 +51,20 @@ export const MessageReplyRoot = styled(
     whiteSpace: 'pre',
     wordWrap: 'break-word',
     userSelect: 'none',
+    ...(theme.appearance.display === 'cozy' ? {
+        marginBottom: 4
+    } : {
+        marginLeft: 'calc(2.25rem + .25rem + -4rem)',
+        paddingLeft: '.625rem'
+    }),
     '&::before': {
         content: '""',
         margin: 'calc(-.5 * 2px) 4px calc(-4px + .125rem) calc(-.5 * 2px)',
         position: 'absolute',
         top: '50%',
         bottom: 0,
-        left: 'calc(-1 * (.5 * 40px + 16px))',
-        right: '100%',
+        left: theme.appearance.display === 'cozy' ? 'calc(-1 * (.5 * 40px + 16px))' : 'calc(-1 * (.5 * 2.25rem + .25rem))',
+        right: theme.appearance.display === 'cozy' ? '100%' : 'calc(100% - .625rem)',
         display: 'block',
         borderStyle: 'solid',
         borderWidth: '2px 0 0 2px',

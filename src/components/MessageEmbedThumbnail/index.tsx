@@ -59,11 +59,11 @@ export const MessageEmbedThumbnailImage = styled(
 });
 
 export interface MessageEmbedThumbnailProps {
-    thumbnail: string;
+    src: string;
 }
 
-export const MessageEmbedThumbnail = ({ thumbnail }: MessageEmbedThumbnailProps) => (
+export const MessageEmbedThumbnail = ({ src }: MessageEmbedThumbnailProps) => (
     <MessageEmbedThumbnailRoot>
-        <MessageEmbedThumbnailImage src={thumbnail} />
+        <MessageEmbedThumbnailImage src={src} />
     </MessageEmbedThumbnailRoot>
 );
