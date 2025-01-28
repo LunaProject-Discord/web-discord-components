@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { generateComponentClasses } from '@lunaproject/web-core/dist/utils';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { AppearanceColor, AppearanceDisplay, DefaultTheme, getCssVariables } from '../../utils';
+import { AppearanceColor, AppearanceDisplay, DefaultTheme } from '../../utils';
 
 export const messagesClasses = generateComponentClasses(
     'Messages',
@@ -43,8 +43,7 @@ export const MessagesRoot = styled(
         />
     )
 )<MessagesProps>(({ theme, variant = 'cozy', color = 'dark' }) => ({
-    ...getCssVariables(theme, { color, display: variant }),
-
+    // ...getCssVariables(theme, { color, display: variant }),
     padding: '1.0625rem 0 1.5rem',
     display: 'flex',
     flexDirection: 'column',
