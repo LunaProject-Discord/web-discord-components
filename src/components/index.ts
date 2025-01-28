@@ -1,4 +1,5 @@
 export * from './Message';
+export * from './MessageAccessories';
 export * from './MessageContent';
 export * from './MessageEmbed';
 export * from './MessageEmbedAuthor';
