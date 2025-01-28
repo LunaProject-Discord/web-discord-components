@@ -3,53 +3,37 @@
 import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { AppearanceColor, AppearanceDisplay, DefaultTheme, generateComponentClasses } from '../../utils';
+import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
+import { AppearanceColor, AppearanceDisplay, buildTheme, generateComponentClasses } from '../../utils';
 
 export const messagesClasses = generateComponentClasses(
     'Messages',
     [
-        'root',
-
-        'variantCozy',
-        'variantCompact',
-        'colorLight',
-        'colorDark'
+        'root'
     ]
 );
 
-export interface MessagesRootProps {
-    variant?: AppearanceDisplay;
-    color?: AppearanceColor;
-}
-
 export const MessagesRootElement: ElementType = 'ul';
 
-export type MessagesProps = Omit<ComponentPropsWithRef<typeof MessagesRootElement>, 'color'> & MessagesRootProps;
-
 export const MessagesRoot = styled(
-    ({ variant, color, className, ...props }: MessagesProps) => (
+    ({ className, ...props }: ComponentPropsWithRef<typeof MessagesRootElement>) => (
         <MessagesRootElement
             className={
                 clsx(
                     messagesClasses.root,
-                    variant === 'compact' ? messagesClasses.variantCompact : messagesClasses.variantCozy,
-                    color === 'light' ? messagesClasses.colorLight : messagesClasses.colorDark,
                     className
                 )
             }
             {...props}
         />
     )
-)<MessagesProps>(({ theme, variant = 'cozy', color = 'dark' }) => {
+)(({ theme }) => {
     console.log(theme);
 
     return {
-        // ...getCssVariables(theme, { color, display: variant }),
         padding: '1.0625rem 0 1.5rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.vars.spacing.messagesGap,
         listStyle: 'none',
         color: 'var(--discord-text-primary)',
         backgroundColor: 'var(--discord-background-primary)',
@@ -57,20 +41,25 @@ export const MessagesRoot = styled(
             fontFamily: '"Roboto Symbol", "Noto Sans", "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", "Noto Color Emoji", sans-serif'
         },
         '& ::selection': {
-            backgroundColor: theme.vars.palette.background.selection
+            backgroundColor: theme.palette.background.selection
         },
-        [`&.${messagesClasses.variantCozy}`]: {
+        ...(theme.appearance.display === 'cozy' ? {
             gap: '1.0625rem'
-        },
-        [`&.${messagesClasses.variantCompact}`]: {
+        } : {
             gap: '.0625rem'
-        }
+        })
     };
 });
 
-export const Messages = ({ variant, color, children }: MessagesProps) => (
-    <ThemeProvider theme={DefaultTheme}>
-        <MessagesRoot variant={variant} color={color}>
+export interface MessagesProps {
+    color?: AppearanceColor;
+    display?: AppearanceDisplay;
+    children?: ReactNode;
+}
+
+export const Messages = ({ color = 'dark', display = 'cozy', children }: MessagesProps) => (
+    <ThemeProvider theme={buildTheme({ color, display })}>
+        <MessagesRoot>
             {children}
         </MessagesRoot>
     </ThemeProvider>
