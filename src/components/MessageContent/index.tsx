@@ -12,7 +12,7 @@ export const messageContentClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessageContentElement: ElementType = 'p';
+const MessageContentElement: ElementType = 'p';
 
 export const MessageContent = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageContentElement>) => (

@@ -20,13 +20,13 @@ export const messageReplyClasses = generateDiscordComponentClasses(
     ]
 );
 
+const MessageReplyRootElement: ElementType = 'div';
+
 export type MessageReplyType = 'message' | 'command';
 
 export interface MessageReplyRootProps extends ComponentPropsWithRef<typeof MessageReplyRootElement> {
     type?: MessageReplyType;
 }
-
-export const MessageReplyRootElement: ElementType = 'div';
 
 export const MessageReplyRoot = styled(
     ({ type, className, ...props }: MessageReplyRootProps) => (
@@ -90,7 +90,7 @@ export const MessageReplyRoot = styled(
     }
 }));
 
-export const MessageReplyUserElement: ElementType = 'div';
+const MessageReplyUserElement: ElementType = 'div';
 
 export const MessageReplyUser = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageReplyUserElement>) => (
@@ -115,7 +115,7 @@ export const MessageReplyUser = styled(
     }
 });
 
-export const MessageReplyUserAvatarElement: ElementType = 'img';
+const MessageReplyUserAvatarElement: ElementType = 'img';
 
 export const MessageReplyUserAvatar = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageReplyUserAvatarElement>) => (
@@ -137,7 +137,7 @@ export const MessageReplyUserAvatar = styled(
     borderRadius: '50%'
 });
 
-export const MessageReplyUserNameElement: ElementType = 'span';
+const MessageReplyUserNameElement: ElementType = 'span';
 
 export const MessageReplyUserName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageReplyUserNameElement>) => (
@@ -164,7 +164,7 @@ export const MessageReplyUserName = styled(
     opacity: .64
 }));
 
-export const MessageReplyPreviewElement: ElementType = 'div';
+const MessageReplyPreviewElement: ElementType = 'div';
 
 export const MessageReplyPreview = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageReplyPreviewElement>) => (
@@ -194,7 +194,7 @@ export const MessageReplyPreview = styled(
     color: theme.appearance.color === 'dark' ? '#b6bac0' : '#4e5057'
 }));
 
-export const MessageReplyPreviewContentElement: ElementType = 'div';
+const MessageReplyPreviewContentElement: ElementType = 'div';
 
 export const MessageReplyPreviewContent = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageReplyPreviewContentElement>) => (

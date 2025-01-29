@@ -44,7 +44,7 @@ const DefaultDiscordLightTheme: Omit<DiscordTheme, 'appearance'> = {
             primary: '#313338',
             secondary: '#060607',
             muted: '#5c5e65',
-            link: ''
+            link: '#3868e0'
         }
     }
 };
@@ -65,7 +65,7 @@ const DefaultDiscordDarkTheme: Omit<DiscordTheme, 'appearance'> = {
             primary: '#dcdee1',
             secondary: '#f2f3f5',
             muted: '#959ba3',
-            link: ''
+            link: '#52a6f6'
         }
     }
 };

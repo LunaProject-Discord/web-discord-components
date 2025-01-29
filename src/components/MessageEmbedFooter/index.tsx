@@ -16,7 +16,7 @@ export const messageEmbedFooterClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessageEmbedFooterRootElement: ElementType = 'div';
+const MessageEmbedFooterRootElement: ElementType = 'div';
 
 export const MessageEmbedFooterRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFooterRootElement>) => (
@@ -40,7 +40,7 @@ export const MessageEmbedFooterRoot = styled(
     lineHeight: '22px'
 });
 
-export const MessageEmbedFooterIconElement: ElementType = 'img';
+const MessageEmbedFooterIconElement: ElementType = 'img';
 
 export const MessageEmbedFooterIcon = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFooterIconElement>) => (
@@ -61,7 +61,7 @@ export const MessageEmbedFooterIcon = styled(
     borderRadius: '50%'
 });
 
-export const MessageEmbedFooterTextElement: ElementType = 'span';
+const MessageEmbedFooterTextElement: ElementType = 'span';
 
 export const MessageEmbedFooterText = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFooterTextElement>) => (
@@ -79,10 +79,12 @@ export const MessageEmbedFooterText = styled(
     fontSize: '.75rem',
     fontWeight: 500,
     lineHeight: '1rem',
+    whiteSpace: 'break-spaces',
+    wordWrap: 'break-word',
     color: theme.palette.text.primary
 }));
 
-export const MessageEmbedFooterSeparatorElement: ElementType = 'span';
+const MessageEmbedFooterSeparatorElement: ElementType = 'span';
 
 export const MessageEmbedFooterSeparator = styled(
     ({ className, ...props }: Omit<ComponentPropsWithRef<typeof MessageEmbedFooterSeparatorElement>, 'children'>) => (

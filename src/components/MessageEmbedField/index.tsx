@@ -14,7 +14,7 @@ export const messageEmbedFieldClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessageEmbedFieldRootElement: ElementType = 'div';
+const MessageEmbedFieldRootElement: ElementType = 'div';
 
 export const MessageEmbedFieldRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldRootElement>) => (
@@ -42,7 +42,7 @@ export const MessageEmbedFieldRoot = styled(
     }
 });
 
-export const MessageEmbedFieldNameElement: ElementType = 'h5';
+const MessageEmbedFieldNameElement: ElementType = 'h5';
 
 export const MessageEmbedFieldName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldNameElement>) => (
@@ -61,10 +61,12 @@ export const MessageEmbedFieldName = styled(
     fontSize: '.875rem',
     fontWeight: 600,
     lineHeight: '1.125rem',
+    whiteSpace: 'break-spaces',
+    wordWrap: 'break-word',
     color: theme.palette.text.secondary
 }));
 
-export const MessageEmbedFieldValueElement: ElementType = 'p';
+const MessageEmbedFieldValueElement: ElementType = 'p';
 
 export const MessageEmbedFieldValue = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldValueElement>) => (

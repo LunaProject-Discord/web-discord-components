@@ -16,7 +16,7 @@ export const messageHeaderClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessageHeaderRootElement: ElementType = 'h3';
+const MessageHeaderRootElement: ElementType = 'h3';
 
 export const MessageHeaderRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderRootElement>) => (
@@ -43,7 +43,7 @@ export const MessageHeaderRoot = styled(
     })
 }));
 
-export const MessageHeaderAvatarElement: ElementType = 'img';
+const MessageHeaderAvatarElement: ElementType = 'img';
 
 export const MessageHeaderAvatar = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderAvatarElement>) => (
@@ -78,7 +78,7 @@ export const MessageHeaderAvatar = styled(
     }
 }));
 
-export const MessageHeaderNameElement: ElementType = 'span';
+const MessageHeaderNameElement: ElementType = 'span';
 
 export const MessageHeaderName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderNameElement>) => (
@@ -105,7 +105,7 @@ export const MessageHeaderName = styled(
     }
 }));
 
-export const MessageHeaderTimestampElement: ElementType = 'time';
+const MessageHeaderTimestampElement: ElementType = 'time';
 
 export const MessageHeaderTimestampCozy = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderTimestampElement>) => (

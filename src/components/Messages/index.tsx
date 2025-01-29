@@ -18,7 +18,7 @@ export const messagesClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessagesRootElement: ElementType = 'ul';
+const MessagesRootElement: ElementType = 'ul';
 
 export const MessagesRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessagesRootElement>) => (

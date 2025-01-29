@@ -13,12 +13,13 @@ export const messageEmbedClasses = generateDiscordComponentClasses(
     [
         'root',
         'title',
+        'titleLink',
         'description',
         'fields'
     ]
 );
 
-export const MessageEmbedRootElement: ElementType = 'div';
+const MessageEmbedRootElement: ElementType = 'div';
 
 export const MessageEmbedRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedRootElement>) => (
@@ -49,7 +50,7 @@ export const MessageEmbedRoot = styled(
     }
 }));
 
-export const MessageEmbedTitleElement: ElementType = 'h4';
+const MessageEmbedTitleElement: ElementType = 'h4';
 
 export const MessageEmbedTitle = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedTitleElement>) => (
@@ -70,10 +71,43 @@ export const MessageEmbedTitle = styled(
     fontSize: '1rem',
     fontWeight: 600,
     lineHeight: '22px',
+    whiteSpace: 'break-spaces',
+    wordWrap: 'break-word',
     color: theme.palette.text.primary
 }));
 
-export const MessageEmbedDescriptionElement: ElementType = 'p';
+const MessageEmbedTitleLinkElement: ElementType = 'a';
+
+export const MessageEmbedTitleLink = styled(
+    ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedTitleLinkElement>) => (
+        <MessageEmbedTitleLinkElement
+            className={
+                clsx(
+                    messageEmbedClasses.title,
+                    messageEmbedClasses.titleLink,
+                    className
+                )
+            }
+            {...props}
+        />
+    )
+)(({ theme }) => ({
+    marginTop: 8,
+    gridColumn: '1 / 1',
+    display: 'inline-block',
+    fontSize: '1rem',
+    fontWeight: 600,
+    lineHeight: '22px',
+    whiteSpace: 'break-spaces',
+    wordWrap: 'break-word',
+    textDecoration: 'none',
+    color: theme.palette.text.link,
+    '&:hover': {
+        textDecoration: 'underline'
+    }
+}));
+
+const MessageEmbedDescriptionElement: ElementType = 'p';
 
 export const MessageEmbedDescription = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedDescriptionElement>) => (
@@ -99,7 +133,7 @@ export const MessageEmbedDescription = styled(
     color: theme.palette.text.primary
 }));
 
-export const MessageEmbedFieldsElement: ElementType = 'div';
+const MessageEmbedFieldsElement: ElementType = 'div';
 
 export const MessageEmbedFields = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldsElement>) => (

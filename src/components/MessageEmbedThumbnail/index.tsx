@@ -13,7 +13,7 @@ export const messageEmbedThumbnailClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessageEmbedThumbnailRootElement: ElementType = 'div';
+const MessageEmbedThumbnailRootElement: ElementType = 'div';
 
 export const MessageEmbedThumbnailRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedThumbnailRootElement>) => (
@@ -37,7 +37,7 @@ export const MessageEmbedThumbnailRoot = styled(
     objectFit: 'fill'
 });
 
-export const MessageEmbedThumbnailImageElement: ElementType = 'img';
+const MessageEmbedThumbnailImageElement: ElementType = 'img';
 
 export const MessageEmbedThumbnailImage = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedThumbnailImageElement>) => (
@@ -55,7 +55,8 @@ export const MessageEmbedThumbnailImage = styled(
     maxWidth: 80,
     maxHeight: 80,
     display: 'block',
-    borderRadius: 4
+    borderRadius: 4,
+    cursor: 'pointer'
 });
 
 export interface MessageEmbedThumbnailProps {

@@ -12,7 +12,7 @@ export const messageAccessoriesClasses = generateDiscordComponentClasses(
     ]
 );
 
-export const MessageAccessoriesRootElement: ElementType = 'div';
+const MessageAccessoriesRootElement: ElementType = 'div';
 
 export const MessageAccessories = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageAccessoriesRootElement>) => (

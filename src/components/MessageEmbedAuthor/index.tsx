@@ -10,11 +10,12 @@ export const messageEmbedAuthorClasses = generateDiscordComponentClasses(
     [
         'root',
         'icon',
-        'name'
+        'name',
+        'nameLink'
     ]
 );
 
-export const MessageEmbedAuthorRootElement: ElementType = 'div';
+const MessageEmbedAuthorRootElement: ElementType = 'div';
 
 export const MessageEmbedAuthorRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorRootElement>) => (
@@ -37,7 +38,7 @@ export const MessageEmbedAuthorRoot = styled(
     lineHeight: '22px'
 });
 
-export const MessageEmbedAuthorIconElement: ElementType = 'img';
+const MessageEmbedAuthorIconElement: ElementType = 'img';
 
 export const MessageEmbedAuthorIcon = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorIconElement>) => (
@@ -58,7 +59,7 @@ export const MessageEmbedAuthorIcon = styled(
     borderRadius: '50%'
 });
 
-export const MessageEmbedAuthorNameElement: ElementType = 'span';
+const MessageEmbedAuthorNameElement: ElementType = 'span';
 
 export const MessageEmbedAuthorName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorNameElement>) => (
@@ -75,7 +76,34 @@ export const MessageEmbedAuthorName = styled(
 )(({ theme }) => ({
     fontSize: '.875rem',
     fontWeight: 600,
+    whiteSpace: 'break-spaces',
+    wordWrap: 'break-word',
     color: theme.palette.text.secondary
+}));
+
+const MessageEmbedAuthorNameLinkElement: ElementType = 'a';
+
+export const MessageEmbedAuthorNameLink = styled(
+    ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorNameLinkElement>) => {
+        const Component = MessageEmbedAuthorName.withComponent(MessageEmbedAuthorNameLinkElement);
+        return (
+            <Component
+                className={
+                    clsx(
+                        messageEmbedAuthorClasses.nameLink,
+                        className
+                    )
+                }
+                {...props}
+            />
+        );
+    }
+)(({ theme }) => ({
+    textDecoration: 'none',
+    color: theme.palette.text.link,
+    '&:hover': {
+        textDecoration: 'underline'
+    }
 }));
 
 export interface MessageEmbedAuthorProps {
@@ -87,7 +115,15 @@ export interface MessageEmbedAuthorProps {
 export const MessageEmbedAuthor = ({ name, url, iconUrl }: MessageEmbedAuthorProps) => (
     <MessageEmbedAuthorRoot>
         {iconUrl && <MessageEmbedAuthorIcon src={iconUrl} />}
-        <MessageEmbedAuthorName>{name}</MessageEmbedAuthorName>
+        {url ? <MessageEmbedAuthorNameLink
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer nofollow ugc"
+        >
+            {name}
+        </MessageEmbedAuthorNameLink> : <MessageEmbedAuthorName>
+            {name}
+        </MessageEmbedAuthorName>}
     </MessageEmbedAuthorRoot>
 );
 
