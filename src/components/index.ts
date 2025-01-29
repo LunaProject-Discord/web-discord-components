@@ -1,3 +1,4 @@
+export * from './Link';
 export * from './Message';
 export * from './MessageAccessories';
 export * from './MessageContent';

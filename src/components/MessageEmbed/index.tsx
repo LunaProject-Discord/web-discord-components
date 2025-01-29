@@ -13,7 +13,6 @@ export const messageEmbedClasses = generateDiscordComponentClasses(
     [
         'root',
         'title',
-        'titleLink',
         'description',
         'fields'
     ]
@@ -74,37 +73,6 @@ export const MessageEmbedTitle = styled(
     whiteSpace: 'break-spaces',
     wordWrap: 'break-word',
     color: theme.palette.text.primary
-}));
-
-const MessageEmbedTitleLinkElement: ElementType = 'a';
-
-export const MessageEmbedTitleLink = styled(
-    ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedTitleLinkElement>) => (
-        <MessageEmbedTitleLinkElement
-            className={
-                clsx(
-                    messageEmbedClasses.title,
-                    messageEmbedClasses.titleLink,
-                    className
-                )
-            }
-            {...props}
-        />
-    )
-)(({ theme }) => ({
-    marginTop: 8,
-    gridColumn: '1 / 1',
-    display: 'inline-block',
-    fontSize: '1rem',
-    fontWeight: 600,
-    lineHeight: '22px',
-    whiteSpace: 'break-spaces',
-    wordWrap: 'break-word',
-    textDecoration: 'none',
-    color: theme.palette.text.link,
-    '&:hover': {
-        textDecoration: 'underline'
-    }
 }));
 
 const MessageEmbedDescriptionElement: ElementType = 'p';

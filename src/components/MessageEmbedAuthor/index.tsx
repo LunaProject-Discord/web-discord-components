@@ -4,14 +4,14 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 import { generateDiscordComponentClasses } from '../../utils';
+import { Link } from '../Link';
 
 export const messageEmbedAuthorClasses = generateDiscordComponentClasses(
     'MessageEmbedAuthor',
     [
         'root',
         'icon',
-        'name',
-        'nameLink'
+        'name'
     ]
 );
 
@@ -81,31 +81,6 @@ export const MessageEmbedAuthorName = styled(
     color: theme.palette.text.secondary
 }));
 
-const MessageEmbedAuthorNameLinkElement: ElementType = 'a';
-
-export const MessageEmbedAuthorNameLink = styled(
-    ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorNameLinkElement>) => {
-        const Component = MessageEmbedAuthorName.withComponent(MessageEmbedAuthorNameLinkElement);
-        return (
-            <Component
-                className={
-                    clsx(
-                        messageEmbedAuthorClasses.nameLink,
-                        className
-                    )
-                }
-                {...props}
-            />
-        );
-    }
-)(({ theme }) => ({
-    textDecoration: 'none',
-    color: theme.palette.text.link,
-    '&:hover': {
-        textDecoration: 'underline'
-    }
-}));
-
 export interface MessageEmbedAuthorProps {
     name: ReactNode;
     url?: string;
@@ -115,15 +90,7 @@ export interface MessageEmbedAuthorProps {
 export const MessageEmbedAuthor = ({ name, url, iconUrl }: MessageEmbedAuthorProps) => (
     <MessageEmbedAuthorRoot>
         {iconUrl && <MessageEmbedAuthorIcon src={iconUrl} />}
-        {url ? <MessageEmbedAuthorNameLink
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer nofollow ugc"
-        >
-            {name}
-        </MessageEmbedAuthorNameLink> : <MessageEmbedAuthorName>
-            {name}
-        </MessageEmbedAuthorName>}
+        <MessageEmbedAuthorName>{url ? <Link href={url}>{name}</Link> : name}</MessageEmbedAuthorName>
     </MessageEmbedAuthorRoot>
 );
 
