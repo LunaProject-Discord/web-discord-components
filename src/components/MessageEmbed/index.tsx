@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
 import { generateDiscordComponentClasses } from '../../utils';
 import { messageEmbedFooterClasses } from '../MessageEmbedFooter';
+import { messageEmbedImageClasses } from '../MessageEmbedImage';
 import { messageEmbedThumbnailClasses } from '../MessageEmbedThumbnail';
 
 export const messageEmbedClasses = generateDiscordComponentClasses(
@@ -43,7 +44,7 @@ export const MessageEmbedRoot = styled(
     backgroundColor: theme.palette.background.secondary,
     borderLeft: 'solid 4px',
     borderRadius: 4,
-    [`&:has(.${messageEmbedThumbnailClasses.root}) .${messageEmbedFooterClasses.root}`]: {
+    [`&:has(.${messageEmbedThumbnailClasses.root}) :where(.${messageEmbedImageClasses.root}, .${messageEmbedFooterClasses.root})`]: {
         gridColumn: '1 / 3'
     }
 }));

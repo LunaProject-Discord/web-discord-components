@@ -5,6 +5,8 @@ export * from './MessageEmbed';
 export * from './MessageEmbedAuthor';
 export * from './MessageEmbedField';
 export * from './MessageEmbedFooter';
+export * from './MessageEmbedGallery';
+export * from './MessageEmbedImage';
 export * from './MessageEmbedThumbnail';
 export * from './MessageHeader';
 export * from './MessageReply';
