@@ -26,26 +26,14 @@ const markToElementType = ({ type }: Mark): ElementType | FC => {
 };
 
 export const contentToReactNode = ({ type, attrs = {}, content = [], marks = [], text }: Content): ReactNode => {
-    if (type === 'root') {
-        return createElement(
-            Fragment,
-            {},
-            content.map(contentToReactNode)
-        );
-    }
-
     const key = nanoid(8);
 
     switch (type) {
-        case 'text':
-            if (!marks || marks.length < 1)
-                return text;
-
-            const mark = marks.shift()!;
+        case 'root':
             return createElement(
-                markToElementType(mark),
-                { key, ...mark.attrs },
-                contentToReactNode({ type, attrs, content, marks, text })
+                Fragment,
+                {},
+                content.map(contentToReactNode)
             );
         case 'paragraph':
             return createElement(
@@ -59,6 +47,16 @@ export const contentToReactNode = ({ type, attrs = {}, content = [], marks = [],
                 `h${level}`,
                 { key, ...props },
                 content.map(contentToReactNode)
+            );
+        case 'text':
+            if (!marks || marks.length < 1)
+                return text;
+
+            const mark = marks.shift()!;
+            return createElement(
+                markToElementType(mark),
+                { key, ...mark.attrs },
+                contentToReactNode({ type, attrs, content, marks, text })
             );
         default:
             warningWithName('contentToReactNode', `${type} node is not recognized!`);

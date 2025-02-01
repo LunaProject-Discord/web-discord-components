@@ -23,24 +23,22 @@ export const wrapMark = (text: string, { type, attrs = {} }: Mark): string => {
 };
 
 export const contentToMarkdown = ({ type, attrs = {}, content = [], marks = [], text = '' }: Content): string => {
-    if (type === 'root')
-        return content.map(contentToMarkdown).join('\n');
-
-    const key = nanoid(8);
-
     switch (type) {
-        case 'text':
-            if (!marks || marks.length < 1)
-                return text || '';
-
-            return wrapMark(
-                contentToMarkdown({ type, attrs, content, marks, text }),
-                marks.shift()!
-            );
+        case 'root':
+            return content.map(contentToMarkdown).join('\n');
         case 'paragraph':
             return content.map(contentToMarkdown).join('');
         case 'heading':
             return `${'#'.repeat(attrs.level || 1)} ${content.map(contentToMarkdown).join('')}`;
+        case 'text':
+            if (!marks || marks.length < 1)
+                return text || '';
+
+            const mark = marks.shift()!;
+            return wrapMark(
+                contentToMarkdown({ type, attrs, content, marks, text }),
+                mark
+            );
         default:
             warningWithName('contentToMarkdown', `${type} node is not recognized!`);
             return content.map(contentToMarkdown).join('');
