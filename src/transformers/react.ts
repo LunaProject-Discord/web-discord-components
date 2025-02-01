@@ -1,7 +1,7 @@
 import { warningWithName } from '@lunaproject/web-core/dist/utils';
 import { nanoid } from 'nanoid';
 import { createElement, ElementType, FC, Fragment, ReactNode } from 'react';
-import { Bold, Italic, Link, Strikethrough, Underline } from '../components';
+import { Bold, Heading, Italic, Link, Strikethrough, Underline } from '../components';
 import { Content, Mark } from '../interfaces';
 
 const markToElementType = ({ type }: Mark): ElementType | FC => {
@@ -42,10 +42,10 @@ export const contentToReactNode = ({ type, attrs = {}, content = [], marks = [],
                 content.map(contentToReactNode)
             );
         case 'heading':
-            const { level = 1, ...props } = attrs;
+            const { level, ...props } = attrs;
             return createElement(
-                `h${level}`,
-                { key, ...props },
+                Heading,
+                { key, level, ...props },
                 content.map(contentToReactNode)
             );
         case 'text':

@@ -1,5 +1,6 @@
 export * from './Bold';
 export * from './DataContext';
+export * from './Heading';
 export * from './Italic';
 export * from './Link';
 export * from './Message';
