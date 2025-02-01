@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { createElement, ElementType, FC, Fragment, ReactNode } from 'react';
 import { Link } from '../components';
 import { Content, Mark } from '../interfaces';
@@ -27,28 +28,41 @@ export const asReactNode = ({ type, attrs = {}, content = [], marks = [], text }
     if (type === 'root') {
         return createElement(
             Fragment,
-            attrs,
+            {},
             content.map(asReactNode)
         );
     }
 
-    if (marks && marks.length > 0) {
-        const mark = marks.shift()!;
-        return createElement(
-            markToElementType(mark),
-            attrs,
-            asReactNode({ type, attrs, content, marks, text })
-        );
-    }
-
     switch (type) {
+        case 'text':
+            if (!marks || marks.length < 1)
+                return text;
+
+            const mark = marks.shift()!;
+            return createElement(
+                markToElementType(mark),
+                { key: nanoid(8), ...mark.attrs },
+                asReactNode({ type, attrs, content, marks, text })
+            );
         case 'paragraph':
-            return createElement('p', attrs, content.map(asReactNode));
+            return createElement(
+                'p',
+                { key: nanoid(8), ...attrs },
+                content.map(asReactNode)
+            );
         case 'heading':
             const { level = 1, ...props } = attrs;
-            return createElement(`h${level}`, props, content.map(asReactNode));
+            return createElement(
+                `h${level}`,
+                { key: nanoid(8), ...props },
+                content.map(asReactNode)
+            );
         default:
             console.warn(`${type} node is not recognized!`);
-            return createElement('span', attrs, content.map(asReactNode));
+            return createElement(
+                Fragment,
+                { key: nanoid(8) },
+                content.map(asReactNode)
+            );
     }
 };
