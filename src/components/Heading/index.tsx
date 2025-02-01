@@ -1,7 +1,8 @@
 'use client';
 
 import styled from '@emotion/styled';
-import React, { ComponentPropsWithRef, ElementType, HTMLAttributes, ReactNode, RefAttributes } from 'react';
+import clsx from 'clsx';
+import React, { ComponentPropsWithRef, ElementType, HTMLAttributes, RefAttributes } from 'react';
 import { generateComponentClasses } from '../../utils';
 
 export const headingClasses = generateComponentClasses(
@@ -19,7 +20,13 @@ const HeadingLargeElement: ElementType = 'h1';
 export const HeadingLarge = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof HeadingLargeElement>) => (
         <HeadingLargeElement
-            className={headingClasses.variantLarge}
+            className={
+                clsx(
+                    headingClasses.root,
+                    headingClasses.variantLarge,
+                    className
+                )
+            }
             {...props}
         />
     )
@@ -39,7 +46,13 @@ const HeadingMediumElement: ElementType = 'h2';
 export const HeadingMedium = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof HeadingMediumElement>) => (
         <HeadingMediumElement
-            className={headingClasses.variantMedium}
+            className={
+                clsx(
+                    headingClasses.root,
+                    headingClasses.variantMedium,
+                    className
+                )
+            }
             {...props}
         />
     )
@@ -59,7 +72,13 @@ const HeadingSmallElement: ElementType = 'h3';
 export const HeadingSmall = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof HeadingSmallElement>) => (
         <HeadingSmallElement
-            className={headingClasses.variantSmall}
+            className={
+                clsx(
+                    headingClasses.root,
+                    headingClasses.variantSmall,
+                    className
+                )
+            }
             {...props}
         />
     )
@@ -82,12 +101,12 @@ export const Heading = ({ level, children, ...props }: HeadingProps) => {
     switch (level) {
         case 'large':
         case 1:
-            return <HeadingLarge {...props}>{children}</HeadingLarge>;
+            return (<HeadingLarge {...props}>{children}</HeadingLarge>);
         case 'medium':
         case 2:
-            return <HeadingMedium {...props}>{children}</HeadingMedium>;
+            return (<HeadingMedium {...props}>{children}</HeadingMedium>);
         case 'small':
         case 3:
-            return <HeadingSmall {...props}>{children}</HeadingSmall>;
+            return (<HeadingSmall {...props}>{children}</HeadingSmall>);
     }
 };
