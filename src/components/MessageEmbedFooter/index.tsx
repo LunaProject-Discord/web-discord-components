@@ -4,9 +4,9 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { formatDiscordTimestamp, generateDiscordComponentClasses } from '../../utils';
+import { formatTimestamp, generateComponentClasses } from '../../utils';
 
-export const messageEmbedFooterClasses = generateDiscordComponentClasses(
+export const messageEmbedFooterClasses = generateComponentClasses(
     'MessageEmbedFooter',
     [
         'root',
@@ -121,7 +121,7 @@ export const MessageEmbedFooter = ({ timestamp, text, iconUrl }: MessageEmbedFoo
         <MessageEmbedFooterText>
             {text}
             {(text && timestamp) && <MessageEmbedFooterSeparator />}
-            {timestamp && formatDiscordTimestamp(timestamp)}
+            {timestamp && formatTimestamp(timestamp)}
         </MessageEmbedFooterText>
     </MessageEmbedFooterRoot>
 );

@@ -1,13 +1,13 @@
-export type DiscordAppearanceColor = 'dark' | 'light';
-export type DiscordAppearanceDisplay = 'cozy' | 'compact';
+export type AppearanceColor = 'dark' | 'light';
+export type AppearanceDisplay = 'cozy' | 'compact';
 
-export interface DiscordAppearance {
-    color: DiscordAppearanceColor;
-    display: DiscordAppearanceDisplay;
+export interface Appearance {
+    color: AppearanceColor;
+    display: AppearanceDisplay;
 }
 
-export interface DiscordTheme {
-    appearance: DiscordAppearance;
+export interface Theme {
+    appearance: Appearance;
     palette: {
         common: {
             black: string;
@@ -28,7 +28,7 @@ export interface DiscordTheme {
     };
 }
 
-const DefaultDiscordLightTheme: Omit<DiscordTheme, 'appearance'> = {
+const DefaultLightTheme: Omit<Theme, 'appearance'> = {
     palette: {
         common: {
             black: '#000',
@@ -49,7 +49,7 @@ const DefaultDiscordLightTheme: Omit<DiscordTheme, 'appearance'> = {
     }
 };
 
-const DefaultDiscordDarkTheme: Omit<DiscordTheme, 'appearance'> = {
+const DefaultDarkTheme: Omit<Theme, 'appearance'> = {
     palette: {
         common: {
             black: '#000',
@@ -70,15 +70,15 @@ const DefaultDiscordDarkTheme: Omit<DiscordTheme, 'appearance'> = {
     }
 };
 
-export const buildDiscordTheme = ({ color, display }: DiscordAppearance): DiscordTheme => ({
-    ...color === 'dark' ? DefaultDiscordDarkTheme : DefaultDiscordLightTheme,
+export const buildTheme = ({ color, display }: Appearance): Theme => ({
+    ...color === 'dark' ? DefaultDarkTheme : DefaultLightTheme,
     appearance: {
         color,
         display
     }
 });
 
-export const generateDiscordComponentClasses = <T extends string>(name: string, slots: T[]): Record<T, string> => {
+export const generateComponentClasses = <T extends string>(name: string, slots: T[]): Record<T, string> => {
     const classes: Record<string, string> = {};
     for (const slot of slots)
         classes[slot] = `LPD${name}-${slot}`;

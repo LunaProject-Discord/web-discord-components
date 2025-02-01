@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-export const formatDiscordTimestamp = (timestamp: DateTime<true> | 'now') => {
+export const formatTimestamp = (timestamp: DateTime<true> | 'now') => {
     if (timestamp === 'now')
         timestamp = DateTime.now();
 

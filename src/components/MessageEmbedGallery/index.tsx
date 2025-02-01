@@ -3,9 +3,9 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateDiscordComponentClasses } from '../../utils';
+import { generateComponentClasses } from '../../utils';
 
-export const messageEmbedGalleryClasses = generateDiscordComponentClasses(
+export const messageEmbedGalleryClasses = generateComponentClasses(
     'MessageEmbedGallery',
     [
         'root',

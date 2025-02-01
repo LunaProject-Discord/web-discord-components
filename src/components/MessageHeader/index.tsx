@@ -1,12 +1,14 @@
 'use client';
 
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { formatDiscordTimestamp, generateDiscordComponentClasses } from '../../utils';
+import { User } from '../../interfaces';
+import { DefaultAvatar, formatTimestamp, generateComponentClasses } from '../../utils';
 
-export const messageHeaderClasses = generateDiscordComponentClasses(
+export const messageHeaderClasses = generateComponentClasses(
     'MessageHeader',
     [
         'root',
@@ -107,7 +109,7 @@ export const MessageHeaderName = styled(
 
 const MessageHeaderTimestampElement: ElementType = 'time';
 
-export const MessageHeaderTimestampCozy = styled(
+export const MessageHeaderTimestamp = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderTimestampElement>) => (
         <MessageHeaderTimestampElement
             className={
@@ -121,43 +123,21 @@ export const MessageHeaderTimestampCozy = styled(
     )
 )(({ theme }) => ({
     height: '1.25rem',
-    marginLeft: '.15rem',
     display: 'inline-block',
-    fontSize: '.75rem',
     fontWeight: 500,
     lineHeight: '1.375rem',
+    wordWrap: 'break-word',
     verticalAlign: 'baseline',
     color: theme.palette.text.muted,
-    ...(theme.appearance.display === 'compact' && {
-        display: 'none'
-    })
-}));
-
-export const MessageHeaderTimestampCompact = styled(
-    ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderTimestampElement>) => (
-        <MessageHeaderTimestampElement
-            className={
-                clsx(
-                    messageHeaderClasses.timestamp,
-                    className
-                )
-            }
-            {...props}
-        />
-    )
-)(({ theme }) => ({
-    width: '2.25rem',
-    height: '1.25rem',
-    marginRight: '.4rem',
-    display: 'inline-block',
-    fontSize: '.6875rem',
-    fontWeight: 500,
-    lineHeight: '1.375rem',
-    textAlign: 'right',
-    verticalAlign: 'baseline',
-    color: theme.palette.text.muted,
-    ...(theme.appearance.display === 'cozy' && {
-        display: 'none'
+    ...(theme.appearance.display === 'cozy' ? {
+        marginLeft: '.15rem',
+        fontSize: '.75rem',
+        whiteSpace: 'break-spaces'
+    } : {
+        width: '2.25rem',
+        marginRight: '.4rem',
+        fontSize: '.6875rem',
+        textAlign: 'right'
     })
 }));
 
@@ -170,16 +150,20 @@ export interface MessageHeaderProps {
 export const MessageHeader = (
     {
         name,
-        avatarUrl = 'https://cdn.discordapp.com/embed/avatars/0.png',
+        avatarUrl = DefaultAvatar.Blurple,
         timestamp
     }: MessageHeaderProps
-) => (
-    <MessageHeaderRoot>
-        <MessageHeaderAvatar src={avatarUrl} />
-        <MessageHeaderTimestampCompact>
-            {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
-        </MessageHeaderTimestampCompact>
-        <MessageHeaderName>{name}</MessageHeaderName>
-        <MessageHeaderTimestampCozy>{formatDiscordTimestamp(timestamp)}</MessageHeaderTimestampCozy>
-    </MessageHeaderRoot>
-);
+) => {
+    const { appearance: { display } } = useTheme();
+
+    return (
+        <MessageHeaderRoot>
+            <MessageHeaderAvatar src={avatarUrl} />
+            {display === 'compact' && <MessageHeaderTimestamp>
+                {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
+            </MessageHeaderTimestamp>}
+            <MessageHeaderName>{name}</MessageHeaderName>
+            {display === 'cozy' && <MessageHeaderTimestamp>{formatTimestamp(timestamp)}</MessageHeaderTimestamp>}
+        </MessageHeaderRoot>
+    );
+};

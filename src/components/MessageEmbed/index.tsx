@@ -3,12 +3,12 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateDiscordComponentClasses } from '../../utils';
+import { generateComponentClasses } from '../../utils';
 import { messageEmbedFooterClasses } from '../MessageEmbedFooter';
 import { messageEmbedImageClasses } from '../MessageEmbedImage';
 import { messageEmbedThumbnailClasses } from '../MessageEmbedThumbnail';
 
-export const messageEmbedClasses = generateDiscordComponentClasses(
+export const messageEmbedClasses = generateComponentClasses(
     'MessageEmbed',
     [
         'root',

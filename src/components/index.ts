@@ -1,3 +1,4 @@
+export * from './DataContext';
 export * from './Link';
 export * from './Message';
 export * from './MessageAccessories';

@@ -3,10 +3,10 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { generateDiscordComponentClasses } from '../../utils';
+import { generateComponentClasses } from '../../utils';
 import { Link } from '../Link';
 
-export const messageEmbedAuthorClasses = generateDiscordComponentClasses(
+export const messageEmbedAuthorClasses = generateComponentClasses(
     'MessageEmbedAuthor',
     [
         'root',

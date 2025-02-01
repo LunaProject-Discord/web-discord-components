@@ -3,9 +3,9 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
-import { generateDiscordComponentClasses } from '../../utils';
+import { DefaultAvatar, generateComponentClasses } from '../../utils';
 
-export const messageReplyClasses = generateDiscordComponentClasses(
+export const messageReplyClasses = generateComponentClasses(
     'MessageReply',
     [
         'root',
@@ -231,7 +231,7 @@ export type MessageReplyProps = {
 export const MessageReply = (props: MessageReplyProps) => {
     const {
         name,
-        avatarUrl = 'https://cdn.discordapp.com/embed/avatars/0.png'
+        avatarUrl = DefaultAvatar.Blurple
     } = props.profile;
 
     return (
