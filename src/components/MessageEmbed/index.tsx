@@ -75,7 +75,7 @@ export const MessageEmbedTitle = styled(
     color: theme.palette.text.primary
 }));
 
-const MessageEmbedDescriptionElement: ElementType = 'p';
+const MessageEmbedDescriptionElement: ElementType = 'div';
 
 export const MessageEmbedDescription = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedDescriptionElement>) => (

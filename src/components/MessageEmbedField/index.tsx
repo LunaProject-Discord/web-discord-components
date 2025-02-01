@@ -66,7 +66,7 @@ export const MessageEmbedFieldName = styled(
     color: theme.palette.text.secondary
 }));
 
-const MessageEmbedFieldValueElement: ElementType = 'p';
+const MessageEmbedFieldValueElement: ElementType = 'div';
 
 export const MessageEmbedFieldValue = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldValueElement>) => (

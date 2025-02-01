@@ -12,7 +12,7 @@ export const messageContentClasses = generateComponentClasses(
     ]
 );
 
-const MessageContentElement: ElementType = 'p';
+const MessageContentElement: ElementType = 'div';
 
 export const MessageContent = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageContentElement>) => (
