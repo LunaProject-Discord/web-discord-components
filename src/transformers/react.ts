@@ -1,19 +1,19 @@
 import { warningWithName } from '@lunaproject/web-core/dist/utils';
 import { nanoid } from 'nanoid';
 import { createElement, ElementType, FC, Fragment, ReactNode } from 'react';
-import { Link } from '../components';
+import { Bold, Italic, Link, Strikethrough, Underline } from '../components';
 import { Content, Mark } from '../interfaces';
 
 const markToElementType = ({ type }: Mark): ElementType | FC => {
     switch (type) {
         case 'bold':
-            return 'strong';
+            return Bold;
         case 'italic':
-            return 'em';
+            return Italic;
         case 'underline':
-            return 'u';
+            return Underline;
         case 'strikethrough':
-            return 's';
+            return Strikethrough;
         case 'code':
             return 'code';
         case 'link':

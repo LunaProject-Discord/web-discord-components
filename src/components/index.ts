@@ -1,4 +1,6 @@
+export * from './Bold';
 export * from './DataContext';
+export * from './Italic';
 export * from './Link';
 export * from './Message';
 export * from './MessageAccessories';
@@ -13,3 +15,5 @@ export * from './MessageEmbedThumbnail';
 export * from './MessageHeader';
 export * from './MessageReply';
 export * from './Messages';
+export * from './Strikethrough';
+export * from './Underline';
