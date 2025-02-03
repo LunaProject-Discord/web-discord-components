@@ -1,8 +1,10 @@
 export * from './Bold';
+export * from './BulletList';
 export * from './DataContext';
 export * from './Heading';
 export * from './Italic';
 export * from './Link';
+export * from './ListItem';
 export * from './Message';
 export * from './MessageAccessories';
 export * from './MessageContent';
@@ -16,5 +18,6 @@ export * from './MessageEmbedThumbnail';
 export * from './MessageHeader';
 export * from './MessageReply';
 export * from './Messages';
+export * from './OrderedList';
 export * from './Strikethrough';
 export * from './Underline';
