@@ -28,14 +28,10 @@ export const OrderedList = styled(
         />
     )
 )({
-    margin: '4px 0 0 calc(.4em + var(--totalCharacters, 1) * .6em)',
+    margin: '4px 0 0 calc(.4em + .6em * var(--totalCharacters, 1))',
     listStyleType: 'decimal',
     listStylePosition: 'outside',
     [`& .${bulletListClasses.root}`]: {
-        listStyleType: 'circle',
-        marginBottom: 0
-    },
-    [`& .${orderedListClasses.root}`]: {
-        marginBottom: 0
+        listStyleType: 'circle'
     }
 });

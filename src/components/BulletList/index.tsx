@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
 import { generateComponentClasses } from '../../utils';
-import { orderedListClasses } from '../OrderedList';
 
 export const bulletListClasses = generateComponentClasses(
     'BulletList',
@@ -32,10 +31,6 @@ export const BulletList = styled(
     listStyleType: 'disc',
     listStylePosition: 'outside',
     [`& .${bulletListClasses.root}`]: {
-        listStyleType: 'circle',
-        marginBottom: 0
-    },
-    [`& .${orderedListClasses.root}`]: {
-        marginBottom: 0
+        listStyleType: 'circle'
     }
 });
