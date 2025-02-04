@@ -98,10 +98,10 @@ export interface MentionProps extends ComponentPropsWithRef<typeof MentionRootEl
 
 export const Mention = ({ children, icon, ...props }: MentionProps) => (
     <MentionRoot {...props}>
-        {icon && <div style={{ whiteSpace: 'nowrap' }}>
+        {icon && <span style={{ whiteSpace: 'nowrap' }}>
             <MentionIcon>{icon}</MentionIcon>
-            &NoBreak;
-        </div>}
+            &#8288;
+        </span>}
         <MentionName>{children}</MentionName>
     </MentionRoot>
 );
