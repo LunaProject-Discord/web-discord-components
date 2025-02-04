@@ -1,5 +1,6 @@
 'use client';
 
+import isPropValid from '@emotion/is-prop-valid';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
@@ -137,7 +138,10 @@ interface RoleMentionRootProps {
     roleColor: string | undefined;
 }
 
-const RoleMentionRoot = styled(MentionRoot)<RoleMentionRootProps>(({ theme, roleColor }) => ({
+const RoleMentionRoot = styled(
+    MentionRoot,
+    { shouldForwardProp: (prop) => isPropValid(prop) && prop !== 'roleColor' }
+)<RoleMentionRootProps>(({ theme, roleColor }) => ({
     cursor: 'text',
     filter: 'saturate(1)',
     ...(roleColor ? {
