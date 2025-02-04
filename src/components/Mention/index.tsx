@@ -147,7 +147,7 @@ const RoleMentionRoot = styled(
     backgroundColor: roleColor ? `color-mix(in srgb, ${roleColor} 10%, transparent)` : theme.palette.background.mention,
     filter: 'saturate(1)',
     '&:hover': {
-        color: roleColor || '#fff',
+        color: roleColor || theme.palette.text.mention,
         backgroundColor: roleColor ? `color-mix(in srgb, ${roleColor} 30%, transparent)` : theme.palette.background.mention
     }
 }));
