@@ -133,21 +133,31 @@ export const ChannelMention = ({ type, name }: ChannelMentionProps) => (
     </Mention>
 );
 
+interface RoleMentionRootProps {
+    roleColor: string | undefined;
+}
+
+const RoleMentionRoot = styled(MentionRoot)<RoleMentionRootProps>(({ theme, roleColor }) => ({
+    cursor: 'text',
+    filter: 'saturate(1)',
+    ...(roleColor ? {
+        color: roleColor,
+        backgroundColor: `color-mix(in srgb, ${roleColor} 10%, transparent)`,
+        '&:hover': {
+            backgroundColor: `color-mix(in srgb, ${roleColor} 30%, transparent)`
+        }
+    } : {})
+}));
+
 export interface RoleMentionProps {
     name: string;
     color?: string;
 }
 
 export const RoleMention = ({ name, color }: RoleMentionProps) => (
-    <Mention
-        style={{
-            color,
-            backgroundColor: color ? `color-mix(in srgb, ${color} 10%, transparent)` : undefined,
-            filter: 'saturate(1)'
-        }}
-    >
+    <RoleMentionRoot roleColor={color}>
         @{name}
-    </Mention>
+    </RoleMentionRoot>
 );
 
 export interface UserMentionProps {
