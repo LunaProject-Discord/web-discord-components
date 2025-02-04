@@ -43,6 +43,7 @@ export const MentionRoot = styled(
     unicodeBidi: 'plaintext',
     whiteSpace: 'break-spaces',
     wordWrap: 'break-word',
+    cursor: 'pointer',
     color: theme.palette.text.mention,
     backgroundColor: theme.palette.background.mention,
     borderRadius: 3,
@@ -72,6 +73,7 @@ export const MentionIcon = styled(
         width: '1em',
         height: '1em',
         margin: '0 4px .2rem 0',
+        display: 'inline',
         verticalAlign: 'middle'
     }
 });
