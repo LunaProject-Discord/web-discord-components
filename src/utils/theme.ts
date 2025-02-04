@@ -16,13 +16,14 @@ export interface Theme {
         background: {
             primary: string;
             secondary: string;
-            mention: string;
             selection: string;
+            mention: string;
         };
         text: {
             primary: string;
             secondary: string;
             muted: string;
+            mention: string;
             link: string;
         };
     };
@@ -37,13 +38,14 @@ const DefaultLightTheme: Omit<Theme, 'appearance'> = {
         background: {
             primary: '#fff',
             secondary: '#f2f3f5',
-            mention: '#e8e8fd',
-            selection: '#b3d4fc'
+            selection: '#b3d4fc',
+            mention: '#e8e8fc'
         },
         text: {
             primary: '#313338',
             secondary: '#060607',
             muted: '#5c5e65',
+            mention: '#4e51be',
             link: '#3868e0'
         }
     }
@@ -58,13 +60,14 @@ const DefaultDarkTheme: Omit<Theme, 'appearance'> = {
         background: {
             primary: '#313338',
             secondary: '#2b2d31',
-            mention: '#3f416e',
-            selection: '#5d769c'
+            selection: '#5d769c',
+            mention: '#3f416d'
         },
         text: {
             primary: '#dcdee1',
             secondary: '#f2f3f5',
             muted: '#959ba3',
+            mention: '#cbcdf8',
             link: '#52a6f6'
         }
     }
