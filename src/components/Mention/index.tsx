@@ -3,9 +3,10 @@
 import isPropValid from '@emotion/is-prop-valid';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
-import { ChannelType } from '../../interfaces';
+import React, { ComponentPropsWithRef, ElementType, ReactNode, useContext, useMemo } from 'react';
+import { Channel, Role, User } from '../../interfaces';
 import { generateComponentClasses } from '../../utils';
+import { ChannelsDataContext, RolesDataContext, UsersDataContext } from '../DataContext';
 import {
     ForumChannelIcon,
     PostIcon,
@@ -113,26 +114,42 @@ export const Mention = ({ children, icon, ...props }: MentionProps) => (
 );
 
 export interface ChannelMentionProps {
-    type: ChannelType;
-    name: string;
+    channel: string | Omit<Channel, 'id'>;
 }
 
-export const ChannelMention = ({ type, name }: ChannelMentionProps) => (
-    <Mention
-        icon={
-            <Fragment>
-                {type === 'text' && <TextChannelIcon />}
-                {type === 'voice' && <VoiceChannelIcon />}
-                {type === 'stage' && <StageChannelIcon />}
-                {type === 'forum' && <ForumChannelIcon />}
-                {type === 'post' && <PostIcon />}
-                {type === 'thread' && <ThreadIcon />}
-            </Fragment>
+export const ChannelMention = ({ channel: _channel }: ChannelMentionProps) => {
+    const channels = useContext(ChannelsDataContext);
+    const channel = typeof _channel === 'string' ? channels[_channel] : _channel;
+
+    const icon = useMemo(() => {
+        if (!channel)
+            return null;
+
+        switch (channel.type) {
+            case 'voice':
+                return (<VoiceChannelIcon />);
+            case 'stage':
+                return (<StageChannelIcon />);
+            case 'forum':
+                return (<ForumChannelIcon />);
+            case 'post':
+                return (<PostIcon />);
+            case 'thread':
+                return (<ThreadIcon />);
+            default:
+                return (<TextChannelIcon />);
         }
-    >
-        {name}
-    </Mention>
-);
+    }, [channel]);
+
+    if (!channel)
+        return null;
+
+    return (
+        <Mention icon={icon}>
+            {channel.name}
+        </Mention>
+    );
+};
 
 interface RoleMentionRootProps {
     roleColor: string | undefined;
@@ -153,22 +170,37 @@ const RoleMentionRoot = styled(
 }));
 
 export interface RoleMentionProps {
-    name: string;
-    color?: string;
+    role: string | Omit<Role, 'id'>;
 }
 
-export const RoleMention = ({ name, color }: RoleMentionProps) => (
-    <RoleMentionRoot roleColor={color}>
-        @{name}
-    </RoleMentionRoot>
-);
+export const RoleMention = ({ role: _role }: RoleMentionProps) => {
+    const roles = useContext(RolesDataContext);
+    const role = typeof _role === 'string' ? roles[_role] : _role;
+
+    if (!role)
+        return null;
+
+    return (
+        <RoleMentionRoot roleColor={role.color}>
+            @{role.name}
+        </RoleMentionRoot>
+    );
+};
 
 export interface UserMentionProps {
-    name: string;
+    user: string | Omit<User, 'id'>;
 }
 
-export const UserMention = ({ name }: UserMentionProps) => (
-    <Mention>
-        @{name}
-    </Mention>
-);
+export const UserMention = ({ user: _user }: UserMentionProps) => {
+    const users = useContext(UsersDataContext);
+    const user = typeof _user === 'string' ? users[_user] : _user;
+
+    if (!user)
+        return null;
+
+    return (
+        <Mention>
+            @{user.name}
+        </Mention>
+    );
+};
