@@ -141,13 +141,14 @@ interface RoleMentionRootProps {
 const RoleMentionRoot = styled(
     MentionRoot,
     { shouldForwardProp: (prop) => isPropValid(prop) && prop !== 'roleColor' }
-)<RoleMentionRootProps>(({ theme, roleColor }) => ({
+)<RoleMentionRootProps>(({ roleColor }) => ({
     cursor: 'text',
     filter: 'saturate(1)',
     ...(roleColor ? {
         color: roleColor,
         backgroundColor: `color-mix(in srgb, ${roleColor} 10%, transparent)`,
         '&:hover': {
+            color: roleColor,
             backgroundColor: `color-mix(in srgb, ${roleColor} 30%, transparent)`
         }
     } : {})
