@@ -67,10 +67,13 @@ export const MentionIcon = styled(
         />
     )
 )({
-    width: '1em',
-    height: '1em',
-    margin: '0 4px .2rem 0',
-    verticalAlign: 'middle'
+    whiteSpace: 'nowrap',
+    '& svg': {
+        width: '1em',
+        height: '1em',
+        margin: '0 4px .2rem 0',
+        verticalAlign: 'middle'
+    }
 });
 
 const MentionNameElement: ElementType = 'span';
@@ -98,10 +101,10 @@ export interface MentionProps extends ComponentPropsWithRef<typeof MentionRootEl
 
 export const Mention = ({ children, icon, ...props }: MentionProps) => (
     <MentionRoot {...props}>
-        {icon && <span style={{ whiteSpace: 'nowrap' }}>
-            <MentionIcon>{icon}</MentionIcon>
+        {icon && <MentionIcon>
+            {icon}
             &#8288;
-        </span>}
+        </MentionIcon>}
         <MentionName>{children}</MentionName>
     </MentionRoot>
 );
