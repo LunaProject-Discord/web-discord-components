@@ -44,8 +44,21 @@ export const UserBotTagRoot = styled(
 });
 
 export const UserBotTagVerified = styled(
-    () => (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    ({ className, ...props }: ComponentPropsWithRef<'svg'>) => (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            className={
+                clsx(
+                    userBotTagClasses.verified,
+                    className
+                )
+            }
+            {...props}
+        >
             <path
                 d="M19.06 6.94a1.5 1.5 0 0 1 0 2.12l-8 8a1.5 1.5 0 0 1-2.12 0l-4-4a1.5 1.5 0 0 1 2.12-2.12L10 13.88l6.94-6.94a1.5 1.5 0 0 1 2.12 0Z"
                 fill="currentColor"
