@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
 import { UserTag } from '../../interfaces';
 import { DefaultAvatar, formatTimestamp, generateComponentClasses } from '../../utils';
-import { UserBotTag as UserTagComponent, userBotTagClasses } from '../UserBotTag';
+import { UserBotTag, userBotTagClasses } from '../UserBotTag';
 
 export const messageHeaderClasses = generateComponentClasses(
     'MessageHeader',
@@ -167,12 +167,6 @@ export const MessageHeader = (
 ) => {
     const { appearance: { display } } = useTheme();
 
-    const userTag = tag ? (
-        <UserTagComponent verified={tag.type === 'system' || (tag.type === 'application' && tag.verified)}>
-            {tag?.type === 'system' ? 'Official' : 'App'}
-        </UserTagComponent>
-    ) : null;
-
     return (
         <MessageHeaderRoot>
             <MessageHeaderAvatar src={avatarUrl} />
@@ -180,11 +174,11 @@ export const MessageHeader = (
                 <MessageHeaderTimestamp>
                     {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
                 </MessageHeaderTimestamp>
-                {userTag}
+                {tag && <UserBotTag tag={tag} />}
             </Fragment>}
             <MessageHeaderName>{name}</MessageHeaderName>
             {display === 'cozy' && <Fragment>
-                {userTag}
+                {tag && <UserBotTag tag={tag} />}
                 <MessageHeaderTimestamp>{formatTimestamp(timestamp)}</MessageHeaderTimestamp>
             </Fragment>}
         </MessageHeaderRoot>

@@ -3,6 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
+import { UserTag } from '../../interfaces';
 import { generateComponentClasses } from '../../utils';
 
 export const userBotTagClasses = generateComponentClasses(
@@ -97,13 +98,12 @@ export const UserBotTagLabel = styled(
 });
 
 export interface UserBotTagProps {
-    children: ReactNode;
-    verified?: boolean;
+    tag: UserTag;
 }
 
-export const UserBotTag = ({ children, verified }: UserBotTagProps) => (
+export const UserBotTag = ({ tag }: UserBotTagProps) => (
     <UserBotTagRoot>
-        {verified && <UserBotTagVerified />}
-        <UserBotTagLabel>{children}</UserBotTagLabel>
+        {(tag.type === 'system' || (tag.type === 'application' && tag.verified)) && <UserBotTagVerified />}
+        <UserBotTagLabel>{tag.type === 'system' ? 'Official' : 'App'}</UserBotTagLabel>
     </UserBotTagRoot>
 );
