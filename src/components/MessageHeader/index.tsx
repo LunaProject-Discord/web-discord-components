@@ -47,10 +47,10 @@ export const MessageHeaderRoot = styled(
     [`& .${userBotTagClasses.root}`]: {
         height: '.9375rem',
         marginTop: '.2em',
-        marginRight: '.25rem',
+        marginRight: theme.appearance.display === 'cozy' ? '.25rem' : '.5rem',
         padding: '0 .275rem',
         position: 'relative',
-        top: '.1rem'
+        top: theme.appearance.display === 'cozy' ? '.1rem' : '.15rem'
     }
 }));
 
@@ -104,7 +104,7 @@ export const MessageHeaderName = styled(
         />
     )
 )(({ theme }) => ({
-    marginRight: '.25rem',
+    marginRight: theme.appearance.display === 'cozy' ? '.25rem' : '.5rem',
     fontSize: '1rem',
     fontWeight: 500,
     lineHeight: '1.375rem',
@@ -144,7 +144,7 @@ export const MessageHeaderTimestamp = styled(
         whiteSpace: 'break-spaces'
     } : {
         width: '2.25rem',
-        marginRight: '.4rem',
+        marginRight: '.5rem',
         fontSize: '.6875rem',
         textAlign: 'right'
     })
