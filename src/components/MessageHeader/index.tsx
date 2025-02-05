@@ -39,23 +39,18 @@ export const MessageHeaderRoot = styled(
         position: 'relative',
         display: 'block',
         fontSize: 'inherit',
-        lineHeight: '1.375rem',
-        [`& .${userBotTagClasses.root}`]: {
-            marginLeft: '.25rem'
-        }
+        lineHeight: '1.375rem'
     } : {
         display: 'inline',
-        marginLeft: '-4rem',
-        [`& .${userBotTagClasses.root}`]: {
-            marginRight: '.25rem'
-        }
+        marginLeft: '-4rem'
     }),
     [`& .${userBotTagClasses.root}`]: {
         height: '.9375rem',
         marginTop: '.2em',
+        marginRight: '.25rem',
         padding: '0 .275rem',
         position: 'relative',
-        top: '.1rem',
+        top: '.1rem'
     }
 }));
 
@@ -109,7 +104,7 @@ export const MessageHeaderName = styled(
         />
     )
 )(({ theme }) => ({
-    marginRight: '.35rem',
+    marginRight: '.25rem',
     fontSize: '1rem',
     fontWeight: 500,
     lineHeight: '1.375rem',
@@ -144,7 +139,7 @@ export const MessageHeaderTimestamp = styled(
     verticalAlign: 'baseline',
     color: theme.palette.text.muted,
     ...(theme.appearance.display === 'cozy' ? {
-        marginLeft: '.15rem',
+        marginLeft: '.25rem',
         fontSize: '.75rem',
         whiteSpace: 'break-spaces'
     } : {
@@ -181,9 +176,12 @@ export const MessageHeader = (
     return (
         <MessageHeaderRoot>
             <MessageHeaderAvatar src={avatarUrl} />
-            {display === 'compact' && <MessageHeaderTimestamp>
-                {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
-            </MessageHeaderTimestamp>}
+            {display === 'compact' && <Fragment>
+                <MessageHeaderTimestamp>
+                    {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
+                </MessageHeaderTimestamp>
+                {userTag}
+            </Fragment>}
             <MessageHeaderName>{name}</MessageHeaderName>
             {display === 'cozy' && <Fragment>
                 {userTag}
