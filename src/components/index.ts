@@ -23,3 +23,4 @@ export * from './OrderedList';
 export * from './Strikethrough';
 export * from './SvgIcon';
 export * from './Underline';
+export * from './UserBotTag';

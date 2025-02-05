@@ -4,9 +4,10 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
-import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { User } from '../../interfaces';
+import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
+import { UserTag } from '../../interfaces';
 import { DefaultAvatar, formatTimestamp, generateComponentClasses } from '../../utils';
+import { UserBotTag as UserTagComponent, userBotTagClasses } from '../UserBotTag';
 
 export const messageHeaderClasses = generateComponentClasses(
     'MessageHeader',
@@ -38,11 +39,24 @@ export const MessageHeaderRoot = styled(
         position: 'relative',
         display: 'block',
         fontSize: 'inherit',
-        lineHeight: '1.375rem'
+        lineHeight: '1.375rem',
+        [`& .${userBotTagClasses.root}`]: {
+            marginLeft: '.25rem'
+        }
     } : {
         display: 'inline',
-        marginLeft: '-4rem'
-    })
+        marginLeft: '-4rem',
+        [`& .${userBotTagClasses.root}`]: {
+            marginRight: '.25rem'
+        }
+    }),
+    [`& .${userBotTagClasses.root}`]: {
+        height: '.9375rem',
+        marginTop: '.2em',
+        padding: '0 .275rem',
+        position: 'relative',
+        top: '.1rem',
+    }
 }));
 
 const MessageHeaderAvatarElement: ElementType = 'img';
@@ -144,6 +158,7 @@ export const MessageHeaderTimestamp = styled(
 export interface MessageHeaderProps {
     name: ReactNode;
     avatarUrl?: string;
+    tag?: UserTag;
     timestamp: DateTime<true> | 'now';
 }
 
@@ -151,10 +166,17 @@ export const MessageHeader = (
     {
         name,
         avatarUrl = DefaultAvatar.Blurple,
+        tag,
         timestamp
     }: MessageHeaderProps
 ) => {
     const { appearance: { display } } = useTheme();
+
+    const userTag = tag ? (
+        <UserTagComponent verified={tag.type === 'system' || (tag.type === 'application' && tag.verified)}>
+            {tag?.type === 'system' ? 'Official' : 'App'}
+        </UserTagComponent>
+    ) : null;
 
     return (
         <MessageHeaderRoot>
@@ -163,7 +185,10 @@ export const MessageHeader = (
                 {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
             </MessageHeaderTimestamp>}
             <MessageHeaderName>{name}</MessageHeaderName>
-            {display === 'cozy' && <MessageHeaderTimestamp>{formatTimestamp(timestamp)}</MessageHeaderTimestamp>}
+            {display === 'cozy' && <Fragment>
+                {userTag}
+                <MessageHeaderTimestamp>{formatTimestamp(timestamp)}</MessageHeaderTimestamp>
+            </Fragment>}
         </MessageHeaderRoot>
     );
 };
