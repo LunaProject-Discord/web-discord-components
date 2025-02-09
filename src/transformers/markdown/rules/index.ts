@@ -6,4 +6,5 @@ export * from './bold';
 export * from './italic';
 export * from './mention';
 export * from './strikethrough';
+export * from './text';
 export * from './underline';
