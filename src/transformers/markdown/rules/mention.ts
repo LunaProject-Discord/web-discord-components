@@ -66,7 +66,7 @@ export const mention: MarkdownRule = {
                     {
                         key: state.key
                     },
-                    output(node.content, state)
+                    node.content
                 );
         }
     }
