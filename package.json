@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@discordjs/rest": "^2.4.2",
+        "@khanacademy/simple-markdown": "^0.13.17",
         "discord-api-types": "^0.37.114",
         "nanoid": "^5.0.9"
     },

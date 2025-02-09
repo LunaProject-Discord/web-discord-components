@@ -402,6 +402,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@khanacademy/perseus-core@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@khanacademy/perseus-core@npm:3.4.0"
+  checksum: 10c0/032bd635c4b14bdfbd5175f59361e7e83ee5ca643fead71b937bf41af1ff9f15f713e4cd70049b300d2ba272a74d22e1c4bdc434a2d1aa0472dbf49ab25beb76
+  languageName: node
+  linkType: hard
+
+"@khanacademy/simple-markdown@npm:^0.13.17":
+  version: 0.13.17
+  resolution: "@khanacademy/simple-markdown@npm:0.13.17"
+  dependencies:
+    "@khanacademy/perseus-core": "npm:3.4.0"
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 10c0/ddddbfef2b4e3fe2de9e8b5b576afac8e5d14fbfbccf598ce103eb56f09b2c39112aa9291038d43dabb72076c6bf0c27acfa89293562838d0da0993308f733d0
+  languageName: node
+  linkType: hard
+
 "@lunaproject/web-core@npm:^2.0.0-beta.16":
   version: 2.0.0-beta.16
   resolution: "@lunaproject/web-core@npm:2.0.0-beta.16"
@@ -448,6 +467,7 @@ __metadata:
     "@discordjs/rest": "npm:^2.4.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
+    "@khanacademy/simple-markdown": "npm:^0.13.17"
     "@lunaproject/web-core": "npm:^2.0.0-beta.16"
     "@types/luxon": "npm:^3.4.2"
     "@types/node": "npm:~20.11.30"
