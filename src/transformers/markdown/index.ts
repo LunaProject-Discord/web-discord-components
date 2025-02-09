@@ -1,5 +1,5 @@
 import SimpleMarkdown, { SingleASTNode } from '@khanacademy/simple-markdown';
-import { bold, italic, MarkdownRule, mention, strikethrough, underline } from './rules';
+import { bold, italic, MarkdownRule, mention, strikethrough, text, underline } from './rules';
 
 const createParser = (
     rules: Record<string, MarkdownRule>,
@@ -19,6 +19,7 @@ const createParser = (
 };
 
 export const parseMarkdown = createParser({
+    text,
     bold,
     italic,
     underline,
