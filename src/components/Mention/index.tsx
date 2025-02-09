@@ -7,6 +7,7 @@ import React, { ComponentPropsWithRef, ElementType, ReactNode, useContext, useMe
 import { Channel, Role, User } from '../../interfaces';
 import { generateComponentClasses } from '../../utils';
 import { ChannelsDataContext, RolesDataContext, UsersDataContext } from '../DataContext';
+import { Italic } from '../Italic';
 import {
     ForumChannelIcon,
     PostIcon,
@@ -122,10 +123,7 @@ export const ChannelMention = ({ channel: _channel }: ChannelMentionProps) => {
     const channel = typeof _channel === 'string' ? channels[_channel] : _channel;
 
     const icon = useMemo(() => {
-        if (!channel)
-            return null;
-
-        switch (channel.type) {
+        switch (channel?.type) {
             case 'voice':
                 return (<VoiceChannelIcon />);
             case 'stage':
@@ -141,12 +139,9 @@ export const ChannelMention = ({ channel: _channel }: ChannelMentionProps) => {
         }
     }, [channel]);
 
-    if (!channel)
-        return null;
-
     return (
         <Mention icon={icon}>
-            {channel.name}
+            {channel?.name ?? <Italic>unknown</Italic>}
         </Mention>
     );
 };
@@ -178,7 +173,7 @@ export const RoleMention = ({ role: _role }: RoleMentionProps) => {
     const role = typeof _role === 'string' ? roles[_role] : _role;
 
     if (!role)
-        return null;
+        return '@unknown-role';
 
     return (
         <RoleMentionRoot roleColor={role.color}>
@@ -195,12 +190,9 @@ export const UserMention = ({ user: _user }: UserMentionProps) => {
     const users = useContext(UsersDataContext);
     const user = typeof _user === 'string' ? users[_user] : _user;
 
-    if (!user)
-        return null;
-
     return (
         <Mention>
-            @{user.name}
+            @{user?.name ?? 'unknown-user'}
         </Mention>
     );
 };
