@@ -36,9 +36,9 @@ export const parseMarkdown = createParser({
     newline,
     lineBreak,
 
-    paragraph,
     heading,
     list,
+    paragraph,
 
     bold,
     italic,

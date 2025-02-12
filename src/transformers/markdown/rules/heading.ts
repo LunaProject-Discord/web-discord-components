@@ -3,16 +3,19 @@ import { createElement } from 'react';
 import { Heading } from '../../../components';
 import type { MarkdownRule } from './index';
 
+const BEGINNING_OF_LINE_REGEX = /^$|\n *$/;
+const HEADING_REGEX = /^ *(#{1,3})([^\n]+?)#* *(?:\n *)+\n/;
+
 export const heading: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.heading,
     match: (source, { nested, inHeading, prevCapture: lookbehind }) => {
         if (nested || inHeading)
             return null;
 
-        if (!/^$|\n *$/.test(lookbehind?.[0] ?? ''))
+        if (!BEGINNING_OF_LINE_REGEX.test(lookbehind?.[0] ?? ''))
             return null;
 
-        return /^ *(#{1,3})([^\n]+?)#* *(?:\n *)+\n/.exec(source);
+        return HEADING_REGEX.exec(source);
     },
     parse: (capture, parse, state) => {
         const parsedContent = parse(
