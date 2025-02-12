@@ -1,7 +1,7 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
 import { Strikethrough } from '../../../components';
-import { MarkdownRule } from './index';
+import type { MarkdownRule } from './index';
 
 export const strikethrough: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.del,

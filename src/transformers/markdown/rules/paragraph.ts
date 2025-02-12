@@ -1,12 +1,11 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
-import { Bold } from '../../../components';
 import type { MarkdownRule } from './index';
 
-export const bold: MarkdownRule = {
-    ...SimpleMarkdown.defaultRules.strong,
+export const paragraph: MarkdownRule = {
+    ...SimpleMarkdown.defaultRules.paragraph,
     react: (node, output, state) => createElement(
-        Bold,
+        'div',
         {
             key: state.key
         },

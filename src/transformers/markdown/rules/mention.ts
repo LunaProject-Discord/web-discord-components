@@ -1,7 +1,7 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
 import { ChannelMention, Mention, RoleMention, UserMention } from '../../../components';
-import { MarkdownRule } from './index';
+import type { MarkdownRule } from './index';
 
 export const mention: MarkdownRule = {
     order: SimpleMarkdown.defaultRules.text.order,

@@ -1,7 +1,7 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
 import { Underline } from '../../../components';
-import { MarkdownRule } from './index';
+import type { MarkdownRule } from './index';
 
 export const underline: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.u,

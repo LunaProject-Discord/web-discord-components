@@ -1,7 +1,7 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
 import { Italic } from '../../../components';
-import { MarkdownRule } from './index';
+import type { MarkdownRule } from './index';
 
 export const italic: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.em,

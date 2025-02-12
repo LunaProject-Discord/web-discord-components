@@ -1,5 +1,5 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
-import { MarkdownRule } from './index';
+import type { MarkdownRule } from './index';
 
 export const text: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.text,
