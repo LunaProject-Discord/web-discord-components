@@ -27,6 +27,6 @@ export const text: MarkdownRule = {
         {
             key: state.key
         },
-        output(node.content, state)
+        node.content
     )
 };
