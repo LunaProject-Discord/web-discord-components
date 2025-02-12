@@ -1,4 +1,5 @@
 import SimpleMarkdown from '@khanacademy/simple-markdown';
+import { createElement } from 'react';
 import type { MarkdownRule } from './index';
 
 export const text: MarkdownRule = {
@@ -21,7 +22,11 @@ export const text: MarkdownRule = {
             }
         );
     },
-    react: (node, output, state) => {
-        return node.content;
-    }
+    react: (node, output, state) => createElement(
+        'span',
+        {
+            key: state.key
+        },
+        output(node.content, state)
+    )
 };

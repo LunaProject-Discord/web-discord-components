@@ -3,22 +3,22 @@ import { createElement, Fragment } from 'react';
 import { BulletList, ListItem, OrderedList } from '../../../components';
 import type { MarkdownRule } from './index';
 
-const LIST_BULLET = '(?:[*+-]|\\d+\\.)';
-const LIST_ITEM_PREFIX = `( *)(${LIST_BULLET}) +`;
+const LIST_ITEM_MARKER = '(?:[*+-]|\\d+\\.)';
+const LIST_ITEM_PREFIX = `( *)(${LIST_ITEM_MARKER}) +`;
 const LIST_ITEM_PREFIX_REGEX = new RegExp(`^${LIST_ITEM_PREFIX}`);
+const LIST_ITEM_END_REGEX = / *\n+$/;
 const LIST_ITEM_REGEX = new RegExp(
     LIST_ITEM_PREFIX +
     '[^\\n]*(?:\\n' +
-    `(?!\\1${LIST_BULLET} )[^\\n]*)*(\n|$)`,
+    `(?!\\1${LIST_ITEM_MARKER} )[^\\n]*)*(\n|$)`,
     'gm'
 );
 const LIST_BLOCK_END = '\\n{1,}';
 const LIST_BLOCK_END_REGEX = new RegExp(`${LIST_BLOCK_END}$`);
-const LIST_ITEM_END_REGEX = / *\n+$/;
 const LIST_REGEX = new RegExp(
-    `^( *)(${LIST_BULLET}) ` +
+    `^( *)(${LIST_ITEM_MARKER}) ` +
     `[\\s\\S]+?(?:${LIST_BLOCK_END}(?! )` +
-    `(?!\\1${LIST_BULLET} )\\n*` +
+    `(?!\\1${LIST_ITEM_MARKER} )\\n*` +
     '|\\s*\n*$)'
 );
 const LIST_LOOKBEHIND_REGEX = /(?:^|\n)( *)$/;
