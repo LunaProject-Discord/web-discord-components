@@ -16,7 +16,7 @@ export const list: MarkdownRule = {
         if (listDepth > 10)
             return null;
 
-        const completed: string = prevCapture ?? '';
+        const completed: string = prevCapture?.[0] ?? '';
         if (!BEGINNING_OF_LINE_REGEX.test(completed))
             return null;
 
