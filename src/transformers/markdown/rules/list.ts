@@ -3,82 +3,70 @@ import { createElement, Fragment } from 'react';
 import { BulletList, ListItem, OrderedList } from '../../../components';
 import type { MarkdownRule } from './index';
 
-const LIST_ITEM_MARKER = '(?:[*+-]|\\d+\\.)';
-const LIST_ITEM_PREFIX = `( *)(${LIST_ITEM_MARKER}) +`;
-const LIST_ITEM_PREFIX_REGEX = new RegExp(`^${LIST_ITEM_PREFIX}`);
+const BEGINNING_OF_LINE_REGEX = /^$|\n *$/;
+const LIST_REGEX = /^( *)([*-]|\d+\.) .+?(?:\n(?! )(?!\1(?:[*-]|\d+\.) )|$)/su;
+const LIST_END_REGEX = /\n{2,}$/;
+const LIST_ITEM_REGEX = /( *)(?:[*-]|\d+\.) +[^\n]*(?:\n(?!\1(?:[*-]|\d+\.) )[^\n]*)*(?:\n|$)/gm;
+const LIST_ITEM_START_REGEX = /^ *(?:[*-]|\d+\.) +/;
 const LIST_ITEM_END_REGEX = / *\n+$/;
-const LIST_ITEM_REGEX = new RegExp(
-    LIST_ITEM_PREFIX +
-    '[^\\n]*(?:\\n' +
-    `(?!\\1${LIST_ITEM_MARKER} )[^\\n]*)*(\n|$)`,
-    'gm'
-);
-const LIST_BLOCK_END = '\\n{1,}';
-const LIST_BLOCK_END_REGEX = new RegExp(`${LIST_BLOCK_END}$`);
-const LIST_REGEX = new RegExp(
-    `^( *)(${LIST_ITEM_MARKER}) ` +
-    `[\\s\\S]+?(?:${LIST_BLOCK_END}(?! )` +
-    `(?!\\1${LIST_ITEM_MARKER} )\\n*` +
-    '|\\s*\n*$)'
-);
-const LIST_LOOKBEHIND_REGEX = /(?:^|\n)( *)$/;
 
 export const list: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.list,
-    match: (source, state, prevCapture) => {
-        state._list = true;
-
-        const prevCaptureStr = state.prevCapture == null ? '' : state.prevCapture[0];
-        const isStartOfLineCapture = LIST_LOOKBEHIND_REGEX.exec(prevCaptureStr);
-        const isListBlock = state._list || !state.inline;
-
-        if (!isStartOfLineCapture || !isListBlock)
+    match: (source, { listDepth, prevCapture }) => {
+        if (listDepth > 10)
             return null;
 
-        source = isStartOfLineCapture[1] + source;
+        const completed: string = prevCapture ?? '';
+        if (!BEGINNING_OF_LINE_REGEX.test(completed))
+            return null;
+
         return LIST_REGEX.exec(source);
     },
-    parse: (capture, parse, state) => {
-        const bullet = capture[2];
-        const ordered = bullet.length > 1;
-        const start = ordered ? +bullet : undefined;
-        const items = capture[0]
-            .replace(LIST_BLOCK_END_REGEX, '\n')
-            .match(LIST_ITEM_REGEX) as string[];
+    parse: ([content, _, marker], parse, state) => {
+        const isOrdered = marker.length > 1;
+        const start = Math.min(1000000000, Math.max(1, Number(marker)));
 
-        let shallow = false;
-        const itemContent = items.map((item) => {
-            const prefixCapture = LIST_ITEM_PREFIX_REGEX.exec(item);
-            const space = prefixCapture ? prefixCapture[0].length : 0;
-            const spaceRegex = new RegExp(`^ {1,${space}}`, 'gm');
+        let lastWasParagraph = false;
+        const completed: string = state.prevCapture ?? '';
 
-            const content = item
-                .replace(spaceRegex, '')
-                .replace(LIST_ITEM_PREFIX_REGEX, '');
+        const items = content
+            .replace(LIST_END_REGEX, '\n')
+            .match(LIST_ITEM_REGEX)
+            ?.map((item, i, items) => {
+                const spaces = LIST_ITEM_START_REGEX.exec(item)?.[0].length || 1;
+                const content = item
+                    .replaceAll(new RegExp(`^ {1,${spaces}}`, 'gm'), '')
+                    .replace(LIST_ITEM_START_REGEX, '');
 
-            shallow = space < 3;
+                const isParagraph = content.includes('\n\n') || (i === items.length - 1 && lastWasParagraph);
+                lastWasParagraph = isParagraph;
 
-            const oldStateInline = state.inline;
-            const oldStateList = state._list;
-            state._list = true;
-            state.inline = true;
+                const currentDepth: number = state.listDepth;
 
-            const result = parse(content.replace(LIST_ITEM_END_REGEX, ''), state);
+                state.listDepth += 1;
+                state.parseParagraphs = isParagraph;
+                state.prevCapture = completed;
 
-            state.inline = oldStateInline;
-            state._list = oldStateList;
-            return result;
-        });
+                const parsed = parse(
+                    content.replace(LIST_ITEM_END_REGEX, isParagraph ? '\n\n' : ''),
+                    state
+                );
+
+                state.listDepth = currentDepth;
+                state.parseParagraphs = false;
+
+                return parsed;
+            });
 
         return {
-            shallow: shallow,
-            ordered: ordered,
-            start: start,
-            items: itemContent
+            content: items ?? [],
+            size: content.length,
+            ordered: isOrdered,
+            start
         };
     },
     react: (node, output, state) => {
-        const items: (SingleASTNode | Array<SingleASTNode>)[] = node.items;
+        const items: (SingleASTNode | Array<SingleASTNode>)[] = node.content;
 
         const children = createElement(
             Fragment,
