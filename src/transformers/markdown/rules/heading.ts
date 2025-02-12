@@ -4,7 +4,7 @@ import { Heading } from '../../../components';
 import type { MarkdownRule } from './index';
 
 const BEGINNING_OF_LINE_REGEX = /^$|\n *$/;
-const HEADING_REGEX = /^ *(#{1,3})([^\n]+?)#* *(?:\n *)+\n/;
+const HEADING_REGEX = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 
 export const heading: MarkdownRule = {
     ...SimpleMarkdown.defaultRules.heading,
