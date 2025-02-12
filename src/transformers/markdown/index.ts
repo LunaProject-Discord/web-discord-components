@@ -32,17 +32,15 @@ const createParser = (
 };
 
 export const parseMarkdown = createParser({
-    text,
-    newline,
-    lineBreak,
-
-    heading,
-    list,
-    paragraph,
-
     bold,
+    heading,
     italic,
-    underline,
+    lineBreak,
+    list,
+    mention,
+    newline,
+    paragraph,
     strikethrough,
-    mention
+    text,
+    underline,
 });
