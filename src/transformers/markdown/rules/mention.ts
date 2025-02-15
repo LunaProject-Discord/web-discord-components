@@ -1,73 +1,127 @@
-import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
-import { ChannelMention, Mention, RoleMention, UserMention } from '../../../components';
-import type { MarkdownRule } from './index';
+import { defineRule } from '.';
+import {
+    BrowseChannelIcon,
+    ChannelMention,
+    GuideChannelIcon,
+    Mention,
+    RoleMention,
+    UserMention
+} from '../../../components';
 
-export const mention: MarkdownRule = {
-    order: SimpleMarkdown.defaultRules.text.order,
-    match: SimpleMarkdown.inlineRegex(/^<(@!?|@&|#)(\d{17,20})>|^(@(?:everyone|here))/),
-    parse: (capture) => {
-        const [, type, id, everyoneOrHere] = capture;
+export const globalMention = defineRule({
+    capture: (source) => {
+        const match = /^@everyone|^@here/.exec(source);
+        if (!match)
+            return;
 
-        if (everyoneOrHere) {
-            return {
-                kind: 'text',
-                content: everyoneOrHere
-            };
-        }
-
-        switch (type) {
-            case '#':
-                return {
-                    kind: 'channel',
-                    content: id
-                };
-            case '@&':
-                return {
-                    kind: 'role',
-                    content: id
-                };
-            default:
-                return {
-                    kind: 'user',
-                    content: id
-                };
-        }
+        return {
+            size: match[0].length,
+            content: match[0]
+        };
     },
-    react: (node, output, state) => {
-        switch (node.kind) {
-            case 'channel':
-                return createElement(
-                    ChannelMention,
-                    {
-                        key: state.key,
-                        channel: node.content
-                    }
-                );
-            case 'role':
-                return createElement(
-                    RoleMention,
-                    {
-                        key: state.key,
-                        role: node.content
-                    }
-                );
-            case 'user':
-                return createElement(
-                    UserMention,
-                    {
-                        key: state.key,
-                        user: node.content
-                    }
-                );
-            default:
-                return createElement(
-                    Mention,
-                    {
-                        key: state.key
-                    },
-                    node.content
-                );
+    render: (capture) => createElement(
+        Mention,
+        {},
+        capture.content
+    )
+});
+
+export const guildSectionMention = defineRule({
+    capture: (source) => {
+        const match = /^<id:(guide|browse|customize)>/.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            id: match[1]
+        };
+    },
+    render: (capture, _) => createElement(
+        Mention,
+        {
+            icon: createElement(
+                capture.id === 'guide' ? GuideChannelIcon : BrowseChannelIcon,
+                {}
+            )
+        },
+        capture.id
+    )
+});
+
+export const channelMention = defineRule({
+    capture: (source) => {
+        const match = /^<#(\d+)>/.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            id: match[1]
+        };
+    },
+    render: ({ id }) => createElement(
+        ChannelMention,
+        {
+            channel: id
         }
-    }
-};
+    )
+});
+
+export const roleMention = defineRule({
+    capture: (source) => {
+        const match = /^<@&(\d+)>/.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            id: match[1]
+        };
+    },
+    render: ({ id }) => createElement(
+        RoleMention,
+        {
+            role: id
+        }
+    )
+});
+
+export const userMention = defineRule({
+    capture(source) {
+        const match = /^<@!?(\d+)>/.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            id: match[1]
+        };
+    },
+    render: ({ id }) => createElement(
+        UserMention,
+        {
+            user: id
+        }
+    )
+});
+
+export const commandMention = defineRule({
+    capture: (source) => {
+        const match = /^<\/((?:[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32})(?: [-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}){0,2}):(\d+)>/u.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            name: match[1],
+            id: match[2]
+        };
+    },
+    render: (capture) => createElement(
+        Mention,
+        {},
+        `/${capture.name}`
+    )
+});

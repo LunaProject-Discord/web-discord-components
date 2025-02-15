@@ -1,8 +1,15 @@
-import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
-import type { MarkdownRule } from './index';
+import { defineRule } from './index';
 
-export const lineBreak: MarkdownRule = {
-    ...SimpleMarkdown.defaultRules.br,
-    react: () => createElement('br', {})
-};
+export const lineBreak = defineRule({
+    capture: (source) => {
+        const match = /^ {2,}\n/.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length
+        };
+    },
+    render: () => createElement('br', {})
+});

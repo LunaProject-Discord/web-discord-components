@@ -1,16 +1,21 @@
-import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
+import { defineRule } from '.';
 import { Strikethrough } from '../../../components';
-import type { MarkdownRule } from './index';
 
-export const strikethrough: MarkdownRule = {
-    ...SimpleMarkdown.defaultRules.del,
-    match: SimpleMarkdown.inlineRegex(/^~~([\S\s]+?)~~(?!_)/),
-    react: (node, output, state) => createElement(
+export const strikethrough = defineRule({
+    capture: (source, _, parse) => {
+        const match = /^~~(.+?)~~(?!_)/su.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            content: parse(match[1])
+        };
+    },
+    render: (capture, render) => createElement(
         Strikethrough,
-        {
-            key: state.key
-        },
-        output(node.content, state)
+        {},
+        render(capture.content)
     )
-};
+});

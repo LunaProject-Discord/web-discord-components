@@ -1,20 +1,20 @@
 import { createElement } from 'react';
-import { Bold } from '../../../components';
+import { Spoiler } from '../../../components';
 import { defineRule } from './index';
 
-export const bold = defineRule({
+export const spoiler = defineRule({
     capture: (source, _, parse) => {
-        const match = /^\*\*((?:\\.|[^\\])+?)\*\*(?!\*)/su.exec(source);
+        const match = /^\|\|(.+?)\|\|/su.exec(source);
         if (!match)
             return;
-        
+
         return {
             size: match[0].length,
             content: parse(match[1])
         };
     },
     render: (capture, render) => createElement(
-        Bold,
+        Spoiler,
         {},
         render(capture.content)
     )

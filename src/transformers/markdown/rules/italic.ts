@@ -1,15 +1,21 @@
-import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
 import { Italic } from '../../../components';
-import type { MarkdownRule } from './index';
+import { defineRule } from './index';
 
-export const italic: MarkdownRule = {
-    ...SimpleMarkdown.defaultRules.em,
-    react: (node, output, state) => createElement(
+export const italic = defineRule({
+    capture: (source, _, parse) => {
+        const match = /^\b_((?:__|\\.|[^\\_])+?)_\b|^\*(?=\S)((?:\*\*|\\.|\s+(?:\\.|[^\s*\\]|\*\*)|[^\s*\\])+?)\*(?!\*)/su.exec(source);
+        if (!match)
+            return;
+        
+        return {
+            size: match[0].length,
+            content: parse(match[2] || match[1])
+        };
+    },
+    render: (capture, render) => createElement(
         Italic,
-        {
-            key: state.key
-        },
-        output(node.content, state)
+        {},
+        render(capture.content)
     )
-};
+});

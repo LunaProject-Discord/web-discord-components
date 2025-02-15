@@ -1,32 +1,21 @@
-import SimpleMarkdown from '@khanacademy/simple-markdown';
-import { createElement } from 'react';
-import type { MarkdownRule } from './index';
+import { defineRule } from '.';
+import { trimToNearestNonSymbolEmoji } from '../utils';
 
-export const text: MarkdownRule = {
-    ...SimpleMarkdown.defaultRules.text,
-    parse: (capture, parse, state) => {
-        const [content] = capture;
-        const { nested } = state;
-
-        if (nested) {
+export const text = defineRule({
+    capture: (source) => {
+        const match = /^(?:[\p{L}\p{M}\p{N}\p{Z}]+|¯\\_\(ツ\)_\/¯)/su.exec(source);
+        if (!match) {
             return {
-                content
+                size: 1,
+                content: source[0]
             };
         }
 
-        return parse(
-            content,
-            {
-                ...state,
-                nested: true
-            }
-        );
+        const content = trimToNearestNonSymbolEmoji(match[0]);
+        return {
+            size: content.length,
+            content
+        };
     },
-    react: (node, output, state) => createElement(
-        'span',
-        {
-            key: state.key
-        },
-        node.content
-    )
-};
+    render: (capture) => capture.content
+});

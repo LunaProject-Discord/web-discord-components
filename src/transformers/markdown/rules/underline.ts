@@ -1,15 +1,21 @@
-import SimpleMarkdown from '@khanacademy/simple-markdown';
 import { createElement } from 'react';
 import { Underline } from '../../../components';
-import type { MarkdownRule } from './index';
+import { defineRule } from './index';
 
-export const underline: MarkdownRule = {
-    ...SimpleMarkdown.defaultRules.u,
-    react: (node, output, state) => createElement(
+export const underline = defineRule({
+    capture: (source, _, parse) => {
+        const match = /^__((?:\\.|[^\\])+?)__(?!_)/su.exec(source);
+        if (!match)
+            return;
+
+        return {
+            size: match[0].length,
+            content: parse(match[1])
+        };
+    },
+    render: (capture, render) => createElement(
         Underline,
-        {
-            key: state.key
-        },
-        output(node.content, state)
+        {},
+        render(capture.content)
     )
-};
+});
