@@ -216,7 +216,7 @@ export const MessageReplyPreviewContent = styled(
 
 export type MessageReplyProps = {
     type?: MessageReplyType;
-    profile: {
+    user: {
         name: ReactNode;
         avatarUrl?: string;
     };
@@ -232,7 +232,7 @@ export const MessageReply = (props: MessageReplyProps) => {
     const {
         name,
         avatarUrl = DefaultAvatar.Blurple
-    } = props.profile;
+    } = props.user;
 
     return (
         <MessageReplyRoot type={props.type}>
