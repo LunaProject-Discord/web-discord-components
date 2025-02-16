@@ -13,7 +13,7 @@ import { getFieldGridColumn, MessageEmbedField } from '../MessageEmbedField';
 import { MessageEmbedFooter, messageEmbedFooterClasses } from '../MessageEmbedFooter';
 import { MessageEmbedGallery } from '../MessageEmbedGallery';
 import { MessageEmbedImage, messageEmbedImageClasses } from '../MessageEmbedImage';
-import { messageEmbedThumbnailClasses } from '../MessageEmbedThumbnail';
+import { MessageEmbedThumbnail, messageEmbedThumbnailClasses } from '../MessageEmbedThumbnail';
 
 export const messageEmbedClasses = generateComponentClasses(
     'MessageEmbed',
@@ -229,7 +229,7 @@ export const MessageEmbed = (
                     }}
                 />}
             </Fragment>}
-            {thumbnail && <MessageEmbedImage src={thumbnail} />}
+            {thumbnail && <MessageEmbedThumbnail src={thumbnail} />}
             {(timestamp || footer?.text) && <MessageEmbedFooter
                 timestamp={timestamp}
                 text={footer?.text}
