@@ -4,9 +4,9 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
-import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode } from 'react';
+import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode, useContext } from 'react';
 import { UserTag } from '../../interfaces';
-import { DefaultAvatar, formatTimestamp, generateComponentClasses } from '../../utils';
+import { ConfigContext, DefaultAvatar, formatTimestamp, generateComponentClasses } from '../../utils';
 import { UserBotTag, userBotTagClasses } from '../UserBotTag';
 
 export const messageHeaderClasses = generateComponentClasses(
@@ -165,6 +165,8 @@ export const MessageHeader = (
         timestamp
     }: MessageHeaderProps
 ) => {
+    const { translations } = useContext(ConfigContext);
+
     const { appearance: { display } } = useTheme();
 
     return (
@@ -179,7 +181,17 @@ export const MessageHeader = (
             <MessageHeaderName>{name}</MessageHeaderName>
             {display === 'cozy' && <Fragment>
                 {tag && <UserBotTag tag={tag} />}
-                <MessageHeaderTimestamp>{formatTimestamp(timestamp)}</MessageHeaderTimestamp>
+                <MessageHeaderTimestamp>
+                    {formatTimestamp(
+                        timestamp,
+                        {
+                            today: translations.timestamp_today,
+                            yesterday: translations.timestamp_yesterday,
+                            tomorrow: translations.timestamp_tomorrow,
+                            other: translations.timestamp_other
+                        }
+                    )}
+                </MessageHeaderTimestamp>
             </Fragment>}
         </MessageHeaderRoot>
     );

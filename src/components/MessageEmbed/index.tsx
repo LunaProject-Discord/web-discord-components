@@ -2,10 +2,17 @@
 
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, ElementType } from 'react';
+import React, { ComponentPropsWithRef, ElementType, Fragment, useEffect, useMemo, useRef } from 'react';
+import { MessageEmbedData } from '../../interfaces';
+import { Markdown } from '../../transformers';
 import { generateComponentClasses } from '../../utils';
-import { messageEmbedFooterClasses } from '../MessageEmbedFooter';
-import { messageEmbedImageClasses } from '../MessageEmbedImage';
+import { decimalToHex } from '../../utils/embed';
+import { Link } from '../Link';
+import { MessageEmbedAuthor } from '../MessageEmbedAuthor';
+import { getFieldGridColumn, MessageEmbedField } from '../MessageEmbedField';
+import { MessageEmbedFooter, messageEmbedFooterClasses } from '../MessageEmbedFooter';
+import { MessageEmbedGallery } from '../MessageEmbedGallery';
+import { MessageEmbedImage, messageEmbedImageClasses } from '../MessageEmbedImage';
 import { messageEmbedThumbnailClasses } from '../MessageEmbedThumbnail';
 
 export const messageEmbedClasses = generateComponentClasses(
@@ -121,3 +128,113 @@ export const MessageEmbedFields = styled(
     display: 'grid',
     gap: 8
 });
+
+export interface MessageEmbedProps {
+    embed: MessageEmbedData;
+}
+
+export const MessageEmbed = (
+    {
+        embed: {
+            title,
+            description,
+            url,
+            color,
+            timestamp,
+            author,
+            footer,
+            fields,
+            images,
+            thumbnail
+        }
+    }: MessageEmbedProps
+) => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const imageRef = useRef<HTMLImageElement | null>(null);
+
+    const fieldInlines = useMemo(() => (fields ?? []).map(({ inline }) => inline ?? false), [fields]);
+
+    useEffect(() => {
+        const { current: container } = containerRef;
+        if (!container)
+            return;
+
+        container.style.maxWidth = '';
+    }, [images?.length === 1 && images[0]]);
+
+    return (
+        <MessageEmbedRoot
+            ref={containerRef}
+            style={{
+                borderLeftColor: color ? decimalToHex(color) : undefined
+            }}
+        >
+            {author && <MessageEmbedAuthor
+                name={author.name}
+                url={author.url}
+                iconUrl={author.iconUrl}
+            />}
+            {title && <MessageEmbedTitle>
+                {url ? <Link href={url}>
+                    <Markdown
+                        content={title}
+                        features="title"
+                    />
+                </Link> : <Markdown
+                    content={title}
+                    features="title"
+                />}
+            </MessageEmbedTitle>}
+            {description && <MessageEmbedDescription>
+                <Markdown
+                    content={description}
+                    features="full"
+                />
+            </MessageEmbedDescription>}
+            {fields && <MessageEmbedFields>
+                {fields.map(({ name, value }, i) => (
+                    <MessageEmbedField
+                        key={name}
+                        name={
+                            <Markdown
+                                content={name}
+                                features="title"
+                            />
+                        }
+                        value={
+                            <Markdown
+                                content={value}
+                                features={{
+                                    extend: 'full',
+                                    headings: false
+                                }}
+                            />
+                        }
+                        column={getFieldGridColumn(fieldInlines, i)}
+                    />
+                ))}
+            </MessageEmbedFields>}
+            {images && <Fragment>
+                {images.length > 1 ? <MessageEmbedGallery images={images} /> : <MessageEmbedImage
+                    ref={imageRef}
+                    src={images[0]}
+                    onLoad={() => {
+                        const { current: container } = containerRef;
+                        const { current: image } = imageRef;
+                        if (!container || !image)
+                            return;
+
+                        const { width } = image.getBoundingClientRect();
+                        container.style.maxWidth = width >= 300 ? `${width + 32}px` : '';
+                    }}
+                />}
+            </Fragment>}
+            {thumbnail && <MessageEmbedImage src={thumbnail} />}
+            {(timestamp || footer?.text) && <MessageEmbedFooter
+                timestamp={timestamp}
+                text={footer?.text}
+                iconUrl={footer?.iconUrl}
+            />}
+        </MessageEmbedRoot>
+    );
+};

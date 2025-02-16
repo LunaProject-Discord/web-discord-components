@@ -3,8 +3,8 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
-import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { formatTimestamp, generateComponentClasses } from '../../utils';
+import React, { ComponentPropsWithRef, ElementType, ReactNode, useContext } from 'react';
+import { ConfigContext, formatTimestamp, generateComponentClasses } from '../../utils';
 
 export const messageEmbedFooterClasses = generateComponentClasses(
     'MessageEmbedFooter',
@@ -115,14 +115,26 @@ export interface MessageEmbedFooterProps {
     iconUrl?: string;
 }
 
-export const MessageEmbedFooter = ({ timestamp, text, iconUrl }: MessageEmbedFooterProps) => (
-    <MessageEmbedFooterRoot>
-        {iconUrl && <MessageEmbedFooterIcon src={iconUrl} />}
-        <MessageEmbedFooterText>
-            {text}
-            {(text && timestamp) && <MessageEmbedFooterSeparator />}
-            {timestamp && formatTimestamp(timestamp)}
-        </MessageEmbedFooterText>
-    </MessageEmbedFooterRoot>
-);
+export const MessageEmbedFooter = ({ timestamp, text, iconUrl }: MessageEmbedFooterProps) => {
+    const { translations } = useContext(ConfigContext);
+
+    return (
+        <MessageEmbedFooterRoot>
+            {iconUrl && <MessageEmbedFooterIcon src={iconUrl} />}
+            <MessageEmbedFooterText>
+                {text}
+                {(text && timestamp) && <MessageEmbedFooterSeparator />}
+                {timestamp && formatTimestamp(
+                    timestamp,
+                    {
+                        today: translations.timestamp_today,
+                        yesterday: translations.timestamp_yesterday,
+                        tomorrow: translations.timestamp_tomorrow,
+                        other: translations.timestamp_other
+                    }
+                )}
+            </MessageEmbedFooterText>
+        </MessageEmbedFooterRoot>
+    );
+};
 
