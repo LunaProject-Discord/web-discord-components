@@ -2,6 +2,7 @@ export * from './Blockquote';
 export * from './Bold';
 export * from './BulletList';
 export * from './Code';
+export * from './CodeBlock';
 export * from './DataContext';
 export * from './Emoji';
 export * from './Heading';

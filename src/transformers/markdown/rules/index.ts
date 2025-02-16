@@ -96,6 +96,7 @@ export const defineRule = <Capture extends BaseCapture>(rule: Rule<Capture>) => 
 export * from './blockquote';
 export * from './bold';
 export * from './code';
+export * from './code_block';
 export * from './emoji';
 export * from './escape';
 export * from './heading';

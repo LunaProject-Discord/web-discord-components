@@ -67,7 +67,8 @@ const UnicodeEmojiRoot = styled(
     height: '1.375em',
     display: 'inline-block',
     verticalAlign: 'middle',
-    objectFit: 'contain'
+    objectFit: 'contain',
+    pointerEvents: 'none'
 });
 
 export const UnicodeEmoji = memo(UnicodeEmojiRoot);

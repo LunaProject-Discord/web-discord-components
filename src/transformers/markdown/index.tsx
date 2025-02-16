@@ -5,6 +5,7 @@ import {
     bold,
     channelMention,
     code,
+    codeBlock,
     commandMention,
     createMarkdownParser,
     customEmoji,
@@ -35,7 +36,7 @@ import {
 type RuleOptionKey =
     | 'headings'
     | 'smalls'
-    // | 'codeBlocks'
+    | 'codeBlocks'
     | 'inlineCode'
     | 'blockquotes'
     | 'lists'
@@ -69,7 +70,7 @@ export const ruleOptions: Record<
 > = {
     headings: { rule: heading, full: true },
     smalls: { rule: small, full: true },
-    // codeBlocks: { rule: codeBlockRule, full: true },
+    codeBlocks: { rule: codeBlock, full: true },
     inlineCode: { rule: code, title: true, full: true },
     blockquotes: { rule: blockquote, full: true },
     lists: { rule: list, full: true },

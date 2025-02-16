@@ -50,7 +50,6 @@ export const BlockquoteDivider = styled(
     )
 )(({ theme }) => ({
     width: 4,
-    height: '100%',
     backgroundColor: theme.appearance.color === 'dark' ? '#4e5057' : '#c5c9cd',
     borderRadius: 4
 }));
