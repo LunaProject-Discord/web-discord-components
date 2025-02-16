@@ -57,6 +57,7 @@ export const CodeBlockContent = styled(
 )(({ theme }) => ({
     padding: '.5em',
     display: 'block',
+    fontFamily: '"HackGen", "Consolas", monospace',
     fontSize: '.875rem',
     lineHeight: '1.125rem',
     whiteSpace: 'pre-wrap',
