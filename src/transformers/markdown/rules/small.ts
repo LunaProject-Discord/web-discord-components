@@ -1,7 +1,8 @@
-import { createElement, Fragment } from 'react';
+import { createElement } from 'react';
 import { defineRule } from '.';
+import { Small } from '../../../components';
 
-export const footing = defineRule({
+export const small = defineRule({
     capture: (source, state, parse) => {
         if (!/\n$|^$/.test(state.completed))
             return;
@@ -15,11 +16,9 @@ export const footing = defineRule({
             content: parse(match[1].trim())
         };
     },
-    render: (capture, render) => {
-        return createElement(
-            Fragment,
-            {},
-            render(capture.content)
-        );
-    }
+    render: (capture, render) => createElement(
+        Small,
+        {},
+        render(capture.content)
+    )
 });

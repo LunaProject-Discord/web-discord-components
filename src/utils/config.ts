@@ -46,7 +46,7 @@ export interface Config {
 const DefaultConfig: Config = {
     translations: {
         timestamp_full_short: 'MMMM d, yyyy h:mm a', // f
-        timestamp_full_long: 'EEEE, MMMM d, yyyy h:mm A', // F
+        timestamp_full_long: 'EEEE, MMMM d, yyyy h:mm a', // F
         timestamp_date_short: 'MM/dd/yyyy', // d
         timestamp_date_long: 'MMMM d, yyyy', // D
         timestamp_time_short: 'h:mm a', // t

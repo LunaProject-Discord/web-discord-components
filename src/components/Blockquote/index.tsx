@@ -29,8 +29,8 @@ export const BlockquoteRoot = styled(
         />
     )
 )({
+    paddingRight: 8,
     display: 'flex',
-    alignItems: 'center',
     gap: 12
 });
 
@@ -71,7 +71,6 @@ export const BlockquoteContent = styled(
     )
 )({
     maxWidth: '90%',
-    paddingRight: 8,
     textIndent: 0
 });
 

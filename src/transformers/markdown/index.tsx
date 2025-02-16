@@ -9,8 +9,8 @@ import {
     createMarkdownParser,
     customEmoji,
     escape,
-    footing,
-    globalMention, guildSectionMention,
+    globalMention,
+    guildSectionMention,
     heading,
     italic,
     lineBreak,
@@ -22,9 +22,11 @@ import {
     renderMarkdownNodes,
     roleMention,
     Rule,
+    small,
     spoiler,
     strikethrough,
-    text, timestamp,
+    text,
+    timestamp,
     underline,
     unicodeEmoji,
     userMention
@@ -32,7 +34,7 @@ import {
 
 type RuleOptionKey =
     | 'headings'
-    | 'footings'
+    | 'smalls'
     // | 'codeBlocks'
     | 'inlineCode'
     | 'blockquotes'
@@ -66,7 +68,7 @@ export const ruleOptions: Record<
     { rule: Rule; title?: boolean; full?: boolean }
 > = {
     headings: { rule: heading, full: true },
-    footings: { rule: footing, full: true },
+    smalls: { rule: small, full: true },
     // codeBlocks: { rule: codeBlockRule, full: true },
     inlineCode: { rule: code, title: true, full: true },
     blockquotes: { rule: blockquote, full: true },
