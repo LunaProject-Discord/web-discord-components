@@ -153,6 +153,7 @@ export const MessageEmbed = (
     const imageRef = useRef<HTMLImageElement | null>(null);
 
     const fieldInlines = useMemo(() => (fields ?? []).map(({ inline }) => inline ?? false), [fields]);
+    const isSingleImage = useMemo(() => images !== undefined && images.length === 1 && images[0] !== undefined, [images]);
 
     useEffect(() => {
         const { current: container } = containerRef;
@@ -160,7 +161,7 @@ export const MessageEmbed = (
             return;
 
         container.style.maxWidth = '';
-    }, [images?.length === 1 && images[0]]);
+    }, [isSingleImage]);
 
     return (
         <MessageEmbedRoot
@@ -194,7 +195,7 @@ export const MessageEmbed = (
             {fields && <MessageEmbedFields>
                 {fields.map(({ name, value }, i) => (
                     <MessageEmbedField
-                        key={name}
+                        key={i}
                         name={
                             <Markdown
                                 content={name}
