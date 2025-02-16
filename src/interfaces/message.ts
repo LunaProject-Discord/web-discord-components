@@ -4,7 +4,7 @@ import { User } from './user';
 
 export interface MessageData {
     timestamp: DateTime<true> | 'now';
-    author: string | User;
+    author: string | Omit<User, 'id'>;
     content?: string;
     embeds?: MessageEmbedData[];
     reply?: MessageReplyProps;
