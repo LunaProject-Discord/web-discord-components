@@ -1,10 +1,13 @@
 import { DateTime } from 'luxon';
+import { MessageReplyProps } from '../components';
 import { User } from './user';
 
 export interface MessageData {
+    timestamp: DateTime<true> | 'now';
     author: string | User;
     content?: string;
     embeds?: MessageEmbedData[];
+    reply?: MessageReplyProps;
 }
 
 export interface MessageEmbedData {
