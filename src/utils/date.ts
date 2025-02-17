@@ -16,7 +16,7 @@ export interface RelativeTimestamp {
 export const getRelativeTimestamp = (timestamp: DateTime<true>): RelativeTimestamp => {
     const now = DateTime.local({ zone: 'utc' });
     const timeline = timestamp.diff(now).milliseconds > 0 ? 'future' : 'past';
-    const diff = Math.abs(timestamp.toSeconds() - now.toSeconds());
+    const diff = Math.abs(timestamp.toMillis() - now.toMillis());
 
     let unit: RelativeTimestamp['unit'];
     let value: number;

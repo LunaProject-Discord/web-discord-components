@@ -4,8 +4,7 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import React, { ComponentPropsWithRef, ElementType, useContext } from 'react';
-import { generateComponentClasses, getRelativeTimestamp } from '../../utils';
-import { ConfigContext, ConfigTranslateKeys } from '../../utils/config';
+import { ConfigContext, ConfigTranslateKeys, generateComponentClasses, getRelativeTimestamp } from '../../utils';
 
 export const timestampClasses = generateComponentClasses(
     'Timestamp',
