@@ -2,11 +2,11 @@
 
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, ElementType, Fragment, useEffect, useMemo, useRef } from 'react';
+import React, { ComponentPropsWithRef, ElementType, Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { MessageEmbedData } from '../../interfaces';
 import { Markdown } from '../../transformers';
 import { generateComponentClasses } from '../../utils';
-import { decimalToHex } from '../../utils/embed';
+import { decimalToHex } from '../../utils';
 import { Link } from '../Link';
 import { MessageEmbedAuthor } from '../MessageEmbedAuthor';
 import { getFieldGridColumn, MessageEmbedField } from '../MessageEmbedField';
@@ -149,24 +149,19 @@ export const MessageEmbed = (
         }
     }: MessageEmbedProps
 ) => {
-    const containerRef = useRef<HTMLDivElement | null>(null);
     const imageRef = useRef<HTMLImageElement | null>(null);
+
+    const [maxWidth, setMaxWidth] = useState<string | undefined>(undefined);
 
     const fieldInlines = useMemo(() => (fields ?? []).map(({ inline }) => inline ?? false), [fields]);
     const isSingleImage = useMemo(() => images !== undefined && images.length === 1 && images[0] !== undefined, [images]);
 
-    useEffect(() => {
-        const { current: container } = containerRef;
-        if (!container)
-            return;
-
-        container.style.maxWidth = '';
-    }, [isSingleImage]);
+    useEffect(() => setMaxWidth(undefined), [isSingleImage]);
 
     return (
         <MessageEmbedRoot
-            ref={containerRef}
             style={{
+                maxWidth,
                 borderLeftColor: color ? decimalToHex(color) : undefined
             }}
         >
@@ -220,13 +215,12 @@ export const MessageEmbed = (
                     ref={imageRef}
                     src={images[0]}
                     onLoad={() => {
-                        const { current: container } = containerRef;
                         const { current: image } = imageRef;
-                        if (!container || !image)
+                        if (!image)
                             return;
 
                         const { width } = image.getBoundingClientRect();
-                        container.style.maxWidth = width >= 300 ? `${width + 32}px` : '';
+                        setMaxWidth(width >= 300 ? `${width + 32}px` : '');
                     }}
                 />}
             </Fragment>}
