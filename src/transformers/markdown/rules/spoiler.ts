@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Spoiler } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const spoiler = defineRule({
     capture: (source, _, parse) => {

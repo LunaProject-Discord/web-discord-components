@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Code } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const code = defineRule({
     capture: (source) => {

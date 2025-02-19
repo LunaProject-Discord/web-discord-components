@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Link } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 const pathize = (href: string) => href.replace(/^attachment:\/\//, '/');
 

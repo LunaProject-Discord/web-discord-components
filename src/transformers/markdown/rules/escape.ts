@@ -1,4 +1,4 @@
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const escape = defineRule({
     capture: (source) => {

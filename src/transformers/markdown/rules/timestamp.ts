@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { createElement } from 'react';
 import { Timestamp } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 const timestampFormats = {
     f: 'full_short',

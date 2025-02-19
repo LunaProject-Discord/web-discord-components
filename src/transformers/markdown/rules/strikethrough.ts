@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { defineRule } from '.';
+import { defineRule } from './utils';
 import { Strikethrough } from '../../../components';
 
 export const strikethrough = defineRule({

@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Heading } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const heading = defineRule({
     capture: (source, state, parse) => {

@@ -1,4 +1,4 @@
-import { defineRule } from '.';
+import { defineRule } from './utils';
 import { trimToNearestNonSymbolEmoji } from '../utils';
 
 export const text = defineRule({

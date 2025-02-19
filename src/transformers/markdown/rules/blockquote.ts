@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Blockquote } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const blockquote = defineRule({
     capture: (source, state, parse) => {

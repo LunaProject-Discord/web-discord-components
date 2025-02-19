@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Italic } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const italic = defineRule({
     capture: (source, _, parse) => {

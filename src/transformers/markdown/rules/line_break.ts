@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const lineBreak = defineRule({
     capture: (source) => {

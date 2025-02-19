@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { defineRule } from '.';
+import { defineRule } from './utils';
 import { BulletList, ListItem, OrderedList } from '../../../components';
 
 export const list = defineRule({

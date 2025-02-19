@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Underline } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const underline = defineRule({
     capture: (source, _, parse) => {

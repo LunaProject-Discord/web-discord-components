@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Bold } from '../../../components';
-import { defineRule } from './index';
+import { defineRule } from './utils';
 
 export const bold = defineRule({
     capture: (source, _, parse) => {

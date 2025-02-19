@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { defineRule } from '.';
+import { defineRule } from './utils';
 import { CustomEmoji, UnicodeEmoji } from '../../../components';
 import { findEmoji, getEmojiName, translateNamedEmoji } from '../utils';
 
