@@ -210,7 +210,7 @@ export const MessageEmbed = (
                     />
                 ))}
             </MessageEmbedFields>}
-            {images && <Fragment>
+            {(images && images.length > 0) && <Fragment>
                 {images.length > 1 ? <MessageEmbedGallery images={images} /> : <MessageEmbedImage
                     ref={imageRef}
                     src={images[0]}
