@@ -66,7 +66,7 @@ export const CodeBlockContent = styled(
     overflowX: 'auto',
     color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.secondary,
-    border: `solid 1px ${theme.appearance.color === 'dark' ? '#1e1f22' : '#e3e5e8'}`,
+    border: `solid 1px ${theme.palette.background.tertiary}`,
     borderRadius: 4
 }));
 

@@ -49,7 +49,7 @@ export const MessageEmbedRoot = styled(
     alignSelf: 'start',
     justifySelf: 'start',
     backgroundColor: theme.palette.background.secondary,
-    borderLeft: 'solid 4px',
+    borderLeft: `solid 4px ${theme.palette.background.tertiary}`,
     borderRadius: 4,
     [`&:has(.${messageEmbedThumbnailClasses.root}) :where(.${messageEmbedImageClasses.root}, .${messageEmbedFooterClasses.root})`]: {
         gridColumn: '1 / 3'

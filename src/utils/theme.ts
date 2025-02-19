@@ -16,6 +16,7 @@ export interface Theme {
         background: {
             primary: string;
             secondary: string;
+            tertiary: string;
             selection: string;
             mention: string;
         };
@@ -38,6 +39,7 @@ const DefaultLightTheme: Omit<Theme, 'appearance'> = {
         background: {
             primary: '#fff',
             secondary: '#f2f3f5',
+            tertiary: '#e3e5e8',
             selection: '#b3d4fc',
             mention: '#e8e8fc'
         },
@@ -60,6 +62,7 @@ const DefaultDarkTheme: Omit<Theme, 'appearance'> = {
         background: {
             primary: '#313338',
             secondary: '#2b2d31',
+            tertiary: '#1e1f22',
             selection: '#5d769c',
             mention: '#3f416d'
         },
