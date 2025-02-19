@@ -402,9 +402,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lunaproject/web-core@npm:^2.0.0-beta.18":
-  version: 2.0.0-beta.18
-  resolution: "@lunaproject/web-core@npm:2.0.0-beta.18"
+"@lunaproject/web-core@npm:^2.0.0-beta.19":
+  version: 2.0.0-beta.19
+  resolution: "@lunaproject/web-core@npm:2.0.0-beta.19"
   dependencies:
     "@types/color": "npm:^4.2.0"
     "@types/deep-equal": "npm:^1.0.4"
@@ -439,7 +439,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/d12570f2c895ef69f7db946aa8eccb70b55355beb2c3e34a42108b9c873671234850e6bdf031b2de641dd31dc8c3a7a2d236cdede11871b9d0a667ba3ada9f2a
+  checksum: 10c0/08f766933a6b9b89b9b390948ca100ad616fca665dd1e42f9a044c8ffd7065954c514f3c332005b298378c1d559114cd7a786a6abb55c8556c12f015c5eabf26
   languageName: node
   linkType: hard
 
@@ -450,7 +450,7 @@ __metadata:
     "@discordjs/rest": "npm:^2.4.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
-    "@lunaproject/web-core": "npm:^2.0.0-beta.18"
+    "@lunaproject/web-core": "npm:^2.0.0-beta.19"
     "@twemoji/api": "npm:^15.1.0"
     "@types/node": "npm:~20.11.30"
     "@types/react": "npm:^19.0.10"
@@ -467,6 +467,7 @@ __metadata:
   peerDependencies:
     "@emotion/react": ^11.14.0
     "@emotion/styled": ^11.14.0
+    "@lunaproject/web-core": ^2.0.0-beta.19
     "@types/react": ^19.0.0
     "@types/react-dom": ^19.0.0
     next: ^15.1.0
