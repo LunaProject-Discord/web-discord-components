@@ -402,11 +402,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lunaproject/web-core@npm:^2.0.0-beta.19":
-  version: 2.0.0-beta.19
-  resolution: "@lunaproject/web-core@npm:2.0.0-beta.19"
+"@lunaproject/web-core@npm:^2.0.0-beta.20":
+  version: 2.0.0-beta.20
+  resolution: "@lunaproject/web-core@npm:2.0.0-beta.20"
   dependencies:
-    "@types/color": "npm:^4.2.0"
     "@types/deep-equal": "npm:^1.0.4"
     "@types/luxon": "npm:^3.4.2"
     clsx: "npm:^2.1.1"
@@ -439,7 +438,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/08f766933a6b9b89b9b390948ca100ad616fca665dd1e42f9a044c8ffd7065954c514f3c332005b298378c1d559114cd7a786a6abb55c8556c12f015c5eabf26
+  checksum: 10c0/fe879f448c3bc1b2f9a1f621ea5054af89adcaff6400eac317573f396085af5c2878d7d045113f6a7c3e248c3a6dd2e2f97449a7d2e626c95e36ee13547762c0
   languageName: node
   linkType: hard
 
@@ -450,7 +449,7 @@ __metadata:
     "@discordjs/rest": "npm:^2.4.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
-    "@lunaproject/web-core": "npm:^2.0.0-beta.19"
+    "@lunaproject/web-core": "npm:^2.0.0-beta.20"
     "@twemoji/api": "npm:^15.1.0"
     "@types/node": "npm:~20.11.30"
     "@types/react": "npm:^19.0.10"
@@ -467,7 +466,7 @@ __metadata:
   peerDependencies:
     "@emotion/react": ^11.14.0
     "@emotion/styled": ^11.14.0
-    "@lunaproject/web-core": ^2.0.0-beta.19
+    "@lunaproject/web-core": ^2.0.0-beta.20
     "@types/react": ^19.0.0
     "@types/react-dom": ^19.0.0
     next: ^15.1.0
@@ -595,31 +594,6 @@ __metadata:
   version: 15.1.0
   resolution: "@twemoji/parser@npm:15.1.0"
   checksum: 10c0/ee38a82b40f5bc945eaefd87e74da716446ad1d02e11de36ba4e6e3e24be0fccb96038b94ae09fc0ca2405d7324d1b25b37769d32264a9ef72758f025389f22c
-  languageName: node
-  linkType: hard
-
-"@types/color-convert@npm:*":
-  version: 2.0.4
-  resolution: "@types/color-convert@npm:2.0.4"
-  dependencies:
-    "@types/color-name": "npm:^1.1.0"
-  checksum: 10c0/fdd2cea0ccf593055c8d952760286a4c114ed72a9940798d13f159823bf71d40a6b124009865e2e066f062d6d5611b677ddb61fd0ed05f6494170454cc6457c2
-  languageName: node
-  linkType: hard
-
-"@types/color-name@npm:^1.1.0":
-  version: 1.1.5
-  resolution: "@types/color-name@npm:1.1.5"
-  checksum: 10c0/ce566d98ab1c2622a2e9d9d1d5cbde403e731a4fc084e8b0f56e89901cd3c46981feafb797d4505918d5eb5a7fd897fce2332d489f450ddf1c58bc4986bd9d76
-  languageName: node
-  linkType: hard
-
-"@types/color@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "@types/color@npm:4.2.0"
-  dependencies:
-    "@types/color-convert": "npm:*"
-  checksum: 10c0/d09b68390bfd4ae6d57115e047be9dbd3ad4d30e9b7c20e6004c778057a94eec9f5c61689c1b6b09a743f8c2491536870dd0c9a2c79bfcaa37f594b54fc9c96d
   languageName: node
   linkType: hard
 
