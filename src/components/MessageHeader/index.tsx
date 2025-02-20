@@ -174,7 +174,7 @@ export const MessageHeader = (
             <MessageHeaderAvatar src={avatarUrl} />
             {display === 'compact' && <Fragment>
                 <MessageHeaderTimestamp>
-                    {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat('H:mm')}
+                    {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat(translations.timestamp_time_short)}
                 </MessageHeaderTimestamp>
                 {tag && <UserBotTag tag={tag} />}
             </Fragment>}
