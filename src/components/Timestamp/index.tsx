@@ -40,7 +40,10 @@ export interface TimestampProps {
 }
 
 export const Timestamp = ({ timestamp, format }: TimestampProps) => {
-    const { translations } = useContext(ConfigContext);
+    const { locale, translations } = useContext(ConfigContext);
+
+    if (locale === 'ja')
+        timestamp = timestamp.setZone('Asia/Tokyo').setLocale('ja') as DateTime<true>;
 
     switch (format) {
         case 'relative':

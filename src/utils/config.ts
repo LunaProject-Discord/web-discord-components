@@ -40,10 +40,12 @@ export type ConfigTranslateKeys =
 export type ConfigTranslations = { [key in ConfigTranslateKeys]: string };
 
 export interface Config {
+    locale: 'en' | 'ja';
     translations: ConfigTranslations;
 }
 
 const DefaultConfig: Config = {
+    locale: 'en',
     translations: {
         timestamp_full_short: 'MMMM d, yyyy h:mm a', // f
         timestamp_full_long: 'EEEE, MMMM d, yyyy h:mm a', // F
@@ -83,7 +85,8 @@ const DefaultConfig: Config = {
 export const ConfigContext = createContext<Config>(DefaultConfig);
 
 export const ConfigProvider = ({ value, children }: ProviderProps<{
-    translations?: Partial<ConfigTranslations>;
+    locale?: Config['locale'];
+    translations?: Partial<Config['translations']>;
 }>) => createElement(
     ConfigContext,
     { value: deepmerge(DefaultConfig, value) as Config },
