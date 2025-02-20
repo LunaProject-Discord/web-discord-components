@@ -165,7 +165,7 @@ export const MessageHeader = (
         timestamp
     }: MessageHeaderProps
 ) => {
-    const { translations } = useContext(ConfigContext);
+    const { locale, translations } = useContext(ConfigContext);
 
     const { appearance: { display } } = useTheme();
 
@@ -173,7 +173,7 @@ export const MessageHeader = (
         <MessageHeaderRoot>
             <MessageHeaderAvatar src={avatarUrl} />
             {display === 'compact' && <Fragment>
-                <MessageHeaderTimestamp>
+                <MessageHeaderTimestamp style={{ width: locale === 'en' ? '3.1rem' : '2.25rem' }}>
                     {(typeof timestamp === 'string' ? DateTime.now() : timestamp).toFormat(translations.timestamp_time_short)}
                 </MessageHeaderTimestamp>
                 {tag && <UserBotTag tag={tag} />}
