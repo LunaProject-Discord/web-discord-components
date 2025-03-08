@@ -1,5 +1,6 @@
 'use client';
 
+import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
@@ -11,6 +12,12 @@ export const italicClasses = generateComponentClasses(
         'root'
     ]
 );
+
+export const italicStyles: Record<keyof typeof italicClasses, CSSObject> = {
+    root: {
+        fontStyle: 'italic'
+    }
+};
 
 const ItalicElement: ElementType = 'span';
 
@@ -26,6 +33,4 @@ export const Italic = styled(
             {...props}
         />
     )
-)({
-    fontStyle: 'italic'
-});
+)(italicStyles.root);

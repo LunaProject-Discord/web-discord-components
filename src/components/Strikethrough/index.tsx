@@ -1,5 +1,6 @@
 'use client';
 
+import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
@@ -11,6 +12,12 @@ export const strikethroughClasses = generateComponentClasses(
         'root'
     ]
 );
+
+export const strikethroughStyles: Record<keyof typeof strikethroughClasses, CSSObject> = {
+    root: {
+        textDecoration: 'line-through'
+    }
+};
 
 const StrikethroughElement: ElementType = 'span';
 
@@ -26,6 +33,4 @@ export const Strikethrough = styled(
             {...props}
         />
     )
-)({
-    textDecoration: 'line-through'
-});
+)(strikethroughStyles.root);

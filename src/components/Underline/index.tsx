@@ -1,5 +1,6 @@
 'use client';
 
+import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
@@ -11,6 +12,12 @@ export const underlineClasses = generateComponentClasses(
         'root'
     ]
 );
+
+export const underlineStyles: Record<keyof typeof underlineClasses, CSSObject> = {
+    root: {
+        textDecoration: 'underline'
+    }
+};
 
 const UnderlineElement: ElementType = 'span';
 
@@ -26,6 +33,4 @@ export const Underline = styled(
             {...props}
         />
     )
-)({
-    textDecoration: 'underline'
-});
+)(underlineStyles.root);

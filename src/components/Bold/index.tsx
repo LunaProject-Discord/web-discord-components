@@ -1,8 +1,9 @@
 'use client';
 
+import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, ElementType } from 'react';
+import React, { ComponentPropsWithRef, CSSProperties, ElementType } from 'react';
 import { generateComponentClasses } from '../../utils';
 
 export const boldClasses = generateComponentClasses(
@@ -11,6 +12,12 @@ export const boldClasses = generateComponentClasses(
         'root'
     ]
 );
+
+export const boldStyles: Record<keyof typeof boldClasses, CSSObject> = {
+    root: {
+        fontWeight: 700
+    }
+};
 
 const BoldElement: ElementType = 'span';
 
@@ -26,6 +33,4 @@ export const Bold = styled(
             {...props}
         />
     )
-)({
-    fontWeight: 700
-});
+)(boldStyles.root);
