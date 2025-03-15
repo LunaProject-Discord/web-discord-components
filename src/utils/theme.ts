@@ -30,23 +30,6 @@ export interface Theme {
     };
 }
 
-type FormatAsCSSVariable<Path extends string> = `--discord-${Path}`;
-
-type TransformCSSVariableKeys<T = Omit<Theme, 'appearance'>, Path extends string = ''> = {
-    [K in keyof T]: T[K] extends object // オブジェクト型の場合は再帰
-        ? TransformCSSVariableValues<T[K], `${Path}${K & string}-`>
-        : FormatAsCSSVariable<`${Path}${K & string}`>;
-};
-
-type TransformCSSVariableValues<T = Omit<Theme, 'appearance'>, Path extends string = ''> = {
-    [K in keyof T]: T[K] extends object // オブジェクト型の場合は再帰
-        ? TransformCSSVariableValues<T[K], `${Path}${K & string}-`>
-        : `var(${FormatAsCSSVariable<`${Path}${K & string}`>})`;
-};
-
-export const ThemeCSSVariableKeys = {} as TransformCSSVariableKeys;
-export const ThemeCSSVariableValues = {} as TransformCSSVariableValues;
-
 export const DefaultLightTheme: Omit<Theme, 'appearance'> = {
     palette: {
         common: {
