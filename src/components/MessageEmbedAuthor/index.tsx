@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
 import { Link } from '../Link';
 
 export const messageEmbedAuthorClasses = generateComponentClasses(
@@ -15,7 +15,31 @@ export const messageEmbedAuthorClasses = generateComponentClasses(
     ]
 );
 
-const MessageEmbedAuthorRootElement: ElementType = 'div';
+export const messageEmbedAuthorStyles: Styles<typeof messageEmbedAuthorClasses> = {
+    root: {
+        marginTop: 8,
+        gridColumn: '1 / 1',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        lineHeight: '22px'
+    },
+    icon: {
+        width: 24,
+        aspectRatio: '1',
+        objectFit: 'contain',
+        borderRadius: '50%'
+    },
+    name: {
+        fontSize: '.875rem',
+        fontWeight: 600,
+        whiteSpace: 'break-spaces',
+        wordWrap: 'break-word',
+        color: ThemeCSSVariableValues.palette.text.secondary
+    }
+};
+
+export const MessageEmbedAuthorRootElement: ElementType = 'div';
 
 export const MessageEmbedAuthorRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorRootElement>) => (
@@ -29,16 +53,9 @@ export const MessageEmbedAuthorRoot = styled(
             {...props}
         />
     )
-)({
-    marginTop: 8,
-    gridColumn: '1 / 1',
-    display: 'flex',
-    alignItems: 'center',
-    gap: 8,
-    lineHeight: '22px'
-});
+)(messageEmbedAuthorStyles.root);
 
-const MessageEmbedAuthorIconElement: ElementType = 'img';
+export const MessageEmbedAuthorIconElement: ElementType = 'img';
 
 export const MessageEmbedAuthorIcon = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorIconElement>) => (
@@ -52,14 +69,9 @@ export const MessageEmbedAuthorIcon = styled(
             {...props}
         />
     )
-)({
-    width: 24,
-    aspectRatio: '1',
-    objectFit: 'contain',
-    borderRadius: '50%'
-});
+)(messageEmbedAuthorStyles.icon);
 
-const MessageEmbedAuthorNameElement: ElementType = 'span';
+export const MessageEmbedAuthorNameElement: ElementType = 'span';
 
 export const MessageEmbedAuthorName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedAuthorNameElement>) => (
@@ -73,13 +85,7 @@ export const MessageEmbedAuthorName = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    fontSize: '.875rem',
-    fontWeight: 600,
-    whiteSpace: 'break-spaces',
-    wordWrap: 'break-word',
-    color: theme.palette.text.secondary
-}));
+)(messageEmbedAuthorStyles.name);
 
 export interface MessageEmbedAuthorProps {
     name: ReactNode;

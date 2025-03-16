@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
 
 export const messageEmbedFieldClasses = generateComponentClasses(
     'MessageEmbedField',
@@ -14,7 +14,41 @@ export const messageEmbedFieldClasses = generateComponentClasses(
     ]
 );
 
-const MessageEmbedFieldRootElement: ElementType = 'div';
+export const messageEmbedFieldStyles: Styles<typeof messageEmbedFieldClasses> = {
+    root: {
+        minWidth: 0,
+        gridColumn: '1 / 13',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        fontSize: '.875rem',
+        fontWeight: 400,
+        lineHeight: '1.125rem',
+        '@media (max-width: 599.95px)': {
+            gridColumn: '1 / 13 !important'
+        }
+    },
+    name: {
+        margin: 0,
+        fontSize: '.875rem',
+        fontWeight: 600,
+        lineHeight: '1.125rem',
+        whiteSpace: 'break-spaces',
+        wordWrap: 'break-word',
+        color: ThemeCSSVariableValues.palette.text.secondary
+    },
+    value: {
+        minWidth: 0,
+        fontSize: '.875rem',
+        fontWeight: 400,
+        lineHeight: '1.125rem',
+        whiteSpace: 'pre-line',
+        wordWrap: 'break-word',
+        color: ThemeCSSVariableValues.palette.text.primary
+    }
+};
+
+export const MessageEmbedFieldRootElement: ElementType = 'div';
 
 export const MessageEmbedFieldRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldRootElement>) => (
@@ -28,21 +62,9 @@ export const MessageEmbedFieldRoot = styled(
             {...props}
         />
     )
-)({
-    minWidth: 0,
-    gridColumn: '1 / 13',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 2,
-    fontSize: '.875rem',
-    fontWeight: 400,
-    lineHeight: '1.125rem',
-    '@media (max-width: 599.95px)': {
-        gridColumn: '1 / 13 !important'
-    }
-});
+)(messageEmbedFieldStyles.root);
 
-const MessageEmbedFieldNameElement: ElementType = 'h5';
+export const MessageEmbedFieldNameElement: ElementType = 'h5';
 
 export const MessageEmbedFieldName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldNameElement>) => (
@@ -56,17 +78,9 @@ export const MessageEmbedFieldName = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    margin: 0,
-    fontSize: '.875rem',
-    fontWeight: 600,
-    lineHeight: '1.125rem',
-    whiteSpace: 'break-spaces',
-    wordWrap: 'break-word',
-    color: theme.palette.text.secondary
-}));
+)(messageEmbedFieldStyles.name);
 
-const MessageEmbedFieldValueElement: ElementType = 'div';
+export const MessageEmbedFieldValueElement: ElementType = 'div';
 
 export const MessageEmbedFieldValue = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldValueElement>) => (
@@ -80,15 +94,7 @@ export const MessageEmbedFieldValue = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    minWidth: 0,
-    fontSize: '.875rem',
-    fontWeight: 400,
-    lineHeight: '1.125rem',
-    whiteSpace: 'pre-line',
-    wordWrap: 'break-word',
-    color: theme.palette.text.primary
-}));
+)(messageEmbedFieldStyles.value);
 
 export interface MessageEmbedFieldColumn {
     start: number;

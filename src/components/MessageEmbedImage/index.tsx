@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const messageEmbedImageClasses = generateComponentClasses(
     'MessageEmbedImage',
@@ -12,7 +12,20 @@ export const messageEmbedImageClasses = generateComponentClasses(
     ]
 );
 
-const MessageEmbedImageElement: ElementType = 'img';
+export const messageEmbedImageStyles: Styles<typeof messageEmbedImageClasses> = {
+    root: {
+        width: '100%',
+        minWidth: 0,
+        maxWidth: 400,
+        maxHeight: 300,
+        marginTop: 16,
+        gridColumn: '1 / 2',
+        cursor: 'pointer',
+        borderRadius: 4
+    }
+};
+
+export const MessageEmbedImageElement: ElementType = 'img';
 
 export const MessageEmbedImage = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedImageElement>) => (
@@ -26,13 +39,4 @@ export const MessageEmbedImage = styled(
             {...props}
         />
     )
-)({
-    width: '100%',
-    minWidth: 0,
-    maxWidth: 400,
-    maxHeight: 300,
-    marginTop: 16,
-    gridColumn: '1 / 2',
-    cursor: 'pointer',
-    borderRadius: 4
-});
+)(messageEmbedImageStyles.root);

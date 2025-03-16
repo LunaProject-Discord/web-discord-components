@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const messageEmbedGalleryClasses = generateComponentClasses(
     'MessageEmbedGallery',
@@ -14,7 +14,34 @@ export const messageEmbedGalleryClasses = generateComponentClasses(
     ]
 );
 
-const MessageEmbedGalleryRootElement: ElementType = 'div';
+export const messageEmbedGalleryStyles: Styles<typeof messageEmbedGalleryClasses> = {
+    root: {
+        height: 300,
+        marginTop: 16,
+        gridColumn: '1 / 2',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridTemplateRows: '1fr 1fr',
+        gap: 4,
+        overflow: 'hidden',
+        borderRadius: 4
+    },
+    cell: {
+        minWidth: '100%',
+        minHeight: '100%',
+        display: 'flex',
+        placeItems: 'center',
+        placeContent: 'center'
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        borderRadius: 4
+    }
+};
+
+export const MessageEmbedGalleryRootElement: ElementType = 'div';
 
 export const MessageEmbedGalleryRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedGalleryRootElement>) => (
@@ -28,19 +55,9 @@ export const MessageEmbedGalleryRoot = styled(
             {...props}
         />
     )
-)({
-    height: 300,
-    marginTop: 16,
-    gridColumn: '1 / 2',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 1fr',
-    gap: 4,
-    overflow: 'hidden',
-    borderRadius: 4
-});
+)(messageEmbedGalleryStyles.root);
 
-const MessageEmbedGalleryCellElement: ElementType = 'div';
+export const MessageEmbedGalleryCellElement: ElementType = 'div';
 
 export interface MessageEmbedGalleryCellProps extends ComponentPropsWithRef<typeof MessageEmbedGalleryCellElement> {
     index: number;
@@ -60,17 +77,13 @@ export const MessageEmbedGalleryCell = styled(
         />
     )
 )<MessageEmbedGalleryCellProps>(({ index, length }) => ({
-    minWidth: '100%',
-    minHeight: '100%',
-    display: 'flex',
-    placeItems: 'center',
-    placeContent: 'center',
+    ...messageEmbedGalleryStyles.cell,
     ...((length === 1 || length === 2 || (length === 3 && index === 0)) && {
         gridRow: 'span 2'
     })
 }));
 
-const MessageEmbedGalleryImageElement: ElementType = 'img';
+export const MessageEmbedGalleryImageElement: ElementType = 'img';
 
 export const MessageEmbedGalleryImage = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedGalleryImageElement>) => (
@@ -84,12 +97,7 @@ export const MessageEmbedGalleryImage = styled(
             {...props}
         />
     )
-)({
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    borderRadius: 4
-});
+)(messageEmbedGalleryStyles.image);
 
 export interface MessageEmbedGalleryProps {
     images: string[];

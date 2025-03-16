@@ -5,8 +5,7 @@ import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { MessageEmbedData } from '../../interfaces';
 import { Markdown } from '../../transformers';
-import { generateComponentClasses } from '../../utils';
-import { decimalToHex } from '../../utils';
+import { decimalToHex, generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
 import { Link } from '../Link';
 import { MessageEmbedAuthor } from '../MessageEmbedAuthor';
 import { getFieldGridColumn, MessageEmbedField } from '../MessageEmbedField';
@@ -25,7 +24,54 @@ export const messageEmbedClasses = generateComponentClasses(
     ]
 );
 
-const MessageEmbedRootElement: ElementType = 'div';
+export const messageEmbedStyles: Styles<typeof messageEmbedClasses> = {
+    root: {
+        maxWidth: 520,
+        padding: '.5rem 1rem 1rem .75rem',
+        position: 'relative',
+        display: 'grid',
+        gridTemplateColumns: 'auto',
+        gridTemplateRows: 'auto',
+        alignSelf: 'start',
+        justifySelf: 'start',
+        backgroundColor: ThemeCSSVariableValues.palette.background.secondary,
+        borderLeft: `solid 4px ${ThemeCSSVariableValues.palette.background.tertiary}`,
+        borderRadius: 4,
+        [`&:has(.${messageEmbedThumbnailClasses.root}) :where(.${messageEmbedImageClasses.root}, .${messageEmbedFooterClasses.root})`]: {
+            gridColumn: '1 / 3'
+        }
+    },
+    title: {
+        marginTop: 8,
+        gridColumn: '1 / 1',
+        display: 'inline-block',
+        fontSize: '1rem',
+        fontWeight: 600,
+        lineHeight: '22px',
+        whiteSpace: 'break-spaces',
+        wordWrap: 'break-word',
+        color: ThemeCSSVariableValues.palette.text.primary
+    },
+    description: {
+        marginTop: 8,
+        gridColumn: '1 / 1',
+        display: 'inline-block',
+        fontSize: '.875rem',
+        fontWeight: 400,
+        lineHeight: '1.125rem',
+        whiteSpace: 'pre-line',
+        wordWrap: 'break-word',
+        color: ThemeCSSVariableValues.palette.text.primary
+    },
+    fields: {
+        marginTop: 8,
+        gridColumn: '1 / 1',
+        display: 'grid',
+        gap: 8
+    }
+};
+
+export const MessageEmbedRootElement: ElementType = 'div';
 
 export const MessageEmbedRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedRootElement>) => (
@@ -39,24 +85,9 @@ export const MessageEmbedRoot = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    maxWidth: 520,
-    padding: '.5rem 1rem 1rem .75rem',
-    position: 'relative',
-    display: 'grid',
-    gridTemplateColumns: 'auto',
-    gridTemplateRows: 'auto',
-    alignSelf: 'start',
-    justifySelf: 'start',
-    backgroundColor: theme.palette.background.secondary,
-    borderLeft: `solid 4px ${theme.palette.background.tertiary}`,
-    borderRadius: 4,
-    [`&:has(.${messageEmbedThumbnailClasses.root}) :where(.${messageEmbedImageClasses.root}, .${messageEmbedFooterClasses.root})`]: {
-        gridColumn: '1 / 3'
-    }
-}));
+)(messageEmbedStyles.root);
 
-const MessageEmbedTitleElement: ElementType = 'h4';
+export const MessageEmbedTitleElement: ElementType = 'h4';
 
 export const MessageEmbedTitle = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedTitleElement>) => (
@@ -70,19 +101,9 @@ export const MessageEmbedTitle = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    marginTop: 8,
-    gridColumn: '1 / 1',
-    display: 'inline-block',
-    fontSize: '1rem',
-    fontWeight: 600,
-    lineHeight: '22px',
-    whiteSpace: 'break-spaces',
-    wordWrap: 'break-word',
-    color: theme.palette.text.primary
-}));
+)(messageEmbedStyles.title);
 
-const MessageEmbedDescriptionElement: ElementType = 'div';
+export const MessageEmbedDescriptionElement: ElementType = 'div';
 
 export const MessageEmbedDescription = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedDescriptionElement>) => (
@@ -96,19 +117,9 @@ export const MessageEmbedDescription = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    marginTop: 8,
-    gridColumn: '1 / 1',
-    display: 'inline-block',
-    fontSize: '.875rem',
-    fontWeight: 400,
-    lineHeight: '1.125rem',
-    whiteSpace: 'pre-line',
-    wordWrap: 'break-word',
-    color: theme.palette.text.primary
-}));
+)(messageEmbedStyles.description);
 
-const MessageEmbedFieldsElement: ElementType = 'div';
+export const MessageEmbedFieldsElement: ElementType = 'div';
 
 export const MessageEmbedFields = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageEmbedFieldsElement>) => (
@@ -122,12 +133,7 @@ export const MessageEmbedFields = styled(
             {...props}
         />
     )
-)({
-    marginTop: 8,
-    gridColumn: '1 / 1',
-    display: 'grid',
-    gap: 8
-});
+)(messageEmbedStyles.fields);
 
 export interface MessageEmbedProps {
     embed: MessageEmbedData;

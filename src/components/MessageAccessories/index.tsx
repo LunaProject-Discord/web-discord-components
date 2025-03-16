@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const messageAccessoriesClasses = generateComponentClasses(
     'MessageAccessories',
@@ -12,7 +12,22 @@ export const messageAccessoriesClasses = generateComponentClasses(
     ]
 );
 
-const MessageAccessoriesRootElement: ElementType = 'div';
+export const messageAccessoriesStyles: Styles<typeof messageAccessoriesClasses> = {
+    root: {
+        minWidth: 0,
+        minHeight: 0,
+        height: 'fit-content',
+        padding: '.125rem 0',
+        position: 'relative',
+        display: 'grid',
+        gridAutoFlow: 'row',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(100%, 1fr))',
+        rowGap: '.25rem',
+        textIndent: 0
+    }
+};
+
+export const MessageAccessoriesRootElement: ElementType = 'div';
 
 export const MessageAccessories = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageAccessoriesRootElement>) => (
@@ -26,15 +41,4 @@ export const MessageAccessories = styled(
             {...props}
         />
     )
-)({
-    minWidth: 0,
-    minHeight: 0,
-    height: 'fit-content',
-    padding: '.125rem 0',
-    position: 'relative',
-    display: 'grid',
-    gridAutoFlow: 'row',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(100%, 1fr))',
-    rowGap: '.25rem',
-    textIndent: 0
-});
+)(messageAccessoriesStyles.root);
