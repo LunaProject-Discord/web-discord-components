@@ -1,10 +1,9 @@
 'use client';
 
-import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const italicClasses = generateComponentClasses(
     'Italic',
@@ -13,7 +12,7 @@ export const italicClasses = generateComponentClasses(
     ]
 );
 
-export const italicStyles: Record<keyof typeof italicClasses, CSSObject> = {
+export const italicStyles: Styles<typeof italicClasses> = {
     root: {
         fontStyle: 'italic'
     }

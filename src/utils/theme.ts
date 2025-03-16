@@ -1,3 +1,5 @@
+import type { CSSObject } from '@emotion/react';
+
 export type AppearanceColor = 'dark' | 'light';
 export type AppearanceDisplay = 'cozy' | 'compact';
 
@@ -90,3 +92,5 @@ export const generateComponentClasses = <T extends string>(name: string, slots: 
         classes[slot] = `LPD${name}-${slot}`;
     return classes;
 };
+
+export type Styles<T extends Record<string, string>> = Record<keyof T, CSSObject>;

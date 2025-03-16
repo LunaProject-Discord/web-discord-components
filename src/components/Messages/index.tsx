@@ -1,6 +1,6 @@
 'use client';
 
-import { CSSObject, ThemeProvider } from '@emotion/react';
+import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode, useMemo } from 'react';
@@ -11,6 +11,7 @@ import {
     DefaultDarkTheme,
     DefaultLightTheme,
     generateComponentClasses,
+    Styles,
     ThemeCSSVariableKeys,
     ThemeCSSVariableValues
 } from '../../utils';
@@ -28,7 +29,7 @@ export const messagesClasses = generateComponentClasses(
     ]
 );
 
-export const messagesStyles: Record<keyof typeof messagesClasses, CSSObject> = {
+export const messagesStyles: Styles<typeof messagesClasses> = {
     root: {
         padding: '1.0625rem 0 1.5rem',
         display: 'flex',

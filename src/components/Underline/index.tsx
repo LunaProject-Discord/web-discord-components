@@ -1,10 +1,9 @@
 'use client';
 
-import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const underlineClasses = generateComponentClasses(
     'Underline',
@@ -13,7 +12,7 @@ export const underlineClasses = generateComponentClasses(
     ]
 );
 
-export const underlineStyles: Record<keyof typeof underlineClasses, CSSObject> = {
+export const underlineStyles: Styles<typeof underlineClasses> = {
     root: {
         textDecoration: 'underline'
     }

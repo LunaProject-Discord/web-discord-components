@@ -1,10 +1,9 @@
 'use client';
 
-import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import React, { ComponentPropsWithRef, CSSProperties, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import React, { ComponentPropsWithRef, ElementType } from 'react';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const boldClasses = generateComponentClasses(
     'Bold',
@@ -13,7 +12,7 @@ export const boldClasses = generateComponentClasses(
     ]
 );
 
-export const boldStyles: Record<keyof typeof boldClasses, CSSObject> = {
+export const boldStyles: Styles<typeof boldClasses> = {
     root: {
         fontWeight: 700
     }

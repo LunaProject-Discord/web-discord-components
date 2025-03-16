@@ -1,10 +1,9 @@
 'use client';
 
-import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const strikethroughClasses = generateComponentClasses(
     'Strikethrough',
@@ -13,7 +12,7 @@ export const strikethroughClasses = generateComponentClasses(
     ]
 );
 
-export const strikethroughStyles: Record<keyof typeof strikethroughClasses, CSSObject> = {
+export const strikethroughStyles: Styles<typeof strikethroughClasses> = {
     root: {
         textDecoration: 'line-through'
     }
