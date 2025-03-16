@@ -80,7 +80,7 @@ export interface Config {
     translations: ConfigTranslations;
 }
 
-const DefaultEnglishTranslations: ConfigTranslations = {
+export const DefaultEnglishTranslations: ConfigTranslations = {
     timestamp_full_short: 'MMMM d, yyyy h:mm a', // f
     timestamp_full_long: 'EEEE, MMMM d, yyyy h:mm a', // F
     timestamp_date_short: 'MM/dd/yyyy', // d
@@ -115,7 +115,7 @@ const DefaultEnglishTranslations: ConfigTranslations = {
     timestamp_other: 'MM/dd/yyyy h:mm a'
 };
 
-const DefaultJapaneseTranslations: ConfigTranslations = {
+export const DefaultJapaneseTranslations: ConfigTranslations = {
     timestamp_full_short: 'yyyy年M月d日 H:mm', // f
     timestamp_full_long: 'yyyy年M月d日 EEEE H:mm', // F
     timestamp_date_short: 'yyyy/MM/dd', // d
@@ -150,7 +150,7 @@ const DefaultJapaneseTranslations: ConfigTranslations = {
     timestamp_other: 'yyyy/MM/dd H:mm'
 };
 
-const DefaultConfig: Config = {
+export const DefaultConfig: Config = {
     locale: 'en',
     translations: DefaultEnglishTranslations
 };
