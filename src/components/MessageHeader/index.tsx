@@ -29,7 +29,7 @@ export const messageHeaderClasses = generateComponentClasses(
 
 export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
     root: {
-        [`.${messagesClasses.displayCozy} &`]: {
+        [`:where(.${messagesClasses.displayCozy} *)`]: {
             minHeight: '1.375rem',
             position: 'relative',
             display: 'block',
@@ -40,7 +40,7 @@ export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
                 top: '.1rem'
             }
         },
-        [`.${messagesClasses.displayCompact} &`]: {
+        [`:where(.${messagesClasses.displayCompact} *)`]: {
             display: 'inline',
             marginLeft: '-4rem',
             [`& .${userBotTagClasses.root}`]: {

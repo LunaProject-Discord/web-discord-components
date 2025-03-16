@@ -20,7 +20,7 @@ export const messageContentStyles: Styles<typeof messageContentClasses> = {
         whiteSpace: 'break-spaces',
         wordWrap: 'break-word',
         color: ThemeCSSVariableValues.palette.text.primary,
-        [`.${messagesClasses.displayCompact} &`]: {
+        [`:where(.${messagesClasses.displayCompact} *)`]: {
             display: 'inline'
         }
     }
