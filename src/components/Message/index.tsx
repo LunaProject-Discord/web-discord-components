@@ -42,7 +42,7 @@ export const messageStyles: Styles<typeof messageClasses> = {
     }
 };
 
-const MessageRootElement: ElementType = 'li';
+export const MessageRootElement: ElementType = 'li';
 
 export const MessageRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageRootElement>) => (

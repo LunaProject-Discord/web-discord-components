@@ -6,7 +6,15 @@ import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import React, { ComponentPropsWithRef, ElementType, Fragment, ReactNode, useContext } from 'react';
 import { UserTag } from '../../interfaces';
-import { ConfigContext, DefaultAvatar, formatTimestamp, generateComponentClasses } from '../../utils';
+import {
+    ConfigContext,
+    DefaultAvatar,
+    formatTimestamp,
+    generateComponentClasses,
+    Styles,
+    ThemeCSSVariableValues
+} from '../../utils';
+import { messagesClasses } from '../Messages';
 import { UserBotTag, userBotTagClasses } from '../UserBotTag';
 
 export const messageHeaderClasses = generateComponentClasses(
@@ -19,7 +27,100 @@ export const messageHeaderClasses = generateComponentClasses(
     ]
 );
 
-const MessageHeaderRootElement: ElementType = 'h3';
+export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
+    root: {
+        [`.${messagesClasses.displayCozy} &`]: {
+            minHeight: '1.375rem',
+            position: 'relative',
+            display: 'block',
+            fontSize: 'inherit',
+            lineHeight: '1.375rem',
+            [`& .${userBotTagClasses.root}`]: {
+                marginRight: '.25rem',
+                top: '.1rem'
+            }
+        },
+        [`.${messagesClasses.displayCompact} &`]: {
+            display: 'inline',
+            marginLeft: '-4rem',
+            [`& .${userBotTagClasses.root}`]: {
+                marginRight: '.5rem',
+                top: '.15rem'
+            }
+        },
+        [`& .${userBotTagClasses.root}`]: {
+            height: '.9375rem',
+            marginTop: '.2em',
+            padding: '0 .275rem',
+            position: 'relative'
+        }
+    },
+    avatar: {
+        userSelect: 'none',
+        cursor: 'pointer',
+        [`.${messagesClasses.displayCozy} &`]: {
+            width: 40,
+            height: 40,
+            position: 'absolute',
+            top: 'calc(4px - .125rem)',
+            left: -56,
+            borderRadius: '50%'
+        },
+        [`.${messagesClasses.displayCompact} &`]: {
+            display: 'none'
+        },
+        '&:hover': {
+            [`.${messagesClasses.colorDark} &`]: {
+                boxShadow: 'rgb(0 0 0 / .16) 0 4px 4px'
+            },
+            [`.${messagesClasses.colorLight} &`]: {
+                boxShadow: 'rgb(0 0 0 / .08) 0 4px 4px'
+            }
+        },
+        '&:active': {
+            transform: 'translateY(1px)'
+        }
+    },
+    name: {
+        fontSize: '1rem',
+        fontWeight: 500,
+        lineHeight: '1.375rem',
+        verticalAlign: 'baseline',
+        cursor: 'pointer',
+        color: ThemeCSSVariableValues.palette.text.secondary,
+        [`.${messagesClasses.displayCozy} &`]: {
+            marginRight: '.25rem'
+        },
+        [`.${messagesClasses.displayCompact} &`]: {
+            marginRight: '.5rem'
+        },
+        '&:hover': {
+            textDecoration: 'underline'
+        }
+    },
+    timestamp: {
+        height: '1.25rem',
+        display: 'inline-block',
+        fontWeight: 500,
+        lineHeight: '1.375rem',
+        wordWrap: 'break-word',
+        verticalAlign: 'baseline',
+        color: ThemeCSSVariableValues.palette.text.muted,
+        [`.${messagesClasses.displayCozy} &`]: {
+            marginLeft: '.25rem',
+            fontSize: '.75rem',
+            whiteSpace: 'break-spaces'
+        },
+        [`.${messagesClasses.displayCompact} &`]: {
+            width: '2.25rem',
+            marginRight: '.5rem',
+            fontSize: '.6875rem',
+            textAlign: 'right'
+        }
+    }
+};
+
+export const MessageHeaderRootElement: ElementType = 'h3';
 
 export const MessageHeaderRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderRootElement>) => (
@@ -33,28 +134,9 @@ export const MessageHeaderRoot = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    ...(theme.appearance.display === 'cozy' ? {
-        minHeight: '1.375rem',
-        position: 'relative',
-        display: 'block',
-        fontSize: 'inherit',
-        lineHeight: '1.375rem'
-    } : {
-        display: 'inline',
-        marginLeft: '-4rem'
-    }),
-    [`& .${userBotTagClasses.root}`]: {
-        height: '.9375rem',
-        marginTop: '.2em',
-        marginRight: theme.appearance.display === 'cozy' ? '.25rem' : '.5rem',
-        padding: '0 .275rem',
-        position: 'relative',
-        top: theme.appearance.display === 'cozy' ? '.1rem' : '.15rem'
-    }
-}));
+)(messageHeaderStyles.root);
 
-const MessageHeaderAvatarElement: ElementType = 'img';
+export const MessageHeaderAvatarElement: ElementType = 'img';
 
 export const MessageHeaderAvatar = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderAvatarElement>) => (
@@ -68,28 +150,9 @@ export const MessageHeaderAvatar = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    userSelect: 'none',
-    cursor: 'pointer',
-    ...(theme.appearance.display === 'cozy' ? {
-        width: 40,
-        height: 40,
-        position: 'absolute',
-        top: 'calc(4px - .125rem)',
-        left: -56,
-        borderRadius: '50%'
-    } : {
-        display: 'none'
-    }),
-    '&:hover': {
-        boxShadow: theme.appearance.color === 'dark' ? 'rgb(0 0 0 / .16) 0 4px 4px' : 'rgb(0 0 0 / .08) 0 4px 4px'
-    },
-    '&:active': {
-        transform: 'translateY(1px)'
-    }
-}));
+)(messageHeaderStyles.avatar);
 
-const MessageHeaderNameElement: ElementType = 'span';
+export const MessageHeaderNameElement: ElementType = 'span';
 
 export const MessageHeaderName = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderNameElement>) => (
@@ -103,20 +166,9 @@ export const MessageHeaderName = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    marginRight: theme.appearance.display === 'cozy' ? '.25rem' : '.5rem',
-    fontSize: '1rem',
-    fontWeight: 500,
-    lineHeight: '1.375rem',
-    verticalAlign: 'baseline',
-    cursor: 'pointer',
-    color: theme.palette.text.secondary,
-    '&:hover': {
-        textDecoration: 'underline'
-    }
-}));
+)(messageHeaderStyles.name);
 
-const MessageHeaderTimestampElement: ElementType = 'time';
+export const MessageHeaderTimestampElement: ElementType = 'time';
 
 export const MessageHeaderTimestamp = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageHeaderTimestampElement>) => (
@@ -130,25 +182,7 @@ export const MessageHeaderTimestamp = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    height: '1.25rem',
-    display: 'inline-block',
-    fontWeight: 500,
-    lineHeight: '1.375rem',
-    wordWrap: 'break-word',
-    verticalAlign: 'baseline',
-    color: theme.palette.text.muted,
-    ...(theme.appearance.display === 'cozy' ? {
-        marginLeft: '.25rem',
-        fontSize: '.75rem',
-        whiteSpace: 'break-spaces'
-    } : {
-        width: '2.25rem',
-        marginRight: '.5rem',
-        fontSize: '.6875rem',
-        textAlign: 'right'
-    })
-}));
+)(messageHeaderStyles.timestamp);
 
 export interface MessageHeaderProps {
     name: ReactNode;

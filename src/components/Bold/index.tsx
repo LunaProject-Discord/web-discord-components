@@ -18,7 +18,7 @@ export const boldStyles: Styles<typeof boldClasses> = {
     }
 };
 
-const BoldElement: ElementType = 'span';
+export const BoldElement: ElementType = 'span';
 
 export const Bold = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof BoldElement>) => (

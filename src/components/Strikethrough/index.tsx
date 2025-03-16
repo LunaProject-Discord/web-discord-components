@@ -18,7 +18,7 @@ export const strikethroughStyles: Styles<typeof strikethroughClasses> = {
     }
 };
 
-const StrikethroughElement: ElementType = 'span';
+export const StrikethroughElement: ElementType = 'span';
 
 export const Strikethrough = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof StrikethroughElement>) => (

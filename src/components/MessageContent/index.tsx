@@ -3,7 +3,8 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
+import { messagesClasses } from '../Messages';
 
 export const messageContentClasses = generateComponentClasses(
     'MessageContent',
@@ -12,7 +13,20 @@ export const messageContentClasses = generateComponentClasses(
     ]
 );
 
-const MessageContentElement: ElementType = 'div';
+export const messageContentStyles: Styles<typeof messageContentClasses> = {
+    root: {
+        fontSize: '1rem',
+        lineHeight: '22px',
+        whiteSpace: 'break-spaces',
+        wordWrap: 'break-word',
+        color: ThemeCSSVariableValues.palette.text.primary,
+        [`.${messagesClasses.displayCompact} &`]: {
+            display: 'inline'
+        }
+    }
+};
+
+export const MessageContentElement: ElementType = 'div';
 
 export const MessageContent = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessageContentElement>) => (
@@ -26,13 +40,4 @@ export const MessageContent = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    fontSize: '1rem',
-    lineHeight: '22px',
-    whiteSpace: 'break-spaces',
-    wordWrap: 'break-word',
-    color: theme.palette.text.primary,
-    ...(theme.appearance.display === 'compact' && {
-        display: 'inline'
-    })
-}));
+)(messageContentStyles.root);

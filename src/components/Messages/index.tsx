@@ -80,7 +80,7 @@ export const messagesStyles: Styles<typeof messagesClasses> = {
     }
 };
 
-const MessagesRootElement: ElementType = 'ul';
+export const MessagesRootElement: ElementType = 'ul';
 
 export const MessagesRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof MessagesRootElement>) => (

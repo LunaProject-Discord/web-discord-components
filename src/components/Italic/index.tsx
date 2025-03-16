@@ -18,7 +18,7 @@ export const italicStyles: Styles<typeof italicClasses> = {
     }
 };
 
-const ItalicElement: ElementType = 'span';
+export const ItalicElement: ElementType = 'span';
 
 export const Italic = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof ItalicElement>) => (

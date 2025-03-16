@@ -18,7 +18,7 @@ export const underlineStyles: Styles<typeof underlineClasses> = {
     }
 };
 
-const UnderlineElement: ElementType = 'span';
+export const UnderlineElement: ElementType = 'span';
 
 export const Underline = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof UnderlineElement>) => (
