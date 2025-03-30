@@ -45,6 +45,7 @@ export const messagesStyles: Styles<typeof messagesClasses> = {
         }
     },
     colorDark: {
+        colorScheme: 'dark',
         [ThemeCSSVariableKeys.palette.common.black]: DefaultDarkTheme.palette.common.black,
         [ThemeCSSVariableKeys.palette.common.white]: DefaultDarkTheme.palette.common.white,
         [ThemeCSSVariableKeys.palette.background.primary]: DefaultDarkTheme.palette.background.primary,
@@ -59,6 +60,7 @@ export const messagesStyles: Styles<typeof messagesClasses> = {
         [ThemeCSSVariableKeys.palette.text.link]: DefaultDarkTheme.palette.text.link
     },
     colorLight: {
+        colorScheme: 'light',
         [ThemeCSSVariableKeys.palette.common.black]: DefaultLightTheme.palette.common.black,
         [ThemeCSSVariableKeys.palette.common.white]: DefaultLightTheme.palette.common.white,
         [ThemeCSSVariableKeys.palette.background.primary]: DefaultLightTheme.palette.background.primary,
@@ -96,6 +98,7 @@ export const MessagesRoot = styled(
     )
 )(({ theme }) => ([
     {
+        colorScheme: theme.appearance.color,
         [ThemeCSSVariableKeys.palette.common.black]: theme.palette.common.black,
         [ThemeCSSVariableKeys.palette.common.white]: theme.palette.common.white,
         [ThemeCSSVariableKeys.palette.background.primary]: theme.palette.background.primary,

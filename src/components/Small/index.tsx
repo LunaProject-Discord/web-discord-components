@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
 
 export const smallClasses = generateComponentClasses(
     'Small',
@@ -12,7 +12,16 @@ export const smallClasses = generateComponentClasses(
     ]
 );
 
-const SmallElement: ElementType = 'small';
+export const smallStyles: Styles<typeof smallClasses> = {
+    root: {
+        display: 'block',
+        fontSize: '.8125rem',
+        lineHeight: '1.11719rem',
+        color: ThemeCSSVariableValues.palette.text.muted
+    }
+};
+
+export const SmallElement: ElementType = 'small';
 
 export const Small = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof SmallElement>) => (
@@ -26,9 +35,4 @@ export const Small = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    display: 'block',
-    fontSize: '.8125rem',
-    lineHeight: '1.11719rem',
-    color: theme.palette.text.muted
-}));
+)(smallStyles.root);

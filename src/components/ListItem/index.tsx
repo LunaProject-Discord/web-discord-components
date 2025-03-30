@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 
 export const listItemClasses = generateComponentClasses(
     'ListItem',
@@ -12,7 +12,16 @@ export const listItemClasses = generateComponentClasses(
     ]
 );
 
-const ListItemElement: ElementType = 'li';
+export const listItemStyles: Styles<typeof listItemClasses> = {
+    root: {
+        marginBottom: 4,
+        whiteSpace: 'break-spaces',
+        wordWrap: 'break-word',
+        verticalAlign: 'baseline'
+    }
+};
+
+export const ListItemElement: ElementType = 'li';
 
 export const ListItem = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof ListItemElement>) => (
@@ -26,9 +35,4 @@ export const ListItem = styled(
             {...props}
         />
     )
-)({
-    marginBottom: 4,
-    whiteSpace: 'break-spaces',
-    wordWrap: 'break-word',
-    verticalAlign: 'baseline'
-});
+)(listItemStyles.root);

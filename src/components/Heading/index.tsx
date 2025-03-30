@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, HTMLAttributes, RefAttributes } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
 
 export const headingClasses = generateComponentClasses(
     'Heading',
@@ -15,7 +15,34 @@ export const headingClasses = generateComponentClasses(
     ]
 );
 
-const HeadingLargeElement: ElementType = 'h1';
+export const headingStyles: Styles<typeof headingClasses> = {
+    root: {
+        margin: '16px 0 8px',
+        fontWeight: 700,
+        lineHeight: '1.375em',
+        color: ThemeCSSVariableValues.palette.text.secondary
+    },
+    variantLarge: {
+        fontSize: '1.5rem',
+        '&:first-child': {
+            marginTop: 8
+        }
+    },
+    variantMedium: {
+        fontSize: '1.25rem',
+        '&:first-child': {
+            marginTop: 8
+        }
+    },
+    variantSmall: {
+        fontSize: '1rem',
+        '&:first-child': {
+            marginTop: 4
+        }
+    }
+};
+
+export const HeadingLargeElement: ElementType = 'h1';
 
 export const HeadingLarge = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof HeadingLargeElement>) => (
@@ -30,18 +57,12 @@ export const HeadingLarge = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    margin: '16px 0 8px',
-    fontSize: '1.5rem',
-    fontWeight: 700,
-    lineHeight: '1.375em',
-    color: theme.palette.text.secondary,
-    '&:first-child': {
-        marginTop: 8
-    }
-}));
+)([
+    headingStyles.root,
+    headingStyles.variantLarge
+]);
 
-const HeadingMediumElement: ElementType = 'h2';
+export const HeadingMediumElement: ElementType = 'h2';
 
 export const HeadingMedium = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof HeadingMediumElement>) => (
@@ -56,18 +77,12 @@ export const HeadingMedium = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    margin: '16px 0 8px',
-    fontSize: '1.25rem',
-    fontWeight: 700,
-    lineHeight: '1.375em',
-    color: theme.palette.text.secondary,
-    '&:first-child': {
-        marginTop: 8
-    }
-}));
+)([
+    headingStyles.root,
+    headingStyles.variantMedium
+]);
 
-const HeadingSmallElement: ElementType = 'h3';
+export const HeadingSmallElement: ElementType = 'h3';
 
 export const HeadingSmall = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof HeadingSmallElement>) => (
@@ -82,16 +97,10 @@ export const HeadingSmall = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    margin: '16px 0 8px',
-    fontSize: '1rem',
-    fontWeight: 700,
-    lineHeight: '1.375em',
-    color: theme.palette.text.secondary,
-    '&:first-child': {
-        marginTop: 4
-    }
-}));
+)([
+    headingStyles.root,
+    headingStyles.variantSmall
+]);
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement>, RefAttributes<HTMLHeadingElement> {
     level: 'large' | 'medium' | 'small' | 1 | 2 | 3;

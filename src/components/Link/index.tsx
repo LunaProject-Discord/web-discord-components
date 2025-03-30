@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles, ThemeCSSVariableValues } from '../../utils';
 
 export const linkClasses = generateComponentClasses(
     'Link',
@@ -12,7 +12,17 @@ export const linkClasses = generateComponentClasses(
     ]
 );
 
-const LinkElement: ElementType = 'a';
+export const linkStyles: Styles<typeof linkClasses> = {
+    root: {
+        textDecoration: 'none',
+        color: ThemeCSSVariableValues.palette.text.link,
+        '&:hover': {
+            textDecoration: 'underline'
+        }
+    }
+};
+
+export const LinkElement: ElementType = 'a';
 
 export const Link = styled(
     (
@@ -35,10 +45,4 @@ export const Link = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    textDecoration: 'none',
-    color: theme.palette.text.link,
-    '&:hover': {
-        textDecoration: 'underline'
-    }
-}));
+)(linkStyles.root);

@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { Children, ComponentPropsWithRef, ElementType, isValidElement } from 'react';
-import { generateComponentClasses } from '../../utils';
+import { generateComponentClasses, Styles } from '../../utils';
 import { bulletListClasses } from '../BulletList';
 import { ListItem } from '../ListItem';
 
@@ -14,7 +14,18 @@ export const orderedListClasses = generateComponentClasses(
     ]
 );
 
-const OrderedListElement: ElementType = 'ol';
+export const orderedListStyles: Styles<typeof orderedListClasses> = {
+    root: {
+        margin: '4px 0 0 calc(.4em + .6em * var(--totalCharacters, 1))',
+        listStyleType: 'decimal',
+        listStylePosition: 'outside',
+        [`& .${bulletListClasses.root}`]: {
+            listStyleType: 'circle'
+        }
+    }
+};
+
+export const OrderedListElement: ElementType = 'ol';
 
 export const OrderedList = styled(
     ({ children, start = 1, className, ...props }: ComponentPropsWithRef<typeof OrderedListElement>) => {
@@ -40,11 +51,4 @@ export const OrderedList = styled(
             </OrderedListElement>
         );
     }
-)({
-    margin: '4px 0 0 calc(.4em + .6em * var(--totalCharacters, 1))',
-    listStyleType: 'decimal',
-    listStylePosition: 'outside',
-    [`& .${bulletListClasses.root}`]: {
-        listStyleType: 'circle'
-    }
-});
+)(orderedListStyles.root);
