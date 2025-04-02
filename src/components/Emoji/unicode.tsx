@@ -35,7 +35,7 @@ const UnicodeEmojiRoot = styled(
         const icon = emoji ? twemoji.convert.toCodePoint(emoji.indexOf(U200D) < 0 ? emoji.replace(UFE0Fg, '') : emoji) : unified!;
         const replaced = { '1f441-fe0f-200d-1f5e8-fe0f': '1f441-200d-1f5e8' }[icon] ?? icon;
 
-        const props: ComponentPropsWithoutRef<'img'> = {
+        const props: ComponentPropsWithoutRef<'img'> & { 'data-emoji': string } = {
             src: generateTwemojiSrc(
                 replaced,
                 {
@@ -43,6 +43,7 @@ const UnicodeEmojiRoot = styled(
                     ext: '.svg'
                 }
             ),
+            'data-emoji': emoji ?? unified,
             className: clsx(
                 emojiClasses.root,
                 emojiClasses.unicode,
