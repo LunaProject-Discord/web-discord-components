@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType } from 'react';
 import { generateComponentClasses, Styles } from '../../utils';
+import { messagesClasses } from '../Messages';
 
 export const placeholderClasses = generateComponentClasses(
     'Placeholder',
@@ -18,7 +19,7 @@ export const placeholderStyles: Styles<typeof placeholderClasses> = {
         textIndent: 0,
         backgroundColor: '#404147',
         borderRadius: 3,
-        '@media (prefers-color-scheme: light)': {
+        [`.${messagesClasses.colorLight} &`]: {
             backgroundColor: '#e1e2e4'
         },
         '&::after': {

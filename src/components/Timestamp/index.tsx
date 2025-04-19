@@ -11,6 +11,7 @@ import {
     getRelativeTimestamp,
     Styles
 } from '../../utils';
+import { messagesClasses } from '../Messages';
 
 export const timestampClasses = generateComponentClasses(
     'Timestamp',
@@ -25,7 +26,7 @@ export const timestampStyles: Styles<typeof timestampClasses> = {
         textIndent: 0,
         backgroundColor: '#404147',
         borderRadius: 3,
-        '@media (prefers-color-scheme: light)': {
+        [`.${messagesClasses.colorLight} &`]: {
             backgroundColor: '#e1e2e4'
         }
     }

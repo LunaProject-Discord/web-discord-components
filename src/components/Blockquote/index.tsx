@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import React, { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 import { generateComponentClasses, Styles } from '../../utils';
+import { messagesClasses } from '../Messages';
 
 export const blockquoteClasses = generateComponentClasses(
     'Blockquote',
@@ -24,7 +25,7 @@ export const blockquoteStyles: Styles<typeof blockquoteClasses> = {
         width: 4,
         backgroundColor: '#4e5057',
         borderRadius: 4,
-        '@media (prefers-color-scheme: light)': {
+        [`.${messagesClasses.colorLight} &`]: {
             backgroundColor: '#c5c9cd'
         }
     },
