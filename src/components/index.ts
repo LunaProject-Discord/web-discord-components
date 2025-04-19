@@ -24,6 +24,7 @@ export * from './MessageHeader';
 export * from './MessageReply';
 export * from './Messages';
 export * from './OrderedList';
+export * from './Placeholder';
 export * from './Small';
 export * from './Spoiler';
 export * from './Strikethrough';

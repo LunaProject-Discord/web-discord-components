@@ -11,6 +11,7 @@ export * from './link';
 export * from './list';
 export * from './mention';
 export * from './paragraph';
+export * from './placeholder';
 export * from './small';
 export * from './spoiler';
 export * from './strikethrough';

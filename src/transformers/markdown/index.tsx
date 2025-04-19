@@ -20,6 +20,7 @@ import {
     maskedImageLink,
     maskedLink,
     paragraph,
+    placeholder,
     renderMarkdownNodes,
     roleMention,
     Rule,
@@ -62,6 +63,7 @@ type RuleOptionKey =
     | 'commandMentions'
     | 'customEmojis'
     | 'unicodeEmojis'
+    | 'placeholders'
     | 'text';
 
 export const ruleOptions: Record<
@@ -96,6 +98,7 @@ export const ruleOptions: Record<
     commandMentions: { rule: commandMention, full: true },
     customEmojis: { rule: customEmoji, title: true, full: true },
     unicodeEmojis: { rule: unicodeEmoji, title: true, full: true },
+    placeholders: { rule: placeholder, title: true, full: true },
     text: { rule: text, title: true, full: true }
 };
 
