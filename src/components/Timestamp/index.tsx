@@ -4,7 +4,13 @@ import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import React, { ComponentPropsWithRef, ElementType, useContext } from 'react';
-import { ConfigContext, ConfigTranslateKeys, generateComponentClasses, getRelativeTimestamp } from '../../utils';
+import {
+    ConfigContext,
+    ConfigTranslateKeys,
+    generateComponentClasses,
+    getRelativeTimestamp,
+    Styles
+} from '../../utils';
 
 export const timestampClasses = generateComponentClasses(
     'Timestamp',
@@ -13,7 +19,19 @@ export const timestampClasses = generateComponentClasses(
     ]
 );
 
-const TimestampRootElement: ElementType = 'span';
+export const timestampStyles: Styles<typeof timestampClasses> = {
+    root: {
+        padding: '0 2px',
+        textIndent: 0,
+        backgroundColor: '#404147',
+        borderRadius: 3,
+        '@media (prefers-color-scheme: light)': {
+            backgroundColor: '#e1e2e4'
+        }
+    }
+};
+
+export const TimestampRootElement: ElementType = 'span';
 
 export const TimestampRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof TimestampRootElement>) => (
@@ -27,12 +45,7 @@ export const TimestampRoot = styled(
             {...props}
         />
     )
-)(({ theme }) => ({
-    padding: '0 2px',
-    textIndent: 0,
-    backgroundColor: theme.appearance.color === 'dark' ? '#404147' : '#e1e2e4',
-    borderRadius: 3
-}));
+)(timestampStyles.root);
 
 export interface TimestampProps {
     timestamp: DateTime<true>;

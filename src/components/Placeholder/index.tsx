@@ -14,13 +14,22 @@ export const placeholderClasses = generateComponentClasses(
 
 export const placeholderStyles: Styles<typeof placeholderClasses> = {
     root: {
-
+        padding: '0 2px',
+        textIndent: 0,
+        backgroundColor: '#404147',
+        borderRadius: 3,
+        '@media (prefers-color-scheme: light)': {
+            backgroundColor: '#e1e2e4'
+        },
+        '&::after': {
+            content: 'attr(data-value)'
+        }
     }
 };
 
 export const PlaceholderElement: ElementType = 'span';
 
-export const Placeholder = styled(
+export const PlaceholderRoot = styled(
     ({ className, ...props }: ComponentPropsWithRef<typeof PlaceholderElement>) => (
         <PlaceholderElement
             className={
@@ -33,3 +42,11 @@ export const Placeholder = styled(
         />
     )
 )(placeholderStyles.root);
+
+export interface PlaceholderProps {
+    value: string;
+}
+
+export const Placeholder = ({ value }: PlaceholderProps) => (
+    <PlaceholderRoot data-value={value} />
+);

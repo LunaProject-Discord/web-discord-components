@@ -16,8 +16,7 @@ export const placeholder = defineRule({
     render: (capture) => createElement(
         Placeholder,
         {
-            ['data-value' as string]: capture.content
-        },
-        capture.content
+            value: capture.content
+        }
     )
 });
