@@ -3,8 +3,8 @@ import { Placeholder } from '../../../components';
 import { defineRule } from './utils';
 
 export const placeholder = defineRule({
-    capture: (source, state, parse) => {
-        const match = /(?<!\\){[A-Za-z0-9_]+(?::[A-Za-z0-9_]+)?}/.exec(source);
+    capture: (source) => {
+        const match = /^(?<!\\){[A-Za-z0-9_]+(?::[A-Za-z0-9_]+)?}/.exec(source);
         if (!match)
             return;
 
