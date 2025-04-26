@@ -64,7 +64,7 @@ export const createMarkdownParser = (rules: Rule[]) => {
             completed: '',
             inQuote: false,
             listDepth: 0,
-            parseParagraphs: false
+            parseParagraphs: true
         }
     );
 };
