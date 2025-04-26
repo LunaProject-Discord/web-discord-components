@@ -26,6 +26,7 @@ import {
     Rule,
     small,
     spoiler,
+    State,
     strikethrough,
     text,
     timestamp,
@@ -164,10 +165,11 @@ const trimContent = (text: string) => text.trim();
 export interface MarkdownProps {
     content: string;
     features?: FeatureConfig;
+    initialState?: Partial<State>;
 }
 
-export const Markdown = ({ content, features }: MarkdownProps) => {
-    const parse = createMarkdownParser(getRules(features ?? 'full'));
+export const Markdown = ({ content, features, initialState }: MarkdownProps) => {
+    const parse = createMarkdownParser(getRules(features ?? 'full'), initialState);
     const result = parse(trimContent(content));
 
     return (

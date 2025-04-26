@@ -27,7 +27,7 @@ export interface State {
 export type Parser = (source: string) => MarkdownNode[];
 export type Renderer = (nodes: MarkdownNode[]) => Renderable[];
 
-export const createMarkdownParser = (rules: Rule[], initialState: Partial<State> | {} = {}) => {
+export const createMarkdownParser = (rules: Rule[], initialState?: Partial<State>) => {
     const parse = (content: string, state: State): MarkdownNode[] => {
         const nodes: MarkdownNode[] = [];
 
