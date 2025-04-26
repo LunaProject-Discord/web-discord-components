@@ -7,11 +7,10 @@ export const paragraph = defineRule({
             return;
 
         const match = /^((?:[^\n]|\n(?! *\n))+)(?:\n *)+\n/.exec(source);
-
-        console.log('Paragraph', { source, state, parse, match });
-
         if (!match)
             return;
+
+        console.log('Paragraph', { source, state, parse, match });
 
         state.parseParagraphs = false;
 
