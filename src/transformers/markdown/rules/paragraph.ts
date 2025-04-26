@@ -10,8 +10,6 @@ export const paragraph = defineRule({
         if (!match)
             return;
 
-        console.log('Paragraph', { source, state, parse, match });
-
         state.parseParagraphs = false;
 
         const content = parse(match[1]);
