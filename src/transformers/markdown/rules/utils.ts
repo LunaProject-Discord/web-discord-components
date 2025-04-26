@@ -27,7 +27,7 @@ export interface State {
 export type Parser = (source: string) => MarkdownNode[];
 export type Renderer = (nodes: MarkdownNode[]) => Renderable[];
 
-export const createMarkdownParser = (rules: Rule[]) => {
+export const createMarkdownParser = (rules: Rule[], initialState: Partial<State> | {} = {}) => {
     const parse = (content: string, state: State): MarkdownNode[] => {
         const nodes: MarkdownNode[] = [];
 
@@ -60,12 +60,15 @@ export const createMarkdownParser = (rules: Rule[]) => {
 
     return (content: string) => parse(
         content,
-        {
-            completed: '',
-            inQuote: false,
-            listDepth: 0,
-            parseParagraphs: true
-        }
+        Object.assign(
+            {
+                completed: '',
+                inQuote: false,
+                listDepth: 0,
+                parseParagraphs: false
+            },
+            initialState
+        )
     );
 };
 
