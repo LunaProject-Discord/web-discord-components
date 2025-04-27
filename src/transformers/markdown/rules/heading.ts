@@ -11,9 +11,15 @@ export const heading = defineRule({
         if (!match)
             return;
 
+        state.parseParagraphs = false;
+
+        const content = parse(match[2].trim());
+
+        state.parseParagraphs = state.enableParseParagraphs;
+
         return {
             size: match[0].length,
-            content: parse(match[2].trim()),
+            content,
             level: match[1].length as 1 | 2 | 3
         };
     },

@@ -22,12 +22,15 @@ export interface State {
     inQuote: boolean;
     listDepth: number;
     parseParagraphs: boolean;
+    enableParseParagraphs: boolean;
 }
+
+export type InitialState = Partial<Pick<State, 'enableParseParagraphs'>>;
 
 export type Parser = (source: string) => MarkdownNode[];
 export type Renderer = (nodes: MarkdownNode[]) => Renderable[];
 
-export const createMarkdownParser = (rules: Rule[], initialState?: Partial<State>) => {
+export const createMarkdownParser = (rules: Rule[], initialState?: InitialState) => {
     const parse = (content: string, state: State): MarkdownNode[] => {
         const nodes: MarkdownNode[] = [];
 
@@ -60,15 +63,13 @@ export const createMarkdownParser = (rules: Rule[], initialState?: Partial<State
 
     return (content: string) => parse(
         content,
-        Object.assign(
-            {
-                completed: '',
-                inQuote: false,
-                listDepth: 0,
-                parseParagraphs: false
-            },
-            initialState
-        )
+        {
+            completed: '',
+            inQuote: false,
+            listDepth: 0,
+            parseParagraphs: initialState?.enableParseParagraphs ?? false,
+            enableParseParagraphs: initialState?.enableParseParagraphs ?? false
+        }
     );
 };
 
