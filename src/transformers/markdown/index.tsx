@@ -12,7 +12,7 @@ import {
     escape,
     globalMention,
     guildSectionMention,
-    heading,
+    heading, InitialState,
     italic,
     lineBreak,
     link,
@@ -165,7 +165,7 @@ const trimContent = (text: string) => text.trim();
 export interface MarkdownProps {
     content: string;
     features?: FeatureConfig;
-    initialState?: Partial<State>;
+    initialState?: InitialState;
 }
 
 export const Markdown = ({ content, features, initialState }: MarkdownProps) => {
