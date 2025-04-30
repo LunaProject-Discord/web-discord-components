@@ -26,7 +26,7 @@ export const timestampStyles: Styles<typeof timestampClasses> = {
         textIndent: 0,
         backgroundColor: '#404147',
         borderRadius: 3,
-        [`.${messagesClasses.colorLight} &`]: {
+        [`.${messagesClasses.colorLight} &, &:where(.${messagesClasses.colorLight} *)`]: {
             backgroundColor: '#e1e2e4'
         }
     }

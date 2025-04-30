@@ -25,7 +25,7 @@ export const blockquoteStyles: Styles<typeof blockquoteClasses> = {
         width: 4,
         backgroundColor: '#4e5057',
         borderRadius: 4,
-        [`.${messagesClasses.colorLight} &`]: {
+        [`.${messagesClasses.colorLight} &, &:where(.${messagesClasses.colorLight} *)`]: {
             backgroundColor: '#c5c9cd'
         }
     },

@@ -19,7 +19,7 @@ export const placeholderStyles: Styles<typeof placeholderClasses> = {
         textIndent: 0,
         backgroundColor: '#404147',
         borderRadius: 3,
-        [`.${messagesClasses.colorLight} &`]: {
+        [`.${messagesClasses.colorLight} &, &:where(.${messagesClasses.colorLight} *)`]: {
             backgroundColor: '#e1e2e4'
         },
         '&::after': {

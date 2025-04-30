@@ -29,7 +29,7 @@ export const messageHeaderClasses = generateComponentClasses(
 
 export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
     root: {
-        [`:where(.${messagesClasses.displayCozy} *)`]: {
+        [`.${messagesClasses.displayCozy} &, &:where(.${messagesClasses.displayCozy} *)`]: {
             minHeight: '1.375rem',
             position: 'relative',
             display: 'block',
@@ -40,7 +40,7 @@ export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
                 top: '.1rem'
             }
         },
-        [`:where(.${messagesClasses.displayCompact} *)`]: {
+        [`.${messagesClasses.displayCompact} &, &:where(.${messagesClasses.displayCompact} *)`]: {
             display: 'inline',
             marginLeft: '-4rem',
             [`& .${userBotTagClasses.root}`]: {
@@ -58,7 +58,7 @@ export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
     avatar: {
         userSelect: 'none',
         cursor: 'pointer',
-        [`:where(.${messagesClasses.displayCozy} *)`]: {
+        [`.${messagesClasses.displayCozy} &, &:where(.${messagesClasses.displayCozy} *)`]: {
             width: 40,
             height: 40,
             position: 'absolute',
@@ -66,14 +66,12 @@ export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
             left: -56,
             borderRadius: '50%'
         },
-        [`:where(.${messagesClasses.displayCompact} *)`]: {
+        [`.${messagesClasses.displayCompact} &, &:where(.${messagesClasses.displayCompact} *)`]: {
             display: 'none'
         },
         '&:hover': {
-            [`:where(.${messagesClasses.colorDark} *)`]: {
-                boxShadow: 'rgb(0 0 0 / .16) 0 4px 4px'
-            },
-            [`:where(.${messagesClasses.colorLight} *)`]: {
+            boxShadow: 'rgb(0 0 0 / .16) 0 4px 4px',
+            [`.${messagesClasses.colorLight} &, &:where(.${messagesClasses.colorLight} *)`]: {
                 boxShadow: 'rgb(0 0 0 / .08) 0 4px 4px'
             }
         },
@@ -88,10 +86,10 @@ export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
         verticalAlign: 'baseline',
         cursor: 'pointer',
         color: ThemeCSSVariableValues.palette.text.secondary,
-        [`:where(.${messagesClasses.displayCozy} *)`]: {
+        [`.${messagesClasses.displayCozy} &, &:where(.${messagesClasses.displayCozy} *)`]: {
             marginRight: '.25rem'
         },
-        [`:where(.${messagesClasses.displayCompact} *)`]: {
+        [`.${messagesClasses.displayCompact} &, &:where(.${messagesClasses.displayCompact} *)`]: {
             marginRight: '.5rem'
         },
         '&:hover': {
@@ -106,12 +104,12 @@ export const messageHeaderStyles: Styles<typeof messageHeaderClasses> = {
         wordWrap: 'break-word',
         verticalAlign: 'baseline',
         color: ThemeCSSVariableValues.palette.text.muted,
-        [`:where(.${messagesClasses.displayCozy} *)`]: {
+        [`.${messagesClasses.displayCozy} &, &:where(.${messagesClasses.displayCozy} *)`]: {
             marginLeft: '.25rem',
             fontSize: '.75rem',
             whiteSpace: 'break-spaces'
         },
-        [`:where(.${messagesClasses.displayCompact} *)`]: {
+        [`.${messagesClasses.displayCompact} &, &:where(.${messagesClasses.displayCompact} *)`]: {
             width: '2.25rem',
             marginRight: '.5rem',
             fontSize: '.6875rem',

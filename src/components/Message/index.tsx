@@ -28,13 +28,13 @@ export const messageStyles: Styles<typeof messageClasses> = {
         '@media (max-width: 599.95px)': {
             paddingRight: 16
         },
-        [`:where(.${messagesClasses.displayCozy} *)`]: {
+        [`.${messagesClasses.displayCozy} &, &:where(.${messagesClasses.displayCozy} *)`]: {
             minHeight: '2.75rem',
             paddingTop: '.125rem',
             paddingBottom: '.125rem',
             paddingLeft: '72px'
         },
-        [`:where(.${messagesClasses.displayCompact} *)`]: {
+        [`.${messagesClasses.displayCompact} &, &::where(.${messagesClasses.displayCompact} *)`]: {
             paddingTop: '.125rem',
             paddingBottom: '.125rem',
             paddingLeft: '5rem'
