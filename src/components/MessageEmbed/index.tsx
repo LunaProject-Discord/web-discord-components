@@ -193,7 +193,7 @@ export const MessageEmbed = (
                     features="full"
                 />
             </MessageEmbedDescription>}
-            {fields && <MessageEmbedFields>
+            {(fields && fields.length > 0) && <MessageEmbedFields>
                 {fields.map(({ name, value }, i) => (
                     <MessageEmbedField
                         key={i}

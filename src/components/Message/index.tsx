@@ -81,7 +81,7 @@ export const Message = ({ message: { author, timestamp, content, embeds, reply }
                     features="full"
                 />
             </MessageContent>}
-            {embeds && <MessageAccessories>
+            {(embeds && embeds.length > 0) && <MessageAccessories>
                 {embeds.map((embed, i) => (
                     <MessageEmbed
                         key={i}
